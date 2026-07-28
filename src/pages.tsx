@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import type { ReactNode } from 'react'
 import founderPhoto from './assets/team/founder-head-professional.webp'
 import cofounderPhoto from './assets/team/hassan-riaz-cofounder.webp'
-import usmanPhoto from './assets/team/usman-cofounder.jpeg'
+import usmanPhoto from './assets/team/muhammad-usman-cofounder.webp'
 import servicesHero from './assets/services-hero.webp'
 import workHero from './assets/work-hero.webp'
 import aboutHero from './assets/about-hero.webp'
@@ -140,10 +140,10 @@ export function AboutPage() {
           <h3>Founder &amp; CEO</h3>
           <p>Fiaz leads UpForge across technology strategy, solution architecture and reliable project delivery—from early discovery through launch and long-term growth.</p>
           <div className="leadership-roles">
-            <div><Layers3 /><span>Solution Architect</span></div>
-            <div><Code2 /><span>Python Developer</span></div>
-            <div><Workflow /><span>Project Manager</span></div>
-            <div><BrainCircuit /><span>Technology Strategist</span></div>
+            <div><Layers3 /><span>Solution Architecture</span></div>
+            <div><Code2 /><span>Full-Stack Engineering</span></div>
+            <div><Workflow /><span>Python Development</span></div>
+            <div><BrainCircuit /><span>Technology Strategy</span></div>
           </div>
           <Link to="/contact">Discuss your project <ArrowRight /></Link>
         </div>
@@ -156,10 +156,10 @@ export function AboutPage() {
           <h3>Co-Founder &amp; Automation Lead</h3>
           <p>Hassan leads no-code automation and project delivery at UpForge—connecting business tools, simplifying complex workflows and building dependable GoHighLevel systems that save time and support sustainable growth.</p>
           <div className="leadership-roles">
-            <div><Workflow /><span>No-Code Automation Expert</span></div>
-            <div><CloudCog /><span>GoHighLevel Expert</span></div>
-            <div><Layers3 /><span>Project Manager</span></div>
-            <div><BrainCircuit /><span>Workflow Strategist</span></div>
+            <div><Workflow /><span>No-Code Automation</span></div>
+            <div><CloudCog /><span>GoHighLevel</span></div>
+            <div><Layers3 /><span>API Integrations</span></div>
+            <div><BrainCircuit /><span>Project Delivery</span></div>
           </div>
           <Link to="/contact">Build with our team <ArrowRight /></Link>
         </div>
@@ -172,10 +172,10 @@ export function AboutPage() {
           <h3>Co-Founder &amp; Business Automation Lead</h3>
           <p>Muhammad Usman helps businesses organize digital operations through practical automation, dependable WordPress solutions and well-managed project delivery—from planning through launch.</p>
           <div className="leadership-roles">
-            <div><Workflow /><span>Automation Expert</span></div>
-            <div><CloudCog /><span>WordPress Expert</span></div>
-            <div><BrainCircuit /><span>GoHighLevel Expert</span></div>
-            <div><Layers3 /><span>Project Manager</span></div>
+            <div><Workflow /><span>Business Automation</span></div>
+            <div><CloudCog /><span>WordPress</span></div>
+            <div><BrainCircuit /><span>CRM Systems</span></div>
+            <div><Layers3 /><span>Project Management</span></div>
           </div>
           <Link to="/contact">Work with our team <ArrowRight /></Link>
         </div>
