@@ -1,5 +1,5 @@
-import { ArrowLeft, ArrowRight, Asterisk, BrainCircuit, CloudCog, Code2, Database, Layers3, Palette, PenTool, Smartphone, Workflow } from 'lucide-react'
-import { Link, NavLink } from 'react-router-dom'
+import { ArrowLeft, ArrowRight, Asterisk, BrainCircuit, Code2, Database, Layers3, Palette, PenTool, Smartphone, Workflow } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
 
 type PageShellProps = {
@@ -16,11 +16,11 @@ function PageShell({ index, label, title, intro, children }: PageShellProps) {
       <header className="inner-nav">
         <Link className="brand" to="/">Up<span>F</span>orge<i>®</i></Link>
         <div>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/services">Services</NavLink>
-          <NavLink to="/work">Work</NavLink>
-          <NavLink to="/about">About</NavLink>
-          <NavLink className={({ isActive }) => `nav-cta${isActive ? ' active' : ''}`} to="/contact">Start a project <ArrowRight size={15} /></NavLink>
+          <Link to="/">Home</Link>
+          <Link to="/services">Services</Link>
+          <Link to="/work">Work</Link>
+          <Link to="/about">About</Link>
+          <Link className="nav-cta" to="/contact">Start a project <ArrowRight size={15} /></Link>
         </div>
       </header>
       <section className="page-hero">
@@ -47,12 +47,11 @@ const serviceDetails = [
   ['01', 'Web Design', 'Distinctive, responsive websites that express your brand clearly and turn attention into action.', Palette, ['UI & UX design', 'Responsive design', 'Design systems']],
   ['02', 'UI/UX Design', 'Research-led product experiences that make complex journeys feel clear, useful, and effortless.', PenTool, ['User research', 'Wireframes & prototypes', 'Interface design']],
   ['03', 'Full-Stack Platforms', 'Fast, secure and scalable web experiences built around the realities of your business.', Code2, ['React & Next.js', 'Node & APIs', 'Cloud deployment']],
-  ['04', 'SaaS Applications', 'Subscription software designed for secure multi-tenant operation, smooth onboarding, and sustainable growth.', CloudCog, ['SaaS architecture', 'Billing integration', 'Cloud deployment']],
-  ['05', 'Solution Architecture', 'Technical strategy and resilient foundations that save expensive rebuilds later.', Layers3, ['System design', 'Technical audits', 'Scale planning']],
-  ['06', 'Mobile Applications', 'Native-quality cross-platform apps with product thinking built into every screen.', Smartphone, ['Flutter', 'iOS & Android', 'App strategy']],
-  ['07', 'Data & AI', 'Modern data infrastructure and intelligent tools that move decisions closer to real time.', BrainCircuit, ['Data pipelines', 'AI integration', 'Analytics']],
-  ['08', 'Automation', 'Connected operations using GoHighLevel, Make, Zapier and custom integrations.', Workflow, ['CRM workflows', 'API integration', 'Lead automation']],
-  ['09', 'Data Engineering', 'Reliable pipelines, warehouses and reporting layers your team can actually trust.', Database, ['ETL / ELT', 'Warehousing', 'Data quality']],
+  ['04', 'Solution Architecture', 'Technical strategy and resilient foundations that save expensive rebuilds later.', Layers3, ['System design', 'Technical audits', 'Scale planning']],
+  ['05', 'Mobile Applications', 'Native-quality cross-platform apps with product thinking built into every screen.', Smartphone, ['Flutter', 'iOS & Android', 'App strategy']],
+  ['06', 'Data & AI', 'Modern data infrastructure and intelligent tools that move decisions closer to real time.', BrainCircuit, ['Data pipelines', 'AI integration', 'Analytics']],
+  ['07', 'Automation', 'Connected operations using GoHighLevel, Make, Zapier and custom integrations.', Workflow, ['CRM workflows', 'API integration', 'Lead automation']],
+  ['08', 'Data Engineering', 'Reliable pipelines, warehouses and reporting layers your team can actually trust.', Database, ['ETL / ELT', 'Warehousing', 'Data quality']],
 ] as const
 
 export function ServicesPage() {
@@ -110,7 +109,7 @@ export function ContactPage() {
         <form onSubmit={(e) => e.preventDefault()}>
           <label>Your name<input placeholder="Jane Smith" required /></label>
           <label>Work email<input type="email" placeholder="jane@company.com" required /></label>
-          <label>What can we help with?<select defaultValue=""><option value="" disabled>Select a service</option><option>Web design</option><option>UI/UX design</option><option>Web development</option><option>SaaS application</option><option>Mobile application</option><option>Data & AI</option><option>Automation</option><option>Something else</option></select></label>
+          <label>What can we help with?<select defaultValue=""><option value="" disabled>Select a service</option><option>Web design</option><option>UI/UX design</option><option>Web development</option><option>Mobile application</option><option>Data & AI</option><option>Automation</option><option>Something else</option></select></label>
           <label>Tell us about the project<textarea placeholder="A little context goes a long way..." rows={5} /></label>
           <button>Send project brief <ArrowRight /></button>
         </form>

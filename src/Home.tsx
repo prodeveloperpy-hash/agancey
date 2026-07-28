@@ -10,12 +10,11 @@ const services = [
   { no: '01', title: 'Web Design', text: 'Distinctive, conversion-focused websites shaped around your brand and audience.', icon: Palette, tag: 'DIGITAL EXPERIENCES' },
   { no: '02', title: 'UI/UX Design', text: 'Intuitive interfaces and thoughtful user journeys grounded in real customer needs.', icon: PenTool, tag: 'PRODUCT DESIGN' },
   { no: '03', title: 'Full-Stack Development', text: 'Robust, scalable web platforms built for real business complexity.', icon: Code2, tag: 'WEB SYSTEMS' },
-  { no: '04', title: 'SaaS Applications', text: 'Scalable subscription products built for dependable growth and effortless customer experiences.', icon: CloudCog, tag: 'CLOUD PRODUCTS' },
-  { no: '05', title: 'Solution Architecture', text: 'Future-ready technical foundations that scale cleanly with you.', icon: Layers3, tag: 'TECH STRATEGY' },
-  { no: '06', title: 'Mobile App Development', text: 'Polished iOS, Android and Flutter experiences users remember.', icon: Smartphone, tag: 'MOBILE' },
-  { no: '07', title: 'Data & AI Engineering', text: 'Turn fragmented data into intelligent, actionable systems.', icon: BrainCircuit, tag: 'INTELLIGENCE' },
-  { no: '08', title: 'Automation Ecosystems', text: 'GoHighLevel, Make, Zapier, APIs and workflows that run themselves.', icon: Workflow, tag: 'AUTOMATION' },
-  { no: '09', title: 'CRM & Conversational AI', text: 'ManyChat, smart funnels and customer journeys that convert.', icon: Bot, tag: 'GROWTH SYSTEMS' },
+  { no: '04', title: 'Solution Architecture', text: 'Future-ready technical foundations that scale cleanly with you.', icon: Layers3, tag: 'TECH STRATEGY' },
+  { no: '05', title: 'Mobile App Development', text: 'Polished iOS, Android and Flutter experiences users remember.', icon: Smartphone, tag: 'MOBILE' },
+  { no: '06', title: 'Data & AI Engineering', text: 'Turn fragmented data into intelligent, actionable systems.', icon: BrainCircuit, tag: 'INTELLIGENCE' },
+  { no: '07', title: 'Automation Ecosystems', text: 'GoHighLevel, Make, Zapier, APIs and workflows that run themselves.', icon: Workflow, tag: 'AUTOMATION' },
+  { no: '08', title: 'CRM & Conversational AI', text: 'ManyChat, smart funnels and customer journeys that convert.', icon: Bot, tag: 'GROWTH SYSTEMS' },
 ]
 
 const process = [
@@ -63,7 +62,7 @@ export default function Home() {
           Up<span>F</span>orge<i>®</i>
         </button>
         <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          <button className="active" onClick={() => scrollTo('home')} aria-current="page">Home</button>
+          <button onClick={() => scrollTo('home')}>Home</button>
           <button onClick={() => navigate('/services')}>Services</button>
           <button onClick={() => navigate('/work')}>Work</button>
           <button onClick={() => navigate('/about')}>About</button>
