@@ -1,21 +1,28 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
-  ArrowRight, Asterisk, Bot, BrainCircuit, ChevronDown, CircleCheck,
+  ArrowRight, Asterisk, BrainCircuit, ChevronDown, CircleCheck,
   CloudCog, Code2, Database, Layers3, Menu, Palette, PenTool, Smartphone, Sparkles, Workflow, X
 } from 'lucide-react'
 import './styles.css'
+import heroAiVisual from './assets/hero-ai-upforge.webp'
 
 const services = [
-  { no: '01', title: 'Web Design', text: 'Distinctive, conversion-focused websites shaped around your brand and audience.', icon: Palette, tag: 'DIGITAL EXPERIENCES' },
-  { no: '02', title: 'UI/UX Design', text: 'Intuitive interfaces and thoughtful user journeys grounded in real customer needs.', icon: PenTool, tag: 'PRODUCT DESIGN' },
-  { no: '03', title: 'Full-Stack Development', text: 'Robust, scalable web platforms built for real business complexity.', icon: Code2, tag: 'WEB SYSTEMS' },
-  { no: '04', title: 'SaaS Applications', text: 'Scalable subscription products built for dependable growth and effortless customer experiences.', icon: CloudCog, tag: 'CLOUD PRODUCTS' },
-  { no: '05', title: 'Solution Architecture', text: 'Future-ready technical foundations that scale cleanly with you.', icon: Layers3, tag: 'TECH STRATEGY' },
-  { no: '06', title: 'Mobile App Development', text: 'Polished iOS, Android and Flutter experiences users remember.', icon: Smartphone, tag: 'MOBILE' },
-  { no: '07', title: 'Data & AI Engineering', text: 'Turn fragmented data into intelligent, actionable systems.', icon: BrainCircuit, tag: 'INTELLIGENCE' },
-  { no: '08', title: 'Automation Ecosystems', text: 'GoHighLevel, Make, Zapier, APIs and workflows that run themselves.', icon: Workflow, tag: 'AUTOMATION' },
-  { no: '09', title: 'CRM & Conversational AI', text: 'ManyChat, smart funnels and customer journeys that convert.', icon: Bot, tag: 'GROWTH SYSTEMS' },
+  { title: 'Solution Architecture', text: 'Future-ready technical foundations that scale cleanly with your business.', icon: Layers3, tag: 'TECH STRATEGY', slug: 'solution-architecture' },
+  { title: 'Full-Stack Development', text: 'Secure, scalable web platforms covering frontend, backend, APIs and databases.', icon: Code2, tag: 'WEB SYSTEMS', slug: 'full-stack-development' },
+  { title: 'No-Code Automation', text: 'GoHighLevel, Make, Zapier and n8n workflows that remove repetitive work.', icon: Workflow, tag: 'AUTOMATION', slug: 'no-code-automation' },
+  { title: 'WordPress Development', text: 'Fast business websites, custom themes, plugins and WooCommerce stores.', icon: CloudCog, tag: 'WORDPRESS', slug: 'wordpress-development' },
+  { title: 'Graphic Design', text: 'Distinctive brand identities, social creatives and visual communication systems.', icon: Palette, tag: 'CREATIVE DESIGN', slug: 'graphic-design' },
+  { title: 'SEO Services', text: 'Technical, on-page, local and off-page SEO designed for sustainable visibility.', icon: Sparkles, tag: 'ORGANIC GROWTH', slug: 'seo-services' },
+  { title: 'UI/UX Design', text: 'Clear interfaces and user journeys grounded in real customer needs.', icon: PenTool, tag: 'PRODUCT DESIGN', slug: 'ui-ux-design' },
+  { title: 'Mobile App Development', text: 'Polished iOS, Android and Flutter experiences users remember.', icon: Smartphone, tag: 'MOBILE', slug: 'mobile-development' },
+  { title: 'Data & AI Engineering', text: 'Data pipelines, analytics and applied AI systems for better decisions.', icon: BrainCircuit, tag: 'INTELLIGENCE', slug: 'data-ai-engineering' },
+  { title: 'AI Tools & Products', text: 'Practical AI assistants, RAG systems and intelligent tools built around real workflows.', icon: BrainCircuit, tag: 'AI PRODUCTS', slug: 'ai-tools-products' },
+  { title: 'SaaS Applications', text: 'Subscription platforms with secure accounts, billing, dashboards and scalable cloud foundations.', icon: CloudCog, tag: 'SAAS PRODUCTS', slug: 'saas-applications' },
+  { title: 'Analytics Dashboards', text: 'Clear KPI dashboards that bring performance, sales and operations into one view.', icon: Database, tag: 'BUSINESS INTELLIGENCE', slug: 'analytics-dashboards' },
+  { title: 'Data Analysis', text: 'Clean reporting, trend analysis and actionable insights from fragmented business data.', icon: Database, tag: 'DATA INSIGHTS', slug: 'data-analysis' },
+  { title: 'Google & LinkedIn Ads', text: 'Intent-led paid campaigns with audience strategy, measurement and ongoing optimization.', icon: Sparkles, tag: 'PAID GROWTH', slug: 'paid-advertising' },
+  { title: 'Pixel & Conversion Tracking', text: 'Reliable Meta Pixel, Google Tag Manager, GA4 and conversion-event implementation.', icon: Workflow, tag: 'TRACKING', slug: 'pixel-tracking' },
 ]
 
 const process = [
@@ -40,6 +47,10 @@ function CursorGlow() {
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeService, setActiveService] = useState(0)
+  const heroWords = ['NO-CODE AUTOMATION EXPERTS', 'FULL-STACK PRODUCT TEAM', 'DATA & AI ENGINEERS', 'DIGITAL GROWTH PARTNERS']
+  const [typedText, setTypedText] = useState('')
+  const [wordIndex, setWordIndex] = useState(0)
+  const [deleting, setDeleting] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -49,6 +60,23 @@ export default function Home() {
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    const current = heroWords[wordIndex]
+    const complete = typedText === current
+    const empty = typedText === ''
+    const delay = complete ? 1500 : deleting ? 38 : 72
+    const timer = window.setTimeout(() => {
+      if (complete && !deleting) return setDeleting(true)
+      if (empty && deleting) {
+        setDeleting(false)
+        setWordIndex((wordIndex + 1) % heroWords.length)
+        return
+      }
+      setTypedText(current.slice(0, typedText.length + (deleting ? -1 : 1)))
+    }, delay)
+    return () => window.clearTimeout(timer)
+  }, [typedText, deleting, wordIndex])
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -60,7 +88,7 @@ export default function Home() {
       <CursorGlow />
       <nav>
         <button className="brand" onClick={() => scrollTo('home')} aria-label="UpForge home">
-          Up<span>F</span>orge<i>®</i>
+          <b>Up</b><span>Forge</span><i>®</i>
         </button>
         <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
           <button className="active" onClick={() => scrollTo('home')} aria-current="page">Home</button>
@@ -75,12 +103,17 @@ export default function Home() {
       </nav>
 
       <section className="hero" id="home">
+        <div className="hero-ai-visual" aria-hidden="true">
+          <img src={heroAiVisual} alt="" />
+          <span className="ai-pulse ai-pulse-one" />
+          <span className="ai-pulse ai-pulse-two" />
+        </div>
         <div className="grid-lines" />
-        <div className="hero-kicker"><span /> INDEPENDENT DIGITAL PRODUCT STUDIO</div>
+        <div className="hero-kicker"><span /> SOFTWARE · AI · AUTOMATION · GROWTH</div>
         <h1>
-          <span className="line-mask"><span>WE ENGINEER</span></span>
-          <span className="line-mask italic"><span>DIGITAL</span></span>
-          <span className="line-mask"><span>ADVANTAGE<span className="acid">.</span></span></span>
+          <span className="line-mask"><span>UPFORGE</span></span>
+          <span className="line-mask italic type-line"><span>{typedText}<i className="type-caret" /></span></span>
+          <span className="line-mask"><span>FOR MODERN BUSINESS<span className="acid">.</span></span></span>
         </h1>
         <div className="hero-bottom">
           <div className="hero-orbit">
@@ -88,10 +121,64 @@ export default function Home() {
             <span>SCROLL TO EXPLORE</span>
           </div>
           <p>From first sketch to scaled system—we design, build and automate digital products that make ambitious businesses impossible to ignore.</p>
+          <p className="hero-value">We design and build SaaS applications, AI tools, business automation, analytics dashboards and growth systems that make work simpler and decisions clearer.</p>
           <button className="circle-arrow" onClick={() => scrollTo('services')} aria-label="Explore services"><ChevronDown /></button>
         </div>
         <div className="ticker">
-          <div>DESIGN <Asterisk /> DEVELOPMENT <Asterisk /> DATA <Asterisk /> AUTOMATION <Asterisk /> STRATEGY <Asterisk /> DESIGN <Asterisk /> DEVELOPMENT <Asterisk /></div>
+          <div>
+            SOLUTION ARCHITECTURE <Asterisk />
+            FULL-STACK DEVELOPMENT <Asterisk />
+            PYTHON <Asterisk />
+            MOBILE APPS <Asterisk />
+            FLUTTER <Asterisk />
+            DATA ENGINEERING <Asterisk />
+            DATA SCIENCE <Asterisk />
+            BIGQUERY <Asterisk />
+            AI ENGINEERING <Asterisk />
+            AI TOOLS & PRODUCTS <Asterisk />
+            SAAS APPLICATIONS <Asterisk />
+            ANALYTICS DASHBOARDS <Asterisk />
+            DATA ANALYSIS <Asterisk />
+            GOHIGHLEVEL <Asterisk />
+            MAKE <Asterisk />
+            ZAPIER <Asterisk />
+            N8N <Asterisk />
+            API INTEGRATION <Asterisk />
+            WORDPRESS <Asterisk />
+            GRAPHIC DESIGN <Asterisk />
+            UI/UX DESIGN <Asterisk />
+            SEO SERVICES <Asterisk />
+            GOOGLE ADS <Asterisk />
+            LINKEDIN ADS <Asterisk />
+            PIXEL TRACKING <Asterisk />
+            CLOUD & DEVOPS <Asterisk />
+            SOLUTION ARCHITECTURE <Asterisk />
+            FULL-STACK DEVELOPMENT <Asterisk />
+            PYTHON <Asterisk />
+            MOBILE APPS <Asterisk />
+            FLUTTER <Asterisk />
+            DATA ENGINEERING <Asterisk />
+            DATA SCIENCE <Asterisk />
+            BIGQUERY <Asterisk />
+            AI ENGINEERING <Asterisk />
+            AI TOOLS & PRODUCTS <Asterisk />
+            SAAS APPLICATIONS <Asterisk />
+            ANALYTICS DASHBOARDS <Asterisk />
+            DATA ANALYSIS <Asterisk />
+            GOHIGHLEVEL <Asterisk />
+            MAKE <Asterisk />
+            ZAPIER <Asterisk />
+            N8N <Asterisk />
+            API INTEGRATION <Asterisk />
+            WORDPRESS <Asterisk />
+            GRAPHIC DESIGN <Asterisk />
+            UI/UX DESIGN <Asterisk />
+            SEO SERVICES <Asterisk />
+            GOOGLE ADS <Asterisk />
+            LINKEDIN ADS <Asterisk />
+            PIXEL TRACKING <Asterisk />
+            CLOUD & DEVOPS <Asterisk />
+          </div>
         </div>
       </section>
 
@@ -116,8 +203,7 @@ export default function Home() {
           {services.map((s, i) => {
             const Icon = s.icon
             return (
-              <article className={activeService === i ? 'active' : ''} onMouseEnter={() => setActiveService(i)} key={s.title}>
-                <div className="service-no">{s.no}</div>
+              <article className={activeService === i ? 'active' : ''} onMouseEnter={() => setActiveService(i)} onClick={() => navigate(`/services/${s.slug}`)} onKeyDown={(e) => e.key === 'Enter' && navigate(`/services/${s.slug}`)} role="link" tabIndex={0} key={s.title}>
                 <div className="service-icon"><Icon /></div>
                 <div className="service-main"><span>{s.tag}</span><h3>{s.title}</h3><p>{s.text}</p></div>
                 <ArrowRight className="service-arrow" />
@@ -169,12 +255,12 @@ export default function Home() {
         <div className="contact-noise" />
         <span className="eyebrow-light">HAVE SOMETHING AMBITIOUS IN MIND?</span>
         <h2>LET'S BUILD<br /><em>WHAT'S NEXT.</em></h2>
-        <a href="mailto:hello@upforge.studio">hello@upforge.studio <ArrowRight /></a>
+        <a href="mailto:info@upforge.us">info@upforge.us <ArrowRight /></a>
         <div className="footer-row">
-          <div className="brand footer-brand">Up<span>F</span>orge<i>®</i></div>
+          <div className="brand footer-brand"><b>Up</b><span>Forge</span><i>®</i></div>
           <p>ENGINEERING DIGITAL MOMENTUM<br />FROM IDEA TO IMPACT.</p>
           <div><Link to="/services">SERVICES</Link><Link to="/about">ABOUT</Link><Link to="/contact">CONTACT</Link></div>
-          <span>© 2026 UPFORGE STUDIO</span>
+          <span>© 2026 UPFORGE — TECHNOLOGY AGENCY & SOFTWARE HOUSE</span>
         </div>
       </section>
     </main>
