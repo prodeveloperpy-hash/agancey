@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Asterisk, BrainCircuit, Code2, Database, Layers3, Palette, PenTool, Smartphone, Workflow } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Asterisk, BrainCircuit, Code2, Database, Layers3, Smartphone, Workflow } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
 
@@ -14,9 +14,8 @@ function PageShell({ index, label, title, intro, children }: PageShellProps) {
   return (
     <main className="inner-page">
       <header className="inner-nav">
-        <Link className="brand" to="/">Up<span>F</span>orge<i>®</i></Link>
+        <Link className="brand" to="/">NEX<span>O</span>RA<i>®</i></Link>
         <div>
-          <Link to="/">Home</Link>
           <Link to="/services">Services</Link>
           <Link to="/work">Work</Link>
           <Link to="/about">About</Link>
@@ -37,21 +36,19 @@ function PageShell({ index, label, title, intro, children }: PageShellProps) {
       </section>
       <footer className="inner-footer">
         <Link to="/"><ArrowLeft /> Back home</Link>
-        <span>© 2026 UPFORGE STUDIO</span>
+        <span>© 2026 NEXORA STUDIO</span>
       </footer>
     </main>
   )
 }
 
 const serviceDetails = [
-  ['01', 'Web Design', 'Distinctive, responsive websites that express your brand clearly and turn attention into action.', Palette, ['UI & UX design', 'Responsive design', 'Design systems']],
-  ['02', 'UI/UX Design', 'Research-led product experiences that make complex journeys feel clear, useful, and effortless.', PenTool, ['User research', 'Wireframes & prototypes', 'Interface design']],
-  ['03', 'Full-Stack Platforms', 'Fast, secure and scalable web experiences built around the realities of your business.', Code2, ['React & Next.js', 'Node & APIs', 'Cloud deployment']],
-  ['04', 'Solution Architecture', 'Technical strategy and resilient foundations that save expensive rebuilds later.', Layers3, ['System design', 'Technical audits', 'Scale planning']],
-  ['05', 'Mobile Applications', 'Native-quality cross-platform apps with product thinking built into every screen.', Smartphone, ['Flutter', 'iOS & Android', 'App strategy']],
-  ['06', 'Data & AI', 'Modern data infrastructure and intelligent tools that move decisions closer to real time.', BrainCircuit, ['Data pipelines', 'AI integration', 'Analytics']],
-  ['07', 'Automation', 'Connected operations using GoHighLevel, Make, Zapier and custom integrations.', Workflow, ['CRM workflows', 'API integration', 'Lead automation']],
-  ['08', 'Data Engineering', 'Reliable pipelines, warehouses and reporting layers your team can actually trust.', Database, ['ETL / ELT', 'Warehousing', 'Data quality']],
+  ['01', 'Full-Stack Platforms', 'Fast, secure and scalable web experiences built around the realities of your business.', Code2, ['React & Next.js', 'Node & APIs', 'Cloud deployment']],
+  ['02', 'Solution Architecture', 'Technical strategy and resilient foundations that save expensive rebuilds later.', Layers3, ['System design', 'Technical audits', 'Scale planning']],
+  ['03', 'Mobile Applications', 'Native-quality cross-platform apps with product thinking built into every screen.', Smartphone, ['Flutter', 'iOS & Android', 'App strategy']],
+  ['04', 'Data & AI', 'Modern data infrastructure and intelligent tools that move decisions closer to real time.', BrainCircuit, ['Data pipelines', 'AI integration', 'Analytics']],
+  ['05', 'Automation', 'Connected operations using GoHighLevel, Make, Zapier and custom integrations.', Workflow, ['CRM workflows', 'API integration', 'Lead automation']],
+  ['06', 'Data Engineering', 'Reliable pipelines, warehouses and reporting layers your team can actually trust.', Database, ['ETL / ELT', 'Warehousing', 'Data quality']],
 ] as const
 
 export function ServicesPage() {
@@ -89,7 +86,7 @@ export function WorkPage() {
 
 export function AboutPage() {
   return (
-    <PageShell index="03" label="ABOUT UPFORGE" title={<>Small by design.<br /><em>Big on ambition.</em></>} intro="We built UpForge to be the kind of technology partner we always wanted: senior, honest, curious, and deeply invested.">
+    <PageShell index="03" label="ABOUT NEXORA" title={<>Small by design.<br /><em>Big on ambition.</em></>} intro="We built Nexora to be the kind of technology partner we always wanted: senior, honest, curious, and deeply invested.">
       <section className="about-story">
         <div><span>OUR POINT OF VIEW</span><h2>Good technology should disappear into a great experience.</h2></div>
         <div className="story-copy"><p>We bring product strategy, design sensibility, and serious engineering into one room. No telephone game. No bloated process. Just clear thinking and excellent craft applied to problems that matter.</p><p>Our distributed team works with ambitious founders and established companies around the world—turning complexity into momentum.</p></div>
@@ -105,11 +102,11 @@ export function ContactPage() {
   return (
     <PageShell index="04" label="START A PROJECT" title={<>Bring us the<br /><em>hard problem.</em></>} intro="Tell us what you are building, fixing, or reimagining. We usually reply within one business day.">
       <section className="contact-panel">
-        <div><span>EMAIL US DIRECTLY</span><a href="mailto:hello@upforge.studio">hello@upforge.studio</a><p>Prefer a quick intro? Send a short note with your goals, timing, and where you need the most help.</p></div>
+        <div><span>EMAIL US DIRECTLY</span><a href="mailto:hello@nexora.studio">hello@nexora.studio</a><p>Prefer a quick intro? Send a short note with your goals, timing, and where you need the most help.</p></div>
         <form onSubmit={(e) => e.preventDefault()}>
           <label>Your name<input placeholder="Jane Smith" required /></label>
           <label>Work email<input type="email" placeholder="jane@company.com" required /></label>
-          <label>What can we help with?<select defaultValue=""><option value="" disabled>Select a service</option><option>Web design</option><option>UI/UX design</option><option>Web development</option><option>Mobile application</option><option>Data & AI</option><option>Automation</option><option>Something else</option></select></label>
+          <label>What can we help with?<select defaultValue=""><option value="" disabled>Select a service</option><option>Web development</option><option>Mobile application</option><option>Data & AI</option><option>Automation</option><option>Something else</option></select></label>
           <label>Tell us about the project<textarea placeholder="A little context goes a long way..." rows={5} /></label>
           <button>Send project brief <ArrowRight /></button>
         </form>
