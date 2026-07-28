@@ -2,17 +2,19 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   ArrowRight, Asterisk, Bot, BrainCircuit, ChevronDown, CircleCheck,
-  CloudCog, Code2, Database, Layers3, Menu, Smartphone, Sparkles, Workflow, X
+  CloudCog, Code2, Database, Layers3, Menu, Palette, PenTool, Smartphone, Sparkles, Workflow, X
 } from 'lucide-react'
 import './styles.css'
 
 const services = [
-  { no: '01', title: 'Full-Stack Development', text: 'Robust, scalable web platforms built for real business complexity.', icon: Code2, tag: 'WEB SYSTEMS' },
-  { no: '02', title: 'Solution Architecture', text: 'Future-ready technical foundations that scale cleanly with you.', icon: Layers3, tag: 'TECH STRATEGY' },
-  { no: '03', title: 'Mobile App Development', text: 'Polished iOS, Android and Flutter experiences users remember.', icon: Smartphone, tag: 'MOBILE' },
-  { no: '04', title: 'Data & AI Engineering', text: 'Turn fragmented data into intelligent, actionable systems.', icon: BrainCircuit, tag: 'INTELLIGENCE' },
-  { no: '05', title: 'Automation Ecosystems', text: 'GoHighLevel, Make, Zapier, APIs and workflows that run themselves.', icon: Workflow, tag: 'AUTOMATION' },
-  { no: '06', title: 'CRM & Conversational AI', text: 'ManyChat, smart funnels and customer journeys that convert.', icon: Bot, tag: 'GROWTH SYSTEMS' },
+  { no: '01', title: 'Web Design', text: 'Distinctive, conversion-focused websites shaped around your brand and audience.', icon: Palette, tag: 'DIGITAL EXPERIENCES' },
+  { no: '02', title: 'UI/UX Design', text: 'Intuitive interfaces and thoughtful user journeys grounded in real customer needs.', icon: PenTool, tag: 'PRODUCT DESIGN' },
+  { no: '03', title: 'Full-Stack Development', text: 'Robust, scalable web platforms built for real business complexity.', icon: Code2, tag: 'WEB SYSTEMS' },
+  { no: '04', title: 'Solution Architecture', text: 'Future-ready technical foundations that scale cleanly with you.', icon: Layers3, tag: 'TECH STRATEGY' },
+  { no: '05', title: 'Mobile App Development', text: 'Polished iOS, Android and Flutter experiences users remember.', icon: Smartphone, tag: 'MOBILE' },
+  { no: '06', title: 'Data & AI Engineering', text: 'Turn fragmented data into intelligent, actionable systems.', icon: BrainCircuit, tag: 'INTELLIGENCE' },
+  { no: '07', title: 'Automation Ecosystems', text: 'GoHighLevel, Make, Zapier, APIs and workflows that run themselves.', icon: Workflow, tag: 'AUTOMATION' },
+  { no: '08', title: 'CRM & Conversational AI', text: 'ManyChat, smart funnels and customer journeys that convert.', icon: Bot, tag: 'GROWTH SYSTEMS' },
 ]
 
 const process = [
@@ -56,10 +58,11 @@ export default function Home() {
     <main>
       <CursorGlow />
       <nav>
-        <button className="brand" onClick={() => scrollTo('home')} aria-label="Nexora home">
-          NEX<span>O</span>RA<i>®</i>
+        <button className="brand" onClick={() => scrollTo('home')} aria-label="UpForge home">
+          Up<span>F</span>orge<i>®</i>
         </button>
         <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+          <button onClick={() => scrollTo('home')}>Home</button>
           <button onClick={() => navigate('/services')}>Services</button>
           <button onClick={() => navigate('/work')}>Work</button>
           <button onClick={() => navigate('/about')}>About</button>
@@ -125,7 +128,7 @@ export default function Home() {
 
       <section className="impact reveal">
         <div className="impact-card">
-          <div className="impact-top"><Sparkles /> THE NEXORA EFFECT</div>
+          <div className="impact-top"><Sparkles /> THE UPFORGE EFFECT</div>
           <h2>Complexity, made<br /><em>beautifully simple.</em></h2>
           <div className="metrics">
             <div><strong>42+</strong><span>PRODUCTS SHIPPED</span></div>
@@ -165,12 +168,12 @@ export default function Home() {
         <div className="contact-noise" />
         <span className="eyebrow-light">HAVE SOMETHING AMBITIOUS IN MIND?</span>
         <h2>LET'S BUILD<br /><em>WHAT'S NEXT.</em></h2>
-        <a href="mailto:hello@nexora.studio">hello@nexora.studio <ArrowRight /></a>
+        <a href="mailto:hello@upforge.studio">hello@upforge.studio <ArrowRight /></a>
         <div className="footer-row">
-          <div className="brand footer-brand">NEX<span>O</span>RA<i>®</i></div>
+          <div className="brand footer-brand">Up<span>F</span>orge<i>®</i></div>
           <p>ENGINEERING DIGITAL MOMENTUM<br />FROM IDEA TO IMPACT.</p>
           <div><Link to="/services">SERVICES</Link><Link to="/about">ABOUT</Link><Link to="/contact">CONTACT</Link></div>
-          <span>© 2026 NEXORA STUDIO</span>
+          <span>© 2026 UPFORGE STUDIO</span>
         </div>
       </section>
     </main>

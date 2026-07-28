@@ -145,6 +145,7 @@ em { font-family:'Playfair Display'; font-weight:500; }
 .inner-page { background:var(--paper); color:#0b0e0c; min-height:100vh; }
 .inner-nav { height:90px; padding:0 5vw; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #c6c9c2; }
 .inner-nav .brand { color:#0b0e0c; text-decoration:none; }
+.inner-nav .brand span { color:#578300; }
 .inner-nav>div { display:flex; align-items:center; gap:32px; }
 .inner-nav>div>a { color:#222722; text-decoration:none; font-size:13px; font-weight:600; }
 .inner-nav .nav-cta { border-color:#949a91!important; }
