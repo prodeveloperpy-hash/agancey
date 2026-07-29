@@ -4,8 +4,10 @@ import {
   ArrowRight, Asterisk, BrainCircuit, ChevronDown, CircleCheck,
   CloudCog, Code2, Database, Layers3, Menu, Palette, PenTool, Smartphone, Sparkles, Workflow, X
 } from 'lucide-react'
+import { FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa6'
 import './styles.css'
 import heroAiVisual from './assets/hero-ai-upforge.webp'
+import ThemeToggle from './ThemeToggle'
 
 const services = [
   { title: 'Solution Architecture', text: 'Future-ready technical foundations that scale cleanly with your business.', icon: Layers3, tag: 'TECH STRATEGY', slug: 'solution-architecture' },
@@ -23,6 +25,16 @@ const services = [
   { title: 'Data Analysis', text: 'Clean reporting, trend analysis and actionable insights from fragmented business data.', icon: Database, tag: 'DATA INSIGHTS', slug: 'data-analysis' },
   { title: 'Google & LinkedIn Ads', text: 'Intent-led paid campaigns with audience strategy, measurement and ongoing optimization.', icon: Sparkles, tag: 'PAID GROWTH', slug: 'paid-advertising' },
   { title: 'Pixel & Conversion Tracking', text: 'Reliable Meta Pixel, Google Tag Manager, GA4 and conversion-event implementation.', icon: Workflow, tag: 'TRACKING', slug: 'pixel-tracking' },
+  { title: 'Python Development', text: 'Python applications, APIs, data processing and automation systems built for dependable operation.', icon: Code2, tag: 'PYTHON ENGINEERING', slug: 'python-development' },
+  { title: 'Web Scraping', text: 'Structured and responsible web-data extraction using Scrapy, Selenium and robust processing pipelines.', icon: Database, tag: 'DATA EXTRACTION', slug: 'web-scraping' },
+  { title: 'Django Development', text: 'Secure Django applications, portals, REST APIs and admin systems with scalable foundations.', icon: Layers3, tag: 'PYTHON WEB', slug: 'django-development' },
+  { title: 'AI Chatbots & Assistants', text: 'Conversational AI for support, lead qualification, knowledge access and internal operations.', icon: BrainCircuit, tag: 'CONVERSATIONAL AI', slug: 'ai-chatbots' },
+  { title: 'Flask Development', text: 'Lean Flask applications, APIs, integrations and focused microservices for modern businesses.', icon: Code2, tag: 'PYTHON APIS', slug: 'flask-development' },
+  { title: 'Selenium Automation', text: 'Reliable browser workflows for testing, data collection, monitoring and repetitive web operations.', icon: Workflow, tag: 'BROWSER AUTOMATION', slug: 'selenium-automation' },
+  { title: 'Google API Integration', text: 'Google Workspace, Sheets, Maps, Gmail, Drive and reporting APIs connected to your workflows.', icon: CloudCog, tag: 'GOOGLE ECOSYSTEM', slug: 'google-api-integration' },
+  { title: 'API Integration', text: 'Secure REST, GraphQL, webhook and third-party integrations that keep business systems synchronized.', icon: Layers3, tag: 'CONNECTED SYSTEMS', slug: 'api-integration' },
+  { title: 'Data Management', text: 'Database design, migration, quality, access controls and dependable cloud data operations.', icon: Database, tag: 'DATA OPERATIONS', slug: 'data-management' },
+  { title: 'Social Media API Integration', text: 'LinkedIn, Facebook and YouTube APIs connected for publishing, leads, video data and reporting.', icon: Workflow, tag: 'SOCIAL CONNECTIONS', slug: 'social-media-api-integration' },
 ]
 
 const process = [
@@ -97,9 +109,12 @@ export default function Home() {
           <button onClick={() => navigate('/about')}>About</button>
           <button className="nav-cta" onClick={() => navigate('/contact')}>Start a project <ArrowRight size={16} /></button>
         </div>
-        <button className="menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-          {menuOpen ? <X /> : <Menu />}
-        </button>
+        <div className="nav-controls">
+          <ThemeToggle />
+          <button className="menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+            {menuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
       </nav>
 
       <section className="hero" id="home">
@@ -107,6 +122,28 @@ export default function Home() {
           <img src={heroAiVisual} alt="" />
           <span className="ai-pulse ai-pulse-one" />
           <span className="ai-pulse ai-pulse-two" />
+          <div className="hero-code-console">
+            <div className="code-console-bar">
+              <span /><span /><span />
+              <small>upforge.system.ts</small>
+            </div>
+            <div className="code-console-body">
+              <div className="code-line line-one"><b>01</b><code><i>const</i> vision = <strong>'your idea'</strong></code></div>
+              <div className="code-line line-two"><b>02</b><code><i>await</i> upforge.<em>architect</em>(vision)</code></div>
+              <div className="code-line line-three"><b>03</b><code>product.<em>build</em>({'{'} scalable: <u>true</u> {'}'})</code></div>
+              <div className="code-line line-four"><b>04</b><code>automation.<em>connect</em>(business)</code></div>
+              <div className="code-line line-five"><b>05</b><code><strong>return</strong> measurableGrowth</code></div>
+            </div>
+            <div className="code-console-status"><span /> SYSTEM READY <b>100%</b></div>
+          </div>
+          <div className="hero-tech-chip chip-react">REACT</div>
+          <div className="hero-tech-chip chip-ai">AI SYSTEMS</div>
+          <div className="hero-tech-chip chip-cloud">CLOUD</div>
+          <span className="data-beam beam-one" />
+          <span className="data-beam beam-two" />
+          <span className="hero-spark spark-one" />
+          <span className="hero-spark spark-two" />
+          <span className="hero-spark spark-three" />
         </div>
         <div className="grid-lines" />
         <div className="hero-kicker"><span /> SOFTWARE · AI · AUTOMATION · GROWTH</div>
@@ -259,7 +296,12 @@ export default function Home() {
         <div className="footer-row">
           <div className="brand footer-brand"><b>Up</b><span>Forge</span><i>®</i></div>
           <p>ENGINEERING DIGITAL MOMENTUM<br />FROM IDEA TO IMPACT.</p>
-          <div><Link to="/services">SERVICES</Link><Link to="/about">ABOUT</Link><Link to="/contact">CONTACT</Link></div>
+          <div className="footer-links">
+            <Link to="/services">SERVICES</Link><Link to="/about">ABOUT</Link><Link to="/contact">CONTACT</Link>
+            <a className="social-link linkedin" href="https://www.linkedin.com/company/up-forge/" target="_blank" rel="noreferrer" aria-label="UpForge on LinkedIn"><FaLinkedinIn /></a>
+            <span className="social-link facebook disabled" aria-label="UpForge Facebook page coming soon" title="Facebook page coming soon"><FaFacebookF /></span>
+            <span className="social-link youtube disabled" aria-label="UpForge YouTube channel coming soon" title="YouTube channel coming soon"><FaYoutube /></span>
+          </div>
           <span>© 2026 UPFORGE — TECHNOLOGY AGENCY & SOFTWARE HOUSE</span>
         </div>
       </section>
