@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&family=Sora:wght@500;600;700;800&display=swap');
 
 :root { --bg:#080b0a; --paper:#f2f1e9; --acid:#c7ff35; --line:rgba(255,255,255,.13); --muted:#9fa6a1; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-body { margin:0; background:var(--bg); color:#fff; font-family:Inter,Arial,sans-serif; overflow-x:hidden; }
+body { margin:0; background:var(--bg); color:#fff; font-family:Manrope,Arial,sans-serif; overflow-x:hidden; }
 button,a { font:inherit; }
 button { color:inherit; }
 .cursor-glow { position:fixed; z-index:0; width:440px; height:440px; border-radius:50%; pointer-events:none; background:radial-gradient(circle,rgba(199,255,53,.07),transparent 65%); transition:transform .12s ease-out; }
@@ -1626,4 +1626,138 @@ html { overflow-x:clip; }
   .hero { padding-left:14px; padding-right:14px; }
   .hero h1 { font-size:clamp(34px,11.5vw,42px); }
   .hero-value { font-size:12.5px!important; line-height:1.55!important; }
+}
+
+/* UpForge professional typography system */
+body {
+  font-family:"Manrope",Inter,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  font-weight:400;
+  letter-spacing:-.012em;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,
+.brand,.footer-brand,
+.service-main h3,
+.automation-card-grid h3,
+.company-pillars h3,
+.work-list h2 {
+  font-family:"Sora","Manrope",Arial,sans-serif;
+  font-optical-sizing:auto;
+  text-wrap:balance;
+}
+h1,h2 {
+  font-weight:700;
+  letter-spacing:-.055em;
+}
+h3 {
+  font-weight:650;
+  letter-spacing:-.025em;
+}
+p {
+  max-width:68ch;
+  line-height:1.72;
+  letter-spacing:-.008em;
+}
+em,.italic {
+  font-family:"Playfair Display",Georgia,serif!important;
+  font-weight:500;
+  letter-spacing:-.025em;
+}
+.brand,.footer-brand {
+  font-weight:800;
+  letter-spacing:-.055em;
+}
+.nav-links button,
+.inner-links a,
+.nav-cta,
+.page-cta a,
+.contact-panel button {
+  font-family:"Manrope",Arial,sans-serif;
+  font-weight:700;
+  letter-spacing:-.018em;
+}
+.hero-kicker,.eyebrow,
+.section-head>span,
+.page-cta>span,
+.ticker,
+.toolkit-label,
+.service-tag {
+  font-family:"DM Mono",monospace;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.hero h1 {
+  font-family:"Sora","Manrope",Arial,sans-serif;
+  font-weight:750;
+  letter-spacing:-.065em;
+  line-height:.98;
+}
+.hero h1 .type-line {
+  font-family:"Playfair Display",Georgia,serif;
+  font-weight:500;
+  letter-spacing:-.02em!important;
+  line-height:1.12;
+}
+.hero-value,
+.page-hero>p,
+.intro-copy p,
+.company-overview-head p,
+.automation-heading p,
+.automation-ecosystem-copy p {
+  font-size:clamp(15px,1.15vw,18px);
+  line-height:1.75;
+}
+.page-hero h1 {
+  font-family:"Sora","Manrope",Arial,sans-serif;
+  font-weight:700;
+  letter-spacing:-.058em;
+  line-height:.98;
+}
+.section-head h2,
+.intro h2,
+.impact h2,
+.company-overview-head h2,
+.company-method h2,
+.automation-heading h2,
+.automation-ecosystem-copy h2 {
+  line-height:1.04;
+  letter-spacing:-.05em;
+}
+.service-main h3,
+.company-pillars h3,
+.automation-card-grid h3 {
+  line-height:1.18;
+}
+
+@media(max-width:560px) {
+  body { font-size:15px; line-height:1.62; }
+  .hero h1 {
+    font-size:clamp(38px,11.7vw,52px);
+    line-height:1.02;
+    letter-spacing:-.06em;
+  }
+  .hero h1 .type-line {
+    font-size:.42em;
+    line-height:1.2;
+    letter-spacing:-.01em!important;
+  }
+  .hero-value,
+  .page-hero>p {
+    font-size:14px!important;
+    line-height:1.68!important;
+  }
+  .page-hero h1 {
+    font-size:clamp(38px,11.2vw,52px);
+    line-height:1.02;
+  }
+  .nav-links button,
+  .inner-nav .inner-links>a,
+  .inner-nav .inner-links>a:not(.nav-cta) {
+    font-family:"Sora","Manrope",Arial,sans-serif;
+    font-weight:600;
+    letter-spacing:-.035em;
+  }
 }
