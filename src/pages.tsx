@@ -36,6 +36,11 @@ function PageShell({ index, label, title, intro, heroImage, heroDecor, children 
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
+  useEffect(() => {
     if (!window.location.hash) return
     const timer = window.setTimeout(() => document.querySelector(window.location.hash)?.scrollIntoView({ behavior: 'auto', block: 'start' }), 80)
     return () => window.clearTimeout(timer)
