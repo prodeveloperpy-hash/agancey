@@ -29,10 +29,11 @@ type PageShellProps = {
   intro: string
   heroImage?: string
   heroDecor?: ReactNode
+  heroClassName?: string
   children: ReactNode
 }
 
-function PageShell({ index, label, title, intro, heroImage, heroDecor, children }: PageShellProps) {
+function PageShell({ index, label, title, intro, heroImage, heroDecor, heroClassName = '', children }: PageShellProps) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -64,8 +65,9 @@ function PageShell({ index, label, title, intro, heroImage, heroDecor, children 
           </button>
         </div>
       </header>
-      <section className={`page-hero${heroImage ? ' page-hero-visual' : ''}`}>
-        {heroImage ? <div className="page-hero-image" aria-hidden="true"><img src={heroImage} alt="" /></div> : heroDecor || <div className="page-orb"><Asterisk /></div>}
+      <section className={`page-hero${heroImage ? ' page-hero-visual' : ''}${heroClassName ? ` ${heroClassName}` : ''}`}>
+        {heroImage && <div className="page-hero-image" aria-hidden="true"><img src={heroImage} alt="" /></div>}
+        {heroDecor || (!heroImage && <div className="page-orb"><Asterisk /></div>)}
         <div className="eyebrow"><span>{index}</span> {label}</div>
         <h1>{title}</h1>
         <p>{intro}</p>
@@ -118,9 +120,36 @@ const serviceDetails = [
   { slug:'social-media-api-integration', title:'LinkedIn, Facebook & YouTube Integration', text:'Connected social-platform APIs for publishing, lead capture, reporting, video data and automated business workflows.', Icon:Workflow, tags:['LinkedIn API','Meta Graph API','YouTube Data API','Social publishing','Lead synchronization','Analytics reporting'] },
 ] as const
 
+function ServicesOrbit() {
+  const logos = [
+    { name:'React', Icon:SiReact, color:'#61dafb' },
+    { name:'Next.js', Icon:SiNextdotjs, color:'#ffffff' },
+    { name:'Python', Icon:SiPython, color:'#ffd43b' },
+    { name:'WordPress', Icon:SiWordpress, color:'#60a5fa' },
+    { name:'OpenAI', Icon:TbBrandOpenai, color:'#ffffff' },
+    { name:'Figma', Icon:SiFigma, color:'#ff7262' },
+    { name:'Flutter', Icon:SiFlutter, color:'#54c5f8' },
+    { name:'Google', Icon:SiGoogle, color:'#fbbc05' },
+  ]
+
+  return (
+    <div className="services-orbit" aria-hidden="true">
+      <div className="services-orbit-ring">
+        {logos.map(({ name, Icon, color }, index) => (
+          <span className="services-orbit-node" key={name} style={{ '--orbit-angle':`${index * 45}deg`, '--logo-color':color } as CSSProperties}>
+            <i><Icon /></i>
+          </span>
+        ))}
+      </div>
+      <div className="services-orbit-inner" />
+      <div className="services-orbit-core"><span>UpForge</span></div>
+    </div>
+  )
+}
+
 export function ServicesPage() {
   return (
-    <PageShell index="01" label="CAPABILITIES" heroImage={servicesHero} title={<>Expertise that turns<br /><em>ideas into impact.</em></>} intro="Strategy, engineering, data, and automation—one senior team from first conversation to long-term scale.">
+    <PageShell index="01" label="CAPABILITIES" heroImage={servicesHero} heroDecor={<ServicesOrbit />} heroClassName="services-page-hero" title={<>Expertise that turns<br /><em>ideas into impact.</em></>} intro="Strategy, engineering, data, and automation—one senior team from first conversation to long-term scale.">
       <section className="detail-grid">
         {serviceDetails.map(({ slug, title, text, Icon, tags }) => (
           <article className="service-catalog-card" key={title} tabIndex={0}>
