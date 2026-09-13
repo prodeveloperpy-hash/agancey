@@ -1,10 +1,11 @@
-import { Moon, Sun } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 type Theme = 'light' | 'dark'
 
 function getInitialTheme(): Theme {
-  return 'light'
+  const savedTheme = window.localStorage.getItem('upforge-theme')
+  if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
 export default function ThemeToggle() {
@@ -13,20 +14,26 @@ export default function ThemeToggle() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     document.documentElement.style.colorScheme = theme
+    window.localStorage.setItem('upforge-theme', theme)
   }, [theme])
 
-  const nextTheme = theme === 'light' ? 'dark' : 'light'
-
   return (
-    <button
-      className="theme-toggle"
-      type="button"
-      onClick={() => setTheme(nextTheme)}
-      aria-label={`Switch to ${nextTheme} mode`}
-      title={`Switch to ${nextTheme} mode`}
-    >
-      {theme === 'light' ? <Moon /> : <Sun />}
-      <span>{theme === 'light' ? 'Dark' : 'Light'}</span>
-    </button>
+    <label className="theme-toggle cosmic-toggle" title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
+      <input
+        className="cosmic-toggle-input"
+        type="checkbox"
+        checked={theme === 'dark'}
+        onChange={event => setTheme(event.target.checked ? 'dark' : 'light')}
+        aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      />
+      <span className="cosmic-slider" aria-hidden="true">
+        <i className="cosmos" />
+        <i className="energy-line energy-one" />
+        <i className="energy-line energy-two" />
+        <i className="energy-line energy-three" />
+        <i className="toggle-orb"><i className="inner-orb" /><i className="orb-ring" /></i>
+        <i className="particles">{Array.from({ length:6 }, (_, index) => <i className="particle" key={index} />)}</i>
+      </span>
+    </label>
   )
 }

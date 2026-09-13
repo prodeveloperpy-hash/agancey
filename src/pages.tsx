@@ -123,11 +123,24 @@ export function ServicesPage() {
     <PageShell index="01" label="CAPABILITIES" heroImage={servicesHero} title={<>Expertise that turns<br /><em>ideas into impact.</em></>} intro="Strategy, engineering, data, and automation—one senior team from first conversation to long-term scale.">
       <section className="detail-grid">
         {serviceDetails.map(({ slug, title, text, Icon, tags }) => (
-          <article key={title}>
-            <div className="detail-top"><Icon /></div>
-            <h2>{title}</h2><p>{text}</p>
-            <ul>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
-            <Link className="detail-link" to={`/services/${slug}`}>View service <ArrowRight /></Link>
+          <article className="service-catalog-card" key={title} tabIndex={0}>
+            <span className="service-card-accent" aria-hidden="true" />
+            <div className="service-card-visual" aria-hidden="true">
+              <div className="service-card-primary-icon"><Icon /></div>
+              <div className="service-card-logos">
+                {(serviceTools[slug] ?? []).slice(0, 6).map(brand => (
+                  <span className="service-card-brand" key={brand.name} title={brand.name} style={{ '--brand-color':brand.color } as CSSProperties}>
+                    <BrandMark tool={brand} />
+                    <small>{brand.name}</small>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="service-card-content">
+              <h2>{title}</h2><p>{text}</p>
+              <ul>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+              <Link className="detail-link" to={`/services/${slug}`}>View service <ArrowRight /></Link>
+            </div>
           </article>
         ))}
       </section>
