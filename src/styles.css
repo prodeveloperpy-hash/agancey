@@ -421,11 +421,13 @@ html[data-theme="dark"] .theme-toggle.cosmic-toggle { border:0; background:none;
 
 /* Interactive service catalogue cards */
 .detail-grid .service-catalog-card {
-  min-height:500px;
-  padding:0 38px 78px;
+  height:350px;
+  min-height:0;
+  padding:0 38px 32px;
   overflow:hidden;
   isolation:isolate;
   outline:none;
+  transition:height .55s cubic-bezier(.16,1,.3,1),background .35s,box-shadow .35s;
 }
 .service-card-accent {
   display:block;
@@ -437,12 +439,13 @@ html[data-theme="dark"] .theme-toggle.cosmic-toggle { border:0; background:none;
   transition:width .35s ease,height .35s ease,opacity .35s ease;
 }
 .service-card-visual {
-  height:112px;
-  margin:32px 0 0;
+  height:200px;
+  margin:0 -38px;
   display:grid;
   place-items:center;
   position:relative;
-  border-radius:18px;
+  border-radius:0 0 18px 18px;
+  background:#f0f6ff;
   transition:height .5s cubic-bezier(.16,1,.3,1),margin .5s cubic-bezier(.16,1,.3,1),background .35s ease;
 }
 .service-card-primary-icon {
@@ -454,7 +457,7 @@ html[data-theme="dark"] .theme-toggle.cosmic-toggle { border:0; background:none;
   color:#2563eb;
   background:#eef5ff;
   border:1px solid #cbdcf7;
-  transition:opacity .2s ease,transform .4s ease;
+  display:none;
 }
 .service-card-primary-icon svg { width:30px; height:30px; }
 .service-card-logos {
@@ -465,8 +468,8 @@ html[data-theme="dark"] .theme-toggle.cosmic-toggle { border:0; background:none;
   align-content:center;
   gap:16px 10px;
   padding:20px;
-  opacity:0;
-  transform:translateY(16px) scale(.96);
+  opacity:1;
+  transform:none;
   transition:opacity .3s ease .08s,transform .45s cubic-bezier(.16,1,.3,1);
 }
 .service-card-brand { min-width:0; display:grid; justify-items:center; gap:7px; color:var(--brand-color); }
@@ -475,40 +478,75 @@ html[data-theme="dark"] .theme-toggle.cosmic-toggle { border:0; background:none;
 .service-card-brand small { max-width:100%; overflow:hidden; text-overflow:ellipsis; color:#52677f; font:8px "DM Mono",monospace; white-space:nowrap; }
 .service-card-content { transition:transform .5s cubic-bezier(.16,1,.3,1); }
 .detail-grid .service-catalog-card h2 { margin:24px 0 14px; font-size:clamp(24px,2.2vw,32px); }
+.detail-grid .service-catalog-card p,
+.detail-grid .service-catalog-card ul,
+.detail-grid .service-catalog-card .detail-link {
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(16px);
+  pointer-events:none;
+  transition:opacity .3s ease,transform .45s cubic-bezier(.16,1,.3,1),visibility 0s linear .35s;
+}
 .detail-grid .service-catalog-card p { min-height:86px; margin:0; }
 .detail-grid .service-catalog-card ul { margin-top:18px; }
+.detail-grid .service-catalog-card .detail-link {
+  position:static;
+  width:max-content;
+  margin-top:22px;
+}
 .service-catalog-card:hover,
 .service-catalog-card:focus-within,
-.service-catalog-card:focus-visible { box-shadow:0 20px 55px rgba(37,99,235,.18); }
+.service-catalog-card:focus-visible { height:350px; box-shadow:0 20px 55px rgba(37,99,235,.18); }
 .service-catalog-card:hover .service-card-accent,
 .service-catalog-card:focus-within .service-card-accent,
 .service-catalog-card:focus-visible .service-card-accent { width:0; height:0; opacity:0; }
 .service-catalog-card:hover .service-card-visual,
 .service-catalog-card:focus-within .service-card-visual,
-.service-catalog-card:focus-visible .service-card-visual { height:205px; margin:0 -38px; background:#f0f6ff; border-radius:0 0 18px 18px; }
+.service-catalog-card:focus-visible .service-card-visual { height:0; margin:0 -38px; background:#f0f6ff; border-radius:0 0 18px 18px; opacity:0; }
 .service-catalog-card:hover .service-card-primary-icon,
 .service-catalog-card:focus-within .service-card-primary-icon,
 .service-catalog-card:focus-visible .service-card-primary-icon { opacity:0; transform:scale(.7); }
 .service-catalog-card:hover .service-card-logos,
 .service-catalog-card:focus-within .service-card-logos,
-.service-catalog-card:focus-visible .service-card-logos { opacity:1; transform:none; }
+.service-catalog-card:focus-visible .service-card-logos { opacity:0; transform:translateY(-12px) scale(.96); }
 .service-catalog-card:hover .service-card-content,
 .service-catalog-card:focus-within .service-card-content,
 .service-catalog-card:focus-visible .service-card-content { transform:translateY(-2px); }
+.service-catalog-card:hover p,
+.service-catalog-card:hover ul,
+.service-catalog-card:hover .detail-link,
+.service-catalog-card:focus-within p,
+.service-catalog-card:focus-within ul,
+.service-catalog-card:focus-within .detail-link,
+.service-catalog-card:focus-visible p,
+.service-catalog-card:focus-visible ul,
+.service-catalog-card:focus-visible .detail-link {
+  opacity:1;
+  visibility:visible;
+  transform:none;
+  pointer-events:auto;
+  transition-delay:.12s;
+}
 html[data-theme="dark"] .service-card-primary-icon { background:#132943; border-color:#345272; color:#93c5fd; }
 html[data-theme="dark"] .service-catalog-card:hover .service-card-visual,
 html[data-theme="dark"] .service-catalog-card:focus-within .service-card-visual,
 html[data-theme="dark"] .service-catalog-card:focus-visible .service-card-visual { background:#10243e; }
 html[data-theme="dark"] .service-card-brand small { color:#b8cce2; }
 @media (max-width:800px), (hover:none) {
-  .detail-grid .service-catalog-card { min-height:470px; padding-left:20px; padding-right:20px; }
+  .detail-grid .service-catalog-card { height:auto; min-height:500px; padding:0 20px 78px; }
   .service-card-accent { display:none; }
   .service-card-visual { height:auto; min-height:140px; margin:0 -20px; background:#f0f6ff; border-radius:0 0 18px 18px; }
   .service-card-primary-icon { display:none; }
   .service-card-logos { position:relative; opacity:1; transform:none; }
+  .detail-grid .service-catalog-card p,
+  .detail-grid .service-catalog-card ul,
+  .detail-grid .service-catalog-card .detail-link { opacity:1; visibility:visible; transform:none; pointer-events:auto; }
   .service-catalog-card:hover .service-card-visual,
   .service-catalog-card:focus-within .service-card-visual,
-  .service-catalog-card:focus-visible .service-card-visual { height:auto; margin:0 -20px; }
+  .service-catalog-card:focus-visible .service-card-visual { height:auto; margin:0 -20px; opacity:1; }
+  .service-catalog-card:hover .service-card-logos,
+  .service-catalog-card:focus-within .service-card-logos,
+  .service-catalog-card:focus-visible .service-card-logos { opacity:1; transform:none; }
 }
 
 /* Final UpForge brand lockup and focused hero copy */
