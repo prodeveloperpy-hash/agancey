@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
+import type { CSSProperties } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   ArrowRight, Asterisk, BrainCircuit, ChevronDown, CircleCheck,
   CloudCog, Code2, Database, Layers3, Menu, Palette, PenTool, Smartphone, Sparkles, Workflow, X
 } from 'lucide-react'
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa6'
+import { TbBrandOpenai } from 'react-icons/tb'
+import { SiFigma, SiFlutter, SiPython, SiReact, SiWordpress } from 'react-icons/si'
 import './styles.css'
 import heroAiVisual from './assets/hero-ai-upforge.webp'
 import ThemeToggle from './ThemeToggle'
@@ -42,6 +45,15 @@ const process = [
   ['02', 'Architect', 'We map the smartest route from ambitious idea to resilient product.'],
   ['03', 'Create', 'Design and engineering move together in focused, transparent sprints.'],
   ['04', 'Evolve', 'We launch, measure, optimize, and stay beside you as you grow.'],
+]
+
+const impactLogos = [
+  { name:'React', Icon:SiReact, color:'#61dafb' },
+  { name:'Python', Icon:SiPython, color:'#ffd43b' },
+  { name:'WordPress', Icon:SiWordpress, color:'#60a5fa' },
+  { name:'OpenAI', Icon:TbBrandOpenai, color:'#ffffff' },
+  { name:'Figma', Icon:SiFigma, color:'#ff7262' },
+  { name:'Flutter', Icon:SiFlutter, color:'#54c5f8' },
 ]
 
 function CursorGlow() {
@@ -267,11 +279,16 @@ export default function Home() {
         </div>
         <div className="system-visual">
           <div className="visual-label">LIVE SYSTEM / 2026</div>
-          <div className="core"><span>N</span></div>
-          <div className="satellite sat-1"><Code2 /></div>
-          <div className="satellite sat-2"><Database /></div>
-          <div className="satellite sat-3"><CloudCog /></div>
-          <div className="satellite sat-4"><BrainCircuit /></div>
+          <div className="core"><span>UpForge</span></div>
+          <div className="impact-logo-orbit" aria-hidden="true">
+            {impactLogos.map(({ name, Icon, color }, index) => (
+              <span className="impact-logo-position" key={name} style={{ '--logo-angle':`${index * 60}deg` } as CSSProperties}>
+                <i className="satellite impact-logo" style={{ '--logo-color':color } as CSSProperties}>
+                  <Icon />
+                </i>
+              </span>
+            ))}
+          </div>
           <div className="scanline" />
         </div>
       </section>
