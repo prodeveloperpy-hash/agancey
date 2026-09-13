@@ -136,7 +136,8 @@ export default function Home() {
       <CursorGlow />
       <nav>
         <button className="brand" onClick={() => scrollTo('home')} aria-label="UpForge home">
-          <b>Up</b><span>Forge</span><i>®</i>
+          <img src="/upforge-logo.png" alt="" />
+          <span className="brand-name"><b>Up</b>Forge</span>
         </button>
         <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
           <button className="active" onClick={() => scrollTo('home')} aria-current="page">Home</button>
@@ -335,7 +336,7 @@ export default function Home() {
         <h2>LET'S BUILD<br /><em>WHAT'S NEXT.</em></h2>
         <a href="mailto:info@upforge.us">info@upforge.us <ArrowRight /></a>
         <div className="footer-row">
-          <div className="brand footer-brand"><b>Up</b><span>Forge</span><i>®</i></div>
+          <div className="brand footer-brand"><img src="/upforge-logo.png" alt="" /><span className="brand-name"><b>Up</b>Forge</span></div>
           <p>ENGINEERING DIGITAL MOMENTUM<br />FROM IDEA TO IMPACT.</p>
           <div className="footer-links">
             <Link to="/services">SERVICES</Link><Link to="/about">ABOUT</Link><Link to="/contact">CONTACT</Link>

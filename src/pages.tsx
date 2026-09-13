@@ -50,7 +50,7 @@ function PageShell({ index, label, title, intro, heroImage, heroDecor, heroClass
   return (
     <main className="inner-page">
       <header className="inner-nav">
-        <Link className="brand" to="/"><b>Up</b><span>Forge</span><i>®</i></Link>
+        <Link className="brand" to="/" aria-label="UpForge home"><img src="/upforge-logo.png" alt="" /><span className="brand-name"><b>Up</b>Forge</span></Link>
         <div className={`inner-links${menuOpen ? ' open' : ''}`}>
           <NavLink onClick={() => setMenuOpen(false)} to="/">Home</NavLink>
           <NavLink onClick={() => setMenuOpen(false)} to="/services">Services</NavLink>
