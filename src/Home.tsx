@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
+import type { CSSProperties } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   ArrowRight, Asterisk, BrainCircuit, ChevronDown, CircleCheck,
   CloudCog, Code2, Database, Layers3, Menu, Palette, PenTool, Smartphone, Sparkles, Workflow, X
 } from 'lucide-react'
-import { FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa6'
+import { FaAws, FaFacebookF, FaLinkedin, FaLinkedinIn, FaYoutube } from 'react-icons/fa6'
+import { TbBrandOpenai } from 'react-icons/tb'
+import { SiDjango, SiFigma, SiFlask, SiFlutter, SiGoogle, SiGoogleads, SiGooglecloud, SiGoogletagmanager, SiLooker, SiPandas, SiPostgresql, SiPostman, SiPython, SiReact, SiScrapy, SiSelenium, SiStripe, SiTensorflow, SiWordpress, SiZapier } from 'react-icons/si'
 import './styles.css'
 import heroAiVisual from './assets/hero-ai-upforge.webp'
 import ThemeToggle from './ThemeToggle'
@@ -42,6 +45,34 @@ const process = [
   ['02', 'Architect', 'We map the smartest route from ambitious idea to resilient product.'],
   ['03', 'Create', 'Design and engineering move together in focused, transparent sprints.'],
   ['04', 'Evolve', 'We launch, measure, optimize, and stay beside you as you grow.'],
+]
+
+const liveSystemLogos = [
+  { name:'Architecture', Icon:FaAws, color:'#ff9900' },
+  { name:'Full Stack', Icon:SiReact, color:'#61dafb' },
+  { name:'Automation', Icon:SiZapier, color:'#ff4f00' },
+  { name:'WordPress', Icon:SiWordpress, color:'#60a5fa' },
+  { name:'Graphic Design', Icon:SiFigma, color:'#ff7262' },
+  { name:'SEO', Icon:SiGoogle, color:'#fbbc05' },
+  { name:'UI/UX', Icon:SiFigma, color:'#a259ff' },
+  { name:'Mobile', Icon:SiFlutter, color:'#54c5f8' },
+  { name:'Data & AI', Icon:SiTensorflow, color:'#ff6f00' },
+  { name:'AI Products', Icon:TbBrandOpenai, color:'#ffffff' },
+  { name:'SaaS', Icon:SiStripe, color:'#8b7cff' },
+  { name:'Dashboards', Icon:SiLooker, color:'#4285f4' },
+  { name:'Data Analysis', Icon:SiPandas, color:'#e70488' },
+  { name:'Advertising', Icon:SiGoogleads, color:'#34a853' },
+  { name:'Tracking', Icon:SiGoogletagmanager, color:'#8ab4f8' },
+  { name:'Python', Icon:SiPython, color:'#ffd43b' },
+  { name:'Scraping', Icon:SiScrapy, color:'#60a839' },
+  { name:'Django', Icon:SiDjango, color:'#44b78b' },
+  { name:'Chatbots', Icon:TbBrandOpenai, color:'#10a37f' },
+  { name:'Flask', Icon:SiFlask, color:'#ffffff' },
+  { name:'Selenium', Icon:SiSelenium, color:'#43b02a' },
+  { name:'Google APIs', Icon:SiGooglecloud, color:'#4285f4' },
+  { name:'API Integration', Icon:SiPostman, color:'#ff6c37' },
+  { name:'Data Management', Icon:SiPostgresql, color:'#8bb9e8' },
+  { name:'Social APIs', Icon:FaLinkedin, color:'#0a66c2' },
 ]
 
 function CursorGlow() {
@@ -267,11 +298,16 @@ export default function Home() {
         </div>
         <div className="system-visual">
           <div className="visual-label">LIVE SYSTEM / 2026</div>
-          <div className="core"><span>N</span></div>
-          <div className="satellite sat-1"><Code2 /></div>
-          <div className="satellite sat-2"><Database /></div>
-          <div className="satellite sat-3"><CloudCog /></div>
-          <div className="satellite sat-4"><BrainCircuit /></div>
+          <div className="core"><span>UpForge</span></div>
+          <div className="live-logo-orbit" aria-hidden="true">
+            {liveSystemLogos.map(({ name, Icon, color }, index) => (
+              <span className={`live-logo-position${index % 2 ? ' inner-logo-position' : ''}`} key={name} style={{ '--logo-angle':`${index * (360 / liveSystemLogos.length)}deg` } as CSSProperties}>
+                <i className="satellite live-logo" style={{ '--logo-color':color, '--logo-delay':`${index * -.16}s` } as CSSProperties}>
+                  <Icon />
+                </i>
+              </span>
+            ))}
+          </div>
           <div className="scanline" />
         </div>
       </section>
