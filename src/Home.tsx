@@ -299,7 +299,7 @@ export default function Home() {
         </div>
         <div className="system-visual">
           <div className="visual-label">LIVE SYSTEM / 2026</div>
-          <div className="core"><span>UpForge</span></div>
+          <div className="core"><img src="/upforge-logo.png" alt="UpForge" /></div>
           <div className="live-logo-orbit" aria-hidden="true">
             {liveSystemLogos.map(({ name, Icon, color }, index) => (
               <span className={`live-logo-position${index % 2 ? ' inner-logo-position' : ''}`} key={name} style={{ '--logo-angle':`${index * (360 / liveSystemLogos.length)}deg` } as CSSProperties}>

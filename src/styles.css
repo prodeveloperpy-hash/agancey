@@ -100,6 +100,7 @@ em { font-family:'Playfair Display'; font-weight:500; }
 .core { width:145px; height:145px; background:var(--acid); color:#0b0d0c; border-radius:50%; display:grid; place-items:center; box-shadow:0 0 75px rgba(199,255,53,.25); z-index:2; }
 .core span { font-size:62px; font-weight:900; letter-spacing:-6px; }
 .system-visual .core span { font-size:22px; letter-spacing:-1.4px; }
+.system-visual .core img { width:88px; height:88px; object-fit:contain; }
 .satellite { position:absolute; width:54px; height:54px; display:grid; place-items:center; border:1px solid #52613a; background:#131812; border-radius:50%; color:var(--acid); z-index:3; }
 .satellite svg { width:19px; }
 .sat-1 { top:19%; left:48%; }.sat-2 { top:47%; right:13%; }.sat-3 { bottom:15%; left:50%; }.sat-4 { top:47%; left:13%; }
@@ -461,6 +462,7 @@ html[data-theme="dark"] .theme-toggle.cosmic-toggle { border:0; background:none;
 .services-orbit-node svg { width:23px; height:23px; }
 .services-orbit-core { position:absolute; left:50%; top:50%; width:128px; height:128px; display:grid; place-items:center; transform:translate(-50%,-50%); border:1px solid rgba(219,234,254,.28); border-radius:50%; color:white; background:linear-gradient(145deg,rgba(96,165,250,.82),rgba(37,99,235,.9)); box-shadow:0 0 70px rgba(147,197,253,.48); }
 .services-orbit-core span { font:800 23px "Sora",sans-serif; letter-spacing:-.06em; }
+.services-orbit-core img { width:82px; height:82px; object-fit:contain; }
 @keyframes servicesOrbitSpin { to { transform:rotate(360deg); } }
 @keyframes servicesOrbitCounterSpin {
   from { transform:rotate(calc(-1 * var(--orbit-angle))); }
@@ -789,6 +791,7 @@ html[data-theme="dark"] {
   --muted:#9cafc6;
   --line:rgba(147,197,253,.16);
 }
+html[data-theme="dark"] img[src="/upforge-logo.png"] { content:url("/upforge-logo-dark.png"); }
 body,.inner-page,nav,.inner-nav,.hero,.intro,.services,.process,.page-hero,
 .detail-grid article,.company-overview,.company-method,.values,
 .service-list article,.work-list article,.theme-toggle {

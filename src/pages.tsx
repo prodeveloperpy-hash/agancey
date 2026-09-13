@@ -142,7 +142,7 @@ function ServicesOrbit() {
         ))}
       </div>
       <div className="services-orbit-inner" />
-      <div className="services-orbit-core"><span>UpForge</span></div>
+      <div className="services-orbit-core"><img src="/upforge-logo.png" alt="UpForge" /></div>
     </div>
   )
 }
