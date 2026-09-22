@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
-  ArrowRight, Asterisk, BrainCircuit, ChevronDown, CircleCheck,
+  ArrowRight, Asterisk, BrainCircuit, ChevronDown, ChevronLeft, ChevronRight, CircleCheck,
   CloudCog, Code2, Database, Layers3, Menu, Palette, PenTool, Smartphone, Sparkles, Workflow, X
 } from 'lucide-react'
 import { FaAws, FaFacebookF, FaLinkedin, FaLinkedinIn, FaYoutube } from 'react-icons/fa6'
@@ -89,7 +89,7 @@ function CursorGlow() {
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [activeService, setActiveService] = useState(0)
+  const servicesTrackRef = useRef<HTMLDivElement>(null)
   const heroWords = ['NO-CODE AUTOMATION EXPERTS', 'FULL-STACK PRODUCT TEAM', 'DATA & AI ENGINEERS', 'DIGITAL GROWTH PARTNERS']
   const [typedText, setTypedText] = useState('')
   const [wordIndex, setWordIndex] = useState(0)
@@ -129,6 +129,13 @@ export default function Home() {
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     setMenuOpen(false)
+  }
+
+  const moveServices = (direction: -1 | 1) => {
+    const track = servicesTrackRef.current
+    if (!track) return
+    const card = track.querySelector<HTMLElement>('.service-card')
+    track.scrollBy({ left: direction * ((card?.offsetWidth ?? 320) + 14), behavior: 'smooth' })
   }
 
   return (
@@ -268,22 +275,33 @@ export default function Home() {
       </section>
 
       <section className="services" id="services">
-        <div className="section-head reveal">
-          <div className="eyebrow"><span>02</span> CAPABILITIES</div>
-          <h2>Built for the<br /><em>next move.</em></h2>
-          <p>One expert team. Every digital capability your business needs to move faster.</p>
+        <div className="services-carousel-head reveal">
+          <div>
+            <div className="eyebrow"><span>02</span> CAPABILITIES</div>
+            <h2>Services</h2>
+          </div>
+          <Link className="services-contact-link" to="/contact">Get in touch <ArrowRight /></Link>
         </div>
-        <div className="service-list reveal">
+        <div className="services-carousel reveal">
+          <button className="services-carousel-control services-carousel-prev" type="button" onClick={() => moveServices(-1)} aria-label="Previous services"><ChevronLeft /></button>
+          <div className="services-carousel-track" ref={servicesTrackRef}>
           {services.map((s, i) => {
             const Icon = s.icon
             return (
-              <article className={activeService === i ? 'active' : ''} onMouseEnter={() => setActiveService(i)} onClick={() => navigate(`/services/${s.slug}`)} onKeyDown={(e) => e.key === 'Enter' && navigate(`/services/${s.slug}`)} role="link" tabIndex={0} key={s.title}>
-                <div className="service-icon"><Icon /></div>
-                <div className="service-main"><span>{s.tag}</span><h3>{s.title}</h3><p>{s.text}</p></div>
-                <ArrowRight className="service-arrow" />
-              </article>
+              <Link className={`service-card service-card-${i % 5}`} to={`/services/${s.slug}`} key={s.title}>
+                <span className="service-card-number">(&nbsp; {String(i + 1).padStart(3, '0')} &nbsp;)</span>
+                <span className="service-card-icon"><Icon /></span>
+                <span className="service-card-copy">
+                  <span>{s.tag}</span>
+                  <h3>{s.title}</h3>
+                  <p>{s.text}</p>
+                </span>
+                <ArrowRight className="service-card-arrow" />
+              </Link>
             )
           })}
+          </div>
+          <button className="services-carousel-control services-carousel-next" type="button" onClick={() => moveServices(1)} aria-label="Next services"><ChevronRight /></button>
         </div>
       </section>
 
