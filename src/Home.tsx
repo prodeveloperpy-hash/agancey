@@ -11,6 +11,9 @@ import { SiDjango, SiFigma, SiFlask, SiFlutter, SiGoogle, SiGoogleads, SiGooglec
 import './styles.css'
 import heroAiVisual from './assets/hero-ai-upforge.webp'
 import ThemeToggle from './ThemeToggle'
+import { AnimatedGroup } from './components/motion-primitives/AnimatedGroup'
+import { InView } from './components/motion-primitives/InView'
+import { TextEffect } from './components/motion-primitives/TextEffect'
 
 const services = [
   { title: 'Solution Architecture', text: 'Future-ready technical foundations that scale cleanly with your business.', icon: Layers3, tag: 'TECH STRATEGY', slug: 'solution-architecture' },
@@ -265,26 +268,26 @@ export default function Home() {
 
       <section className="intro reveal" id="about">
         <div className="eyebrow"><span>01</span> WHAT WE BELIEVE</div>
-        <div className="intro-copy">
-          <h2>Not another vendor.<br />Your <em>unfair advantage.</em></h2>
+        <InView className="intro-copy">
+          <h2><TextEffect preset="slide">Not another vendor.</TextEffect><br /><em><TextEffect preset="blur" delay={0.14}>Your unfair advantage.</TextEffect></em></h2>
           <div>
             <p>We are a team of builders, thinkers and problem-solvers obsessed with one thing: making technology genuinely useful for your business.</p>
             <div className="proof"><CircleCheck /> SENIOR TALENT, ZERO HANDOFFS</div>
           </div>
-        </div>
+        </InView>
       </section>
 
       <section className="services" id="services">
         <div className="services-carousel-head reveal">
           <div>
             <div className="eyebrow"><span>02</span> CAPABILITIES</div>
-            <h2>Services</h2>
+            <h2><TextEffect>Services</TextEffect></h2>
           </div>
           <Link className="services-contact-link" to="/contact">Get in touch <ArrowRight /></Link>
         </div>
         <div className="services-carousel reveal">
           <button className="services-carousel-control services-carousel-prev" type="button" onClick={() => moveServices(-1)} aria-label="Previous services"><ChevronLeft /></button>
-          <div className="services-carousel-track" ref={servicesTrackRef}>
+          <AnimatedGroup className="services-carousel-track" itemClassName="service-card-motion" containerRef={servicesTrackRef}>
           {services.map((s, i) => {
             const Icon = s.icon
             return (
@@ -300,22 +303,22 @@ export default function Home() {
               </Link>
             )
           })}
-          </div>
+          </AnimatedGroup>
           <button className="services-carousel-control services-carousel-next" type="button" onClick={() => moveServices(1)} aria-label="Next services"><ChevronRight /></button>
         </div>
       </section>
 
-      <section className="impact reveal">
-        <div className="impact-card">
+      <section className="impact">
+        <InView className="impact-card" direction="left">
           <div className="impact-top"><Sparkles /> THE UPFORGE EFFECT</div>
-          <h2>Complexity, made<br /><em>beautifully simple.</em></h2>
+          <h2><TextEffect preset="slide">Complexity, made</TextEffect><br /><em><TextEffect delay={0.12}>beautifully simple.</TextEffect></em></h2>
           <div className="metrics">
             <div><strong>42+</strong><span>PRODUCTS SHIPPED</span></div>
             <div><strong>96%</strong><span>CLIENT RETENTION</span></div>
             <div><strong>4.9</strong><span>PARTNER RATING</span></div>
           </div>
-        </div>
-        <div className="system-visual">
+        </InView>
+        <InView className="system-visual" direction="right" delay={0.08}>
           <div className="visual-label">LIVE SYSTEM / 2026</div>
           <div className="core"><img src="/upforge-logo.png" alt="UpForge" /></div>
           <div className="live-logo-orbit" aria-hidden="true">
@@ -328,15 +331,15 @@ export default function Home() {
             ))}
           </div>
           <div className="scanline" />
-        </div>
+        </InView>
       </section>
 
       <section className="process" id="process">
         <div className="section-head reveal">
           <div className="eyebrow"><span>03</span> HOW WE WORK</div>
-          <h2>Sharp process.<br /><em>Zero drama.</em></h2>
+          <h2><TextEffect preset="slide">Sharp process.</TextEffect><br /><em><TextEffect preset="scale" delay={0.12}>Zero drama.</TextEffect></em></h2>
         </div>
-        <div className="process-grid reveal">
+        <AnimatedGroup className="process-grid" itemClassName="process-motion-item">
           {process.map(([no, title, text]) => (
             <article key={title}>
               <div className="step">{no}</div>
@@ -345,13 +348,13 @@ export default function Home() {
               <p>{text}</p>
             </article>
           ))}
-        </div>
+        </AnimatedGroup>
       </section>
 
       <section className="contact" id="contact">
         <div className="contact-noise" />
         <span className="eyebrow-light">HAVE SOMETHING AMBITIOUS IN MIND?</span>
-        <h2>LET'S BUILD<br /><em>WHAT'S NEXT.</em></h2>
+        <h2><TextEffect preset="slide">LET'S BUILD</TextEffect><br /><em><TextEffect preset="blur" delay={0.14}>WHAT'S NEXT.</TextEffect></em></h2>
         <a href="mailto:info@upforge.us">info@upforge.us <ArrowRight /></a>
         <div className="footer-row">
           <div className="brand footer-brand"><img src="/upforge-logo.png" alt="" /><span className="brand-name"><b>Up</b>Forge</span></div>

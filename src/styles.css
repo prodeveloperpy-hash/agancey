@@ -68,6 +68,26 @@ em { font-family:'Playfair Display'; font-weight:500; }
   .services#services .service-list { flex-basis:420px; height:420px; }
 }
 
+/* Motion Primitives layout adapters */
+.process-motion-item { min-width:0; height:100%; }
+.process-motion-item article { height:100%; }
+.process-motion-item:not(:first-child) article { padding-left:30px; }
+.process-motion-item:last-child article { border-right:0; }
+
+@media(max-width:800px) {
+  .process-motion-item:nth-child(2) article { border-right:0; }
+}
+@media(max-width:560px) {
+  .process-motion-item article,
+  .process-motion-item:not(:first-child) article {
+    min-height:auto;
+    padding:30px 0;
+    border-right:0;
+    border-bottom:1px solid #b7bbb4;
+  }
+  .process-motion-item:last-child article { border-bottom:0; }
+}
+
 /* Homepage services carousel */
 .services#services {
   padding-top:110px;
@@ -119,6 +139,11 @@ em { font-family:'Playfair Display'; font-weight:500; }
   overscroll-behavior-inline:contain;
 }
 .services-carousel-track::-webkit-scrollbar { display:none; }
+.service-card-motion {
+  min-width:0;
+  height:100%;
+  scroll-snap-align:start;
+}
 .service-card {
   position:relative;
   min-height:440px;
@@ -129,7 +154,7 @@ em { font-family:'Playfair Display'; font-weight:500; }
   color:#101418;
   border:1px solid rgba(15,23,42,.035);
   border-radius:28px;
-  scroll-snap-align:start;
+  height:100%;
   text-decoration:none;
   isolation:isolate;
   transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease;
@@ -190,6 +215,19 @@ em { font-family:'Playfair Display'; font-weight:500; }
   transition:opacity .25s ease,transform .25s ease;
 }
 .service-card:hover .service-card-arrow { opacity:1; transform:none; }
+.motion-text-word { display:inline-block; overflow:hidden; vertical-align:bottom; }
+.motion-text-segment { display:inline-block; will-change:transform,opacity,filter; }
+.motion-text-accessible {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
 .services-carousel-control {
   position:absolute;
   z-index:3;
@@ -2043,6 +2081,22 @@ html { overflow-x:clip; }
     opacity:1;
     pointer-events:auto;
   }
+}
+
+/* Keep process dividers aligned when AnimatedGroup adds motion wrappers. */
+.process-grid>.process-motion-item:not(:last-child)>article { border-right:1px solid #b7bbb4; }
+.process-grid>.process-motion-item:last-child>article { border-right:0; }
+html[data-theme="dark"] .process-grid>.process-motion-item:not(:last-child)>article { border-color:#29415f; }
+
+@media(max-width:800px) {
+  .process-grid>.process-motion-item:nth-child(2)>article { border-right:0; }
+}
+@media(max-width:560px) {
+  .process-grid>.process-motion-item:not(:last-child)>article {
+    border-right:0;
+    border-bottom:1px solid #b7bbb4;
+  }
+  html[data-theme="dark"] .process-grid>.process-motion-item:not(:last-child)>article { border-bottom-color:#29415f; }
 }
 
 @media(max-width:560px) {
