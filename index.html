@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f8fbff" />
+    <meta name="theme-color" content="#050914" />
+    <script>
+      try { document.documentElement.dataset.theme = localStorage.getItem('upforge-theme') === 'light' ? 'light' : 'dark' } catch { document.documentElement.dataset.theme = 'dark' }
+    </script>
     <meta name="description" content="UpForge is a full-service technology agency and software house delivering web, mobile, AI, data, automation and digital growth solutions." />
     <title>UpForge &mdash; Technology Agency &amp; Software House</title>
     <link rel="icon" type="image/png" href="/upforge-logo.png" />

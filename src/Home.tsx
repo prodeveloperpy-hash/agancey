@@ -1,19 +1,29 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import type { CSSProperties } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { motion } from 'motion/react'
 import {
-  ArrowRight, Asterisk, BrainCircuit, ChevronDown, ChevronLeft, ChevronRight, CircleCheck,
-  CloudCog, Code2, Database, Layers3, Menu, Palette, PenTool, Smartphone, Sparkles, Workflow, X
+  ArrowRight, Bot, BrainCircuit, ChartColumn, ChevronLeft, ChevronRight, CircleCheck,
+  CloudCog, Code2, Database, Globe, Layers3, LayoutDashboard, MessageCircle, MonitorSmartphone, Palette, PenTool,
+  Play, ShieldCheck, Smartphone, Sparkles, TrendingUp, Workflow, Zap
 } from 'lucide-react'
 import { FaAws, FaFacebookF, FaLinkedin, FaLinkedinIn, FaYoutube } from 'react-icons/fa6'
 import { TbBrandOpenai } from 'react-icons/tb'
-import { SiDjango, SiFigma, SiFlask, SiFlutter, SiGoogle, SiGoogleads, SiGooglecloud, SiGoogletagmanager, SiLooker, SiPandas, SiPostgresql, SiPostman, SiPython, SiReact, SiScrapy, SiSelenium, SiStripe, SiTensorflow, SiWordpress, SiZapier } from 'react-icons/si'
+import { SiDjango, SiFigma, SiFlask, SiFlutter, SiGoogle, SiGoogleads, SiGooglecloud, SiGoogletagmanager, SiLooker, SiNotion, SiPandas, SiPostgresql, SiPostman, SiPython, SiReact, SiScrapy, SiSelenium, SiShopify, SiStripe, SiTensorflow, SiWordpress, SiZapier } from 'react-icons/si'
 import './styles.css'
-import heroAiVisual from './assets/hero-ai-upforge.webp'
-import ThemeToggle from './ThemeToggle'
+import SiteNav from './SiteNav'
 import { AnimatedGroup } from './components/motion-primitives/AnimatedGroup'
+import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
+import { BorderTrail } from './components/motion-primitives/BorderTrail'
+import { GlowEffect } from './components/motion-primitives/GlowEffect'
+import { InfiniteSlider } from './components/motion-primitives/InfiniteSlider'
 import { InView } from './components/motion-primitives/InView'
+import { Magnetic } from './components/motion-primitives/Magnetic'
+import { Spotlight } from './components/motion-primitives/Spotlight'
 import { TextEffect } from './components/motion-primitives/TextEffect'
+import { TextLoop } from './components/motion-primitives/TextLoop'
+import { TextShimmer } from './components/motion-primitives/TextShimmer'
+import { Tilt } from './components/motion-primitives/Tilt'
 
 const services = [
   { title: 'Solution Architecture', text: 'Future-ready technical foundations that scale cleanly with your business.', icon: Layers3, tag: 'TECH STRATEGY', slug: 'solution-architecture' },
@@ -78,6 +88,84 @@ const liveSystemLogos = [
   { name:'Social APIs', Icon:FaLinkedin, color:'#0a66c2' },
 ]
 
+const featureCards = [
+  { title:'Web & SaaS', text:'Full-stack platforms', Icon:MonitorSmartphone, slug:'full-stack-development' },
+  { title:'AI & Automation', text:'Workflows that run themselves', Icon:Bot, slug:'no-code-automation', featured:true },
+  { title:'SEO & Growth', text:'Search, ads and tracking', Icon:TrendingUp, slug:'seo-services' },
+  { title:'Data & Dashboards', text:'Decisions in one view', Icon:LayoutDashboard, slug:'analytics-dashboards' },
+]
+
+const stackLogos = [
+  { name:'React', Icon:SiReact },
+  { name:'Python', Icon:SiPython },
+  { name:'AWS', Icon:FaAws },
+  { name:'Stripe', Icon:SiStripe },
+  { name:'Shopify', Icon:SiShopify },
+  { name:'Notion', Icon:SiNotion },
+  { name:'Zapier', Icon:SiZapier },
+  { name:'WordPress', Icon:SiWordpress },
+]
+
+const chartBars = [26, 38, 32, 52, 46, 68, 84]
+
+function LaptopMockup() {
+  return (
+    <Tilt className="biz-laptop" rotationFactor={5}>
+      <div className="biz-laptop-lid">
+        <div className="biz-screen">
+          <div className="biz-screen-nav">
+            <span className="biz-screen-brand"><b>Up</b>Forge</span>
+            <span className="biz-screen-links"><i className="is-active">Home</i><i>About</i><i>Services</i><i>Projects</i><i>Blog</i></span>
+            <span className="biz-screen-pill">Contact Us</span>
+          </div>
+          <div className="biz-screen-body">
+            <div className="biz-screen-copy">
+              <h3>Grow Your<br />Business Online</h3>
+              <p>We deliver innovative digital solutions</p>
+              <div className="biz-screen-actions">
+                <span className="biz-screen-btn">Get Started</span>
+                <span className="biz-screen-play"><i><Play /></i> Watch Video</span>
+              </div>
+            </div>
+            <div className="biz-chart-card">
+              <strong>+<AnimatedNumber value={68} />% <small>Growth</small></strong>
+              <div className="biz-chart">
+                <svg viewBox="0 0 200 90" preserveAspectRatio="none" aria-hidden="true">
+                  <motion.polyline
+                    points="4,78 34,64 62,70 92,46 120,52 150,30 196,8"
+                    initial={{ pathLength:0 }}
+                    whileInView={{ pathLength:1 }}
+                    viewport={{ once:true }}
+                    transition={{ duration:1.6, ease:'easeInOut', delay:.4 }}
+                  />
+                </svg>
+                {chartBars.map((height, index) => (
+                  <motion.span
+                    key={index}
+                    style={{ height:`${height}%` }}
+                    initial={{ scaleY:0 }}
+                    whileInView={{ scaleY:1 }}
+                    viewport={{ once:true }}
+                    transition={{ duration:.8, delay:.2 + index * .08, ease:[0.16, 1, 0.3, 1] }}
+                  />
+                ))}
+              </div>
+              <div className="biz-chart-icons"><i><ChartColumn /></i><i><MessageCircle /></i><i><Zap /></i><i><Globe /></i></div>
+            </div>
+          </div>
+          <div className="biz-screen-trust">
+            <span>Built with<br />modern stacks</span>
+            <InfiniteSlider className="biz-screen-logos" gap={28} speed={28} speedOnHover={10}>
+              {stackLogos.map(({ name, Icon }) => <span key={name}><Icon /> {name}</span>)}
+            </InfiniteSlider>
+          </div>
+        </div>
+      </div>
+      <div className="biz-laptop-base"><span /></div>
+    </Tilt>
+  )
+}
+
 function CursorGlow() {
   useEffect(() => {
     const glow = document.querySelector<HTMLElement>('.cursor-glow')
@@ -91,18 +179,7 @@ function CursorGlow() {
 }
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false)
   const servicesTrackRef = useRef<HTMLDivElement>(null)
-  const heroWords = ['NO-CODE AUTOMATION EXPERTS', 'FULL-STACK PRODUCT TEAM', 'DATA & AI ENGINEERS', 'DIGITAL GROWTH PARTNERS']
-  const [typedText, setTypedText] = useState('')
-  const [wordIndex, setWordIndex] = useState(0)
-  const [deleting, setDeleting] = useState(false)
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -112,26 +189,8 @@ export default function Home() {
     return () => observer.disconnect()
   }, [])
 
-  useEffect(() => {
-    const current = heroWords[wordIndex]
-    const complete = typedText === current
-    const empty = typedText === ''
-    const delay = complete ? 1500 : deleting ? 38 : 72
-    const timer = window.setTimeout(() => {
-      if (complete && !deleting) return setDeleting(true)
-      if (empty && deleting) {
-        setDeleting(false)
-        setWordIndex((wordIndex + 1) % heroWords.length)
-        return
-      }
-      setTypedText(current.slice(0, typedText.length + (deleting ? -1 : 1)))
-    }, delay)
-    return () => window.clearTimeout(timer)
-  }, [typedText, deleting, wordIndex])
-
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    setMenuOpen(false)
   }
 
   const moveServices = (direction: -1 | 1) => {
@@ -142,128 +201,80 @@ export default function Home() {
   }
 
   return (
-    <main>
-      <CursorGlow />
-      <nav>
-        <button className="brand" onClick={() => scrollTo('home')} aria-label="UpForge home">
-          <img src="/upforge-logo.png" alt="" />
-          <span className="brand-name"><b>Up</b>Forge</span>
-        </button>
-        <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          <button className="active" onClick={() => scrollTo('home')} aria-current="page">Home</button>
-          <button onClick={() => navigate('/services')}>Services</button>
-          <button onClick={() => navigate('/work')}>Work</button>
-          <button onClick={() => navigate('/about')}>About</button>
-          <button className="nav-cta" onClick={() => navigate('/contact')}>Start a project <ArrowRight size={16} /></button>
-        </div>
-        <div className="nav-controls">
-          <ThemeToggle />
-          <button className="menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-            {menuOpen ? <X /> : <Menu />}
-          </button>
-        </div>
-      </nav>
+    <main className="biz-home">
+      <SiteNav />
 
-      <section className="hero" id="home">
-        <div className="hero-ai-visual" aria-hidden="true">
-          <img src={heroAiVisual} alt="" />
-          <span className="ai-pulse ai-pulse-one" />
-          <span className="ai-pulse ai-pulse-two" />
-          <div className="hero-code-console">
-            <div className="code-console-bar">
-              <span /><span /><span />
-              <small>upforge.system.ts</small>
-            </div>
-            <div className="code-console-body">
-              <div className="code-line line-one"><b>01</b><code><i>const</i> vision = <strong>'your idea'</strong></code></div>
-              <div className="code-line line-two"><b>02</b><code><i>await</i> upforge.<em>architect</em>(vision)</code></div>
-              <div className="code-line line-three"><b>03</b><code>product.<em>build</em>({'{'} scalable: <u>true</u> {'}'})</code></div>
-              <div className="code-line line-four"><b>04</b><code>automation.<em>connect</em>(business)</code></div>
-              <div className="code-line line-five"><b>05</b><code><strong>return</strong> measurableGrowth</code></div>
-            </div>
-            <div className="code-console-status"><span /> SYSTEM READY <b>100%</b></div>
-          </div>
-          <div className="hero-tech-chip chip-react">REACT</div>
-          <div className="hero-tech-chip chip-ai">AI SYSTEMS</div>
-          <div className="hero-tech-chip chip-cloud">CLOUD</div>
-          <span className="data-beam beam-one" />
-          <span className="data-beam beam-two" />
-          <span className="hero-spark spark-one" />
-          <span className="hero-spark spark-two" />
-          <span className="hero-spark spark-three" />
-        </div>
-        <div className="grid-lines" />
-        <div className="hero-kicker"><span /> SOFTWARE · AI · AUTOMATION · GROWTH</div>
-        <h1>
-          <span className="line-mask"><span>UPFORGE</span></span>
-          <span className="line-mask italic type-line"><span>{typedText}<i className="type-caret" /></span></span>
-          <span className="line-mask"><span>FOR MODERN BUSINESS<span className="acid">.</span></span></span>
+      <section className="biz-hero" id="home">
+        <Spotlight className="biz-hero-spotlight" size={560} />
+        <div className="biz-hero-bg" aria-hidden="true"><span className="biz-beam biz-beam-one" /><span className="biz-beam biz-beam-two" /><span className="biz-dots" /></div>
+
+        <div className="biz-kicker"><span className="biz-kicker-line" /><TextShimmer duration={2.8}>Professional</TextShimmer><span className="biz-kicker-line" /></div>
+        <h1 className="biz-title">
+          <motion.span
+            className="biz-title-line"
+            initial={{ opacity:0, y:28, filter:'blur(8px)' }}
+            animate={{ opacity:1, y:0, filter:'blur(0px)' }}
+            transition={{ duration:.8, ease:[0.16, 1, 0.3, 1] }}
+          >
+            Software, AI &amp; Automation
+          </motion.span>
+          <span className="biz-title-accent">
+            <i aria-hidden="true" />
+            <TextLoop interval={2.8}>
+              <span>Engineered</span>
+              <span>Designed</span>
+              <span>Automated</span>
+              <span>Scaled</span>
+            </TextLoop>
+            <i aria-hidden="true" />
+          </span>
         </h1>
-        <div className="hero-bottom">
-          <div className="hero-orbit">
-            <div className="orbit-ring"><Asterisk size={26} /></div>
-            <span>SCROLL TO EXPLORE</span>
-          </div>
-          <p>From first sketch to scaled system—we design, build and automate digital products that make ambitious businesses impossible to ignore.</p>
-          <p className="hero-value">We design and build SaaS applications, AI tools, business automation, analytics dashboards and growth systems that make work simpler and decisions clearer.</p>
-          <button className="circle-arrow" onClick={() => scrollTo('services')} aria-label="Explore services"><ChevronDown /></button>
+        <p className="biz-subtitle">Modern digital products for startups and companies</p>
+        <div className="biz-divider" aria-hidden="true"><span /><i /></div>
+        <div className="biz-hero-actions">
+          <Magnetic>
+            <Link className="biz-btn biz-btn-primary" to="/contact">Get Started <ArrowRight /></Link>
+          </Magnetic>
+          <button className="biz-btn biz-btn-ghost" type="button" onClick={() => scrollTo('services')}>Explore services</button>
         </div>
-        <div className="ticker">
-          <div>
-            SOLUTION ARCHITECTURE <Asterisk />
-            FULL-STACK DEVELOPMENT <Asterisk />
-            PYTHON <Asterisk />
-            MOBILE APPS <Asterisk />
-            FLUTTER <Asterisk />
-            DATA ENGINEERING <Asterisk />
-            DATA SCIENCE <Asterisk />
-            BIGQUERY <Asterisk />
-            AI ENGINEERING <Asterisk />
-            AI TOOLS & PRODUCTS <Asterisk />
-            SAAS APPLICATIONS <Asterisk />
-            ANALYTICS DASHBOARDS <Asterisk />
-            DATA ANALYSIS <Asterisk />
-            GOHIGHLEVEL <Asterisk />
-            MAKE <Asterisk />
-            ZAPIER <Asterisk />
-            N8N <Asterisk />
-            API INTEGRATION <Asterisk />
-            WORDPRESS <Asterisk />
-            GRAPHIC DESIGN <Asterisk />
-            UI/UX DESIGN <Asterisk />
-            SEO SERVICES <Asterisk />
-            GOOGLE ADS <Asterisk />
-            LINKEDIN ADS <Asterisk />
-            PIXEL TRACKING <Asterisk />
-            CLOUD & DEVOPS <Asterisk />
-            SOLUTION ARCHITECTURE <Asterisk />
-            FULL-STACK DEVELOPMENT <Asterisk />
-            PYTHON <Asterisk />
-            MOBILE APPS <Asterisk />
-            FLUTTER <Asterisk />
-            DATA ENGINEERING <Asterisk />
-            DATA SCIENCE <Asterisk />
-            BIGQUERY <Asterisk />
-            AI ENGINEERING <Asterisk />
-            AI TOOLS & PRODUCTS <Asterisk />
-            SAAS APPLICATIONS <Asterisk />
-            ANALYTICS DASHBOARDS <Asterisk />
-            DATA ANALYSIS <Asterisk />
-            GOHIGHLEVEL <Asterisk />
-            MAKE <Asterisk />
-            ZAPIER <Asterisk />
-            N8N <Asterisk />
-            API INTEGRATION <Asterisk />
-            WORDPRESS <Asterisk />
-            GRAPHIC DESIGN <Asterisk />
-            UI/UX DESIGN <Asterisk />
-            SEO SERVICES <Asterisk />
-            GOOGLE ADS <Asterisk />
-            LINKEDIN ADS <Asterisk />
-            PIXEL TRACKING <Asterisk />
-            CLOUD & DEVOPS <Asterisk />
-          </div>
-        </div>
+
+        <InView className="biz-device" delay={0.1}>
+          <span className="biz-device-glow" aria-hidden="true" />
+          <LaptopMockup />
+        </InView>
+
+        <AnimatedGroup className="biz-features" itemClassName="biz-feature-motion">
+          {featureCards.map(({ title, text, Icon, slug, featured }) => (
+            <Link className={`biz-feature${featured ? ' is-featured' : ''}`} to={`/services/${slug}`} key={title}>
+              {featured && <BorderTrail size={90} duration={6} />}
+              <span className="biz-feature-icon"><Icon /></span>
+              <h3>{title}</h3>
+              <span className="biz-feature-rule" />
+              <p>{text}</p>
+              <span className="biz-feature-dots" aria-hidden="true"><i /><i /><i /></span>
+            </Link>
+          ))}
+        </AnimatedGroup>
+
+        <InView className="biz-stats" delay={0.05}>
+          <div><strong><AnimatedNumber value={42} suffix="+" /></strong><span>Products shipped</span></div>
+          <div><strong><AnimatedNumber value={96} suffix="%" /></strong><span>Client retention</span></div>
+          <div><strong><AnimatedNumber value={4.9} decimals={1} /></strong><span>Partner rating</span></div>
+          <Magnetic className="biz-stats-cta">
+            <div className="biz-glow-wrap">
+              <GlowEffect />
+              <Link className="biz-btn biz-btn-primary biz-btn-lg" to="/contact">Get Free Quote <ArrowRight /></Link>
+            </div>
+          </Magnetic>
+        </InView>
+
+        <div className="biz-tagline"><span />Modern<i />Fast<i />Secure<i />Scalable<span /></div>
+
+        <InfiniteSlider className="biz-ticker" gap={42} speed={50} speedOnHover={18}>
+          {['Solution Architecture', 'Full-Stack Development', 'AI Engineering', 'SaaS Applications', 'No-Code Automation', 'Analytics Dashboards', 'Mobile Apps', 'SEO Services', 'Google & LinkedIn Ads', 'WordPress', 'UI/UX Design'].map((item) => (
+            <span key={item}><ShieldCheck /> {item}</span>
+          ))}
+        </InfiniteSlider>
       </section>
 
       <section className="intro reveal" id="about">
@@ -292,6 +303,7 @@ export default function Home() {
             const Icon = s.icon
             return (
               <Link className={`service-card service-card-${i % 5}`} to={`/services/${s.slug}`} key={s.title}>
+                <Spotlight size={280} />
                 <span className="service-card-number">(&nbsp; {String(i + 1).padStart(3, '0')} &nbsp;)</span>
                 <span className="service-card-icon"><Icon /></span>
                 <span className="service-card-copy">

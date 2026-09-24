@@ -4,8 +4,7 @@ type Theme = 'light' | 'dark'
 
 function getInitialTheme(): Theme {
   const savedTheme = window.localStorage.getItem('upforge-theme')
-  if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  return savedTheme === 'light' ? 'light' : 'dark'
 }
 
 export default function ThemeToggle() {

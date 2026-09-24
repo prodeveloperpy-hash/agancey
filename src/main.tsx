@@ -5,6 +5,7 @@ import { FaEnvelope, FaWhatsapp } from 'react-icons/fa6'
 import Home from './Home'
 import { AboutPage, ContactPage, ServiceDetailPage, ServicesPage, WorkPage } from './pages'
 import './styles.css'
+import './theme.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

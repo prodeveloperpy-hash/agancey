@@ -1,6 +1,7 @@
-import { ArrowLeft, ArrowRight, Asterisk, BrainCircuit, CloudCog, Code2, Database, Layers3, Menu, Palette, PenTool, Smartphone, Sparkles, Workflow, X } from 'lucide-react'
-import { Link, NavLink, useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { ArrowLeft, ArrowRight, Asterisk, BrainCircuit, CloudCog, Code2, Database, Layers3, Palette, PenTool, Smartphone, Sparkles, Workflow } from 'lucide-react'
+import { Link, useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { motion } from 'motion/react'
 import type { CSSProperties, FormEvent, ReactNode } from 'react'
 import type { IconType } from 'react-icons'
 import { FaAws, FaFacebook, FaFacebookF, FaLinkedin, FaLinkedinIn, FaMicrosoft, FaYoutube } from 'react-icons/fa6'
@@ -20,7 +21,15 @@ import servicesHero from './assets/services-hero.webp'
 import workHero from './assets/work-hero.webp'
 import aboutHero from './assets/about-hero.webp'
 import highlevelMark from './assets/highlevel-mark.png'
-import ThemeToggle from './ThemeToggle'
+import SiteNav from './SiteNav'
+import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
+import { BorderTrail } from './components/motion-primitives/BorderTrail'
+import { GlowEffect } from './components/motion-primitives/GlowEffect'
+import { InfiniteSlider } from './components/motion-primitives/InfiniteSlider'
+import { Magnetic } from './components/motion-primitives/Magnetic'
+import { Spotlight } from './components/motion-primitives/Spotlight'
+import { TextShimmer } from './components/motion-primitives/TextShimmer'
+import { Tilt } from './components/motion-primitives/Tilt'
 
 type PageShellProps = {
   index: string
@@ -33,14 +42,17 @@ type PageShellProps = {
   children: ReactNode
 }
 
+const easeOut = [0.16, 1, 0.3, 1] as const
+
+/** Scroll-reveal props for a motion element, staggered by index (Motion Primitives "In View" pattern). */
+const reveal = (index = 0) => ({
+  initial:{ opacity:0, y:32 },
+  whileInView:{ opacity:1, y:0 },
+  viewport:{ once:true, margin:'-8% 0px' },
+  transition:{ duration:.7, delay:Math.min(index, 8) * .07, ease:easeOut },
+})
+
 function PageShell({ index, label, title, intro, heroImage, heroDecor, heroClassName = '', children }: PageShellProps) {
-  const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
-
   useEffect(() => {
     if (!window.location.hash) return
     const timer = window.setTimeout(() => document.querySelector(window.location.hash)?.scrollIntoView({ behavior: 'auto', block: 'start' }), 80)
@@ -48,35 +60,36 @@ function PageShell({ index, label, title, intro, heroImage, heroDecor, heroClass
   }, [])
 
   return (
-    <main className="inner-page">
-      <header className="inner-nav">
-        <Link className="brand" to="/" aria-label="UpForge home"><img src="/upforge-logo.png" alt="" /><span className="brand-name"><b>Up</b>Forge</span></Link>
-        <div className={`inner-links${menuOpen ? ' open' : ''}`}>
-          <NavLink onClick={() => setMenuOpen(false)} to="/">Home</NavLink>
-          <NavLink onClick={() => setMenuOpen(false)} to="/services">Services</NavLink>
-          <NavLink onClick={() => setMenuOpen(false)} to="/work">Work</NavLink>
-          <NavLink onClick={() => setMenuOpen(false)} to="/about">About</NavLink>
-          <NavLink onClick={() => setMenuOpen(false)} className={({ isActive }) => `nav-cta${isActive ? ' active' : ''}`} to="/contact">Start a project <ArrowRight size={15} /></NavLink>
-        </div>
-        <div className="inner-controls">
-          <ThemeToggle />
-          <button className="inner-menu" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>
-            {menuOpen ? <X /> : <Menu />}
-          </button>
-        </div>
-      </header>
-      <section className={`page-hero${heroImage ? ' page-hero-visual' : ''}${heroClassName ? ` ${heroClassName}` : ''}`}>
+    <main className="inner-page biz-page">
+      <SiteNav />
+      <section className={`page-hero biz-page-hero${heroImage ? ' page-hero-visual' : ''}${heroClassName ? ` ${heroClassName}` : ''}`} data-index={index || undefined}>
+        <Spotlight size={560} />
+        <div className="biz-hero-bg" aria-hidden="true"><span className="biz-beam biz-beam-one" /><span className="biz-beam biz-beam-two" /><span className="biz-dots" /></div>
         {heroImage && <div className="page-hero-image" aria-hidden="true"><img src={heroImage} alt="" /></div>}
         {heroDecor || (!heroImage && <div className="page-orb"><Asterisk /></div>)}
-        <div className="eyebrow"><span>{index}</span> {label}</div>
-        <h1>{title}</h1>
-        <p>{intro}</p>
+        <div className="biz-page-copy">
+          <div className="biz-kicker biz-kicker-sm"><span className="biz-kicker-line" /><TextShimmer duration={2.8}>{label}</TextShimmer><span className="biz-kicker-line" /></div>
+          <motion.h1 initial={{ opacity:0, y:28, filter:'blur(8px)' }} animate={{ opacity:1, y:0, filter:'blur(0px)' }} transition={{ duration:.8, ease:easeOut }}>{title}</motion.h1>
+          <motion.p initial={{ opacity:0, y:18 }} animate={{ opacity:1, y:0 }} transition={{ duration:.7, delay:.15, ease:easeOut }}>{intro}</motion.p>
+          <div className="biz-divider" aria-hidden="true"><span /><i /></div>
+          <motion.div className="biz-hero-actions" initial={{ opacity:0, y:18 }} animate={{ opacity:1, y:0 }} transition={{ duration:.7, delay:.25, ease:easeOut }}>
+            <Magnetic><Link className="biz-btn biz-btn-primary" to="/contact">Get Started <ArrowRight /></Link></Magnetic>
+            <Link className="biz-btn biz-btn-ghost" to="/services">Explore services</Link>
+          </motion.div>
+        </div>
       </section>
       {children}
       <section className="page-cta">
+        <Spotlight size={520} />
         <span>READY WHEN YOU ARE</span>
         <h2>Let's make it<br /><em>remarkable.</em></h2>
-        <Link to="/contact">Start a conversation <ArrowRight /></Link>
+        <div className="biz-tagline biz-tagline-left"><span />Modern<i />Fast<i />Secure<i />Scalable</div>
+        <Magnetic className="page-cta-magnetic">
+          <div className="biz-glow-wrap">
+            <GlowEffect colors={['#ffffff', '#8fbaff', '#1f6bff', '#ffffff']} />
+            <Link className="biz-btn biz-btn-light biz-btn-lg" to="/contact">Start a conversation <ArrowRight /></Link>
+          </div>
+        </Magnetic>
       </section>
       <footer className="inner-footer">
         <Link to="/"><ArrowLeft /> Back home</Link>
@@ -150,9 +163,18 @@ function ServicesOrbit() {
 export function ServicesPage() {
   return (
     <PageShell index="01" label="CAPABILITIES" heroImage={servicesHero} heroDecor={<ServicesOrbit />} heroClassName="services-page-hero" title={<>Expertise that turns<br /><em>ideas into impact.</em></>} intro="Strategy, engineering, data, and automation—one senior team from first conversation to long-term scale.">
+      <section className="biz-logo-strip" aria-label="Technologies we work with">
+        <span>Technologies we work with</span>
+        <InfiniteSlider gap={44} speed={36} speedOnHover={12}>
+          {stripTools.map(brand => (
+            <span className="biz-logo-strip-item" key={brand.name} style={{ '--brand-color':brand.color } as CSSProperties}><BrandMark tool={brand} /> {brand.name}</span>
+          ))}
+        </InfiniteSlider>
+      </section>
       <section className="detail-grid">
-        {serviceDetails.map(({ slug, title, text, Icon, tags }) => (
-          <article className="service-catalog-card" key={title} tabIndex={0}>
+        {serviceDetails.map(({ slug, title, text, Icon, tags }, index) => (
+          <motion.article className="service-catalog-card" key={title} tabIndex={0} {...reveal(index % 3)}>
+            <Spotlight size={300} />
             <span className="service-card-accent" aria-hidden="true" />
             <div className="service-card-visual" aria-hidden="true">
               <div className="service-card-primary-icon"><Icon /></div>
@@ -170,7 +192,7 @@ export function ServicesPage() {
               <ul>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
               <Link className="detail-link" to={`/services/${slug}`}>View service <ArrowRight /></Link>
             </div>
-          </article>
+          </motion.article>
         ))}
       </section>
     </PageShell>
@@ -294,6 +316,10 @@ const serviceTools: Record<string, BrandTool[]> = {
   ],
 }
 
+const stripTools = Array.from(
+  new Map(Object.values(serviceTools).flat().filter(brand => brand.Icon).map(brand => [brand.name, brand] as const)).values(),
+).slice(0, 20)
+
 function BrandMark({ tool }: { tool:BrandTool }) {
   const Icon = tool.Icon
   return tool.image ? <img src={tool.image} alt="" /> : Icon ? <Icon /> : null
@@ -345,15 +371,16 @@ function ServiceShowcase({ slug, title, text, tags }: { slug:string; title:strin
   return (
     <>
       <section className="automation-capabilities">
-        <div className="automation-heading">
+        <motion.div className="automation-heading" {...reveal()}>
           <span>UPFORGE EXPERTISE</span>
           <h2>Unlock new possibilities with<br /><em>{title.toLowerCase()}.</em></h2>
           <p>{text} Every engagement combines clear planning, experienced execution and dependable support.</p>
-        </div>
+        </motion.div>
         <div className="automation-card-grid">
-          {capabilities.map(({ title, text, brand }) => {
+          {capabilities.map(({ title, text, brand }, index) => {
             return (
-            <article key={title}>
+            <motion.article key={title} {...reveal(index)}>
+              <Spotlight size={260} />
               <div
                 className="automation-card-logo"
                 title={brand.name}
@@ -363,7 +390,7 @@ function ServiceShowcase({ slug, title, text, tags }: { slug:string; title:strin
                 <BrandMark tool={brand} />
               </div>
               <div><h3>{title}</h3><p>{text}</p></div>
-            </article>
+            </motion.article>
             )
           })}
         </div>
@@ -378,12 +405,12 @@ function ServiceShowcase({ slug, title, text, tags }: { slug:string; title:strin
           </svg>
           {leftTools.map((brand,index) => <BrandNode key={brand.name} tool={brand} className={`node-${['one','two','three','four'][index]}`} />)}
         </div>
-        <div className="automation-ecosystem-copy">
+        <motion.div className="automation-ecosystem-copy" {...reveal()}>
           <span>CONNECTED TOOLKIT</span>
           <h2>Our expertise in {title.toLowerCase()} tools.</h2>
           <p>We work with proven platforms and modern technologies selected around your users, existing systems and long-term operating needs.</p>
           <Link to="/contact">Schedule a discovery call <ArrowRight /></Link>
-        </div>
+        </motion.div>
         <div className="tool-rail tool-rail-right" aria-hidden="true">
           <svg viewBox="0 0 360 440" preserveAspectRatio="none">
             <path d="M360 55 H260 C170 55 180 170 10 190" />
@@ -397,6 +424,13 @@ function ServiceShowcase({ slug, title, text, tags }: { slug:string; title:strin
     </>
   )
 }
+
+const deliverySteps = [
+  ['Discover', 'Understand the goal'],
+  ['Design', 'Plan the right solution'],
+  ['Build', 'Execute with clarity'],
+  ['Launch', 'Test, document and support'],
+] as const
 
 export function ServiceDetailPage() {
   const { slug } = useParams()
@@ -414,19 +448,26 @@ export function ServiceDetailPage() {
     >
       <ServiceShowcase slug={slug ?? ''} title={title} text={text} tags={tags} />
       <section className="service-detail">
-        <div className="service-detail-intro"><Icon /><span>WHAT'S INCLUDED</span><h2>A complete service,<br />not a partial handoff.</h2><p>We combine strategy, execution, testing and documentation so your team receives a solution that is clear, maintainable and ready to use.</p></div>
+        <motion.div className="service-detail-intro" {...reveal()}><Icon /><span>WHAT'S INCLUDED</span><h2>A complete service,<br />not a partial handoff.</h2><p>We combine strategy, execution, testing and documentation so your team receives a solution that is clear, maintainable and ready to use.</p></motion.div>
         <div className="included-list">{tags.map((tag,index) => {
           const brand = tools[index % tools.length]
           return (
-            <article key={tag}>
+            <motion.article key={tag} {...reveal(index)}>
               <span className="included-brand-logo" style={{ '--brand-color':brand.color } as CSSProperties}><BrandMark tool={brand} /></span>
               <h3>{tag}</h3>
               <p>Planned and delivered around your goals, users and existing systems.</p>
-            </article>
+            </motion.article>
           )
         })}</div>
       </section>
-      <section className="delivery-strip"><div><strong>Discover</strong><span>Understand the goal</span></div><div><strong>Design</strong><span>Plan the right solution</span></div><div><strong>Build</strong><span>Execute with clarity</span></div><div><strong>Launch</strong><span>Test, document and support</span></div></section>
+      <section className="delivery-strip">
+        {deliverySteps.map(([step, text], index) => (
+          <motion.div key={step} {...reveal(index)}>
+            {index === 0 && <BorderTrail size={80} duration={7} />}
+            <strong>{step}</strong><span>{text}</span>
+          </motion.div>
+        ))}
+      </section>
     </PageShell>
   )
 }
@@ -442,42 +483,76 @@ export function WorkPage() {
   return (
     <PageShell index="02" label="SELECTED WORK" heroImage={workHero} title={<>Products made to<br /><em>move the needle.</em></>} intro="A selection of digital systems built around hard problems, real users, and measurable outcomes.">
       <section className="work-list">
-        {projects.map(([tag, name, text, no]) => <article key={name}><span>{no}</span><div><small>{tag}</small><h2>{name}</h2><p>{text}</p></div><ArrowRight /></article>)}
+        {projects.map(([tag, name, text, no], index) => (
+          <motion.article key={name} {...reveal(index)}>
+            <Spotlight size={420} />
+            <span>{no}</span><div><small>{tag}</small><h2>{name}</h2><p>{text}</p></div><ArrowRight />
+          </motion.article>
+        ))}
       </section>
     </PageShell>
   )
 }
 
+const companyPillars = [
+  { title:'Digital Products', text:'Web applications, SaaS platforms, mobile experiences and WordPress systems designed around real users.', Icon:Code2 },
+  { title:'Business Automation', text:'Connected CRM, GoHighLevel, n8n, Make and API workflows that reduce manual work and improve visibility.', Icon:Workflow },
+  { title:'Data & Intelligence', text:'Data pipelines, analytics dashboards and practical AI tools that turn information into better decisions.', Icon:BrainCircuit },
+]
+
+const companyMethod = [
+  ['01', 'Understand the goal', 'We begin with your users, operations and business outcome—not a preselected technology.'],
+  ['02', 'Design the right system', 'We define the experience, architecture and delivery plan before expensive development begins.'],
+  ['03', 'Build with visibility', 'You receive regular progress, working releases and clear decisions throughout the engagement.'],
+  ['04', 'Improve after launch', 'We test, document, monitor and evolve the solution as your needs and opportunities grow.'],
+] as const
+
 export function AboutPage() {
   return (
     <PageShell index="03" label="ABOUT UPFORGE" heroImage={aboutHero} title={<>Technology made<br /><em>clear and useful.</em></>} intro="UpForge is a digital engineering company that designs, builds and improves software, automation and data systems for modern businesses.">
       <section className="about-story">
-        <div><span>WHO WE ARE</span><h2>A practical technology partner for ambitious companies.</h2></div>
-        <div className="story-copy"><p>We combine product strategy, thoughtful design and dependable engineering in one focused team. Our job is to understand the business problem first, then build the simplest strong solution around it.</p><p>From customer-facing products to internal operations, UpForge helps startups and established organizations replace complexity with systems that are easier to use, manage and scale.</p></div>
+        <motion.div {...reveal()}><span>WHO WE ARE</span><h2>A practical technology partner for ambitious companies.</h2></motion.div>
+        <motion.div className="story-copy" {...reveal(1)}><p>We combine product strategy, thoughtful design and dependable engineering in one focused team. Our job is to understand the business problem first, then build the simplest strong solution around it.</p><p>From customer-facing products to internal operations, UpForge helps startups and established organizations replace complexity with systems that are easier to use, manage and scale.</p></motion.div>
+      </section>
+      <section className="biz-page-stats">
+        <motion.div className="biz-stats" {...reveal()}>
+          <div><strong><AnimatedNumber value={42} suffix="+" /></strong><span>Products shipped</span></div>
+          <div><strong><AnimatedNumber value={96} suffix="%" /></strong><span>Client retention</span></div>
+          <div><strong><AnimatedNumber value={4.9} decimals={1} /></strong><span>Partner rating</span></div>
+          <Magnetic className="biz-stats-cta">
+            <div className="biz-glow-wrap">
+              <GlowEffect />
+              <Link className="biz-btn biz-btn-primary biz-btn-lg" to="/contact">Get Free Quote <ArrowRight /></Link>
+            </div>
+          </Magnetic>
+        </motion.div>
       </section>
       <section className="company-overview">
-        <div className="company-overview-head">
+        <motion.div className="company-overview-head" {...reveal()}>
           <span>WHAT WE DO</span>
           <h2>One team from idea to reliable delivery.</h2>
           <p>We plan, design, engineer and support complete digital solutions—without passing your project between disconnected suppliers.</p>
-        </div>
+        </motion.div>
         <div className="company-pillars">
-          <article><Code2 /><h3>Digital Products</h3><p>Web applications, SaaS platforms, mobile experiences and WordPress systems designed around real users.</p></article>
-          <article><Workflow /><h3>Business Automation</h3><p>Connected CRM, GoHighLevel, n8n, Make and API workflows that reduce manual work and improve visibility.</p></article>
-          <article><BrainCircuit /><h3>Data &amp; Intelligence</h3><p>Data pipelines, analytics dashboards and practical AI tools that turn information into better decisions.</p></article>
+          {companyPillars.map(({ title, text, Icon }, index) => (
+            <motion.article key={title} className={index === 1 ? 'is-featured' : undefined} {...reveal(index)}>
+              {index === 1 && <BorderTrail size={90} duration={6} />}
+              <Spotlight size={280} />
+              <Icon /><h3>{title}</h3><p>{text}</p>
+            </motion.article>
+          ))}
         </div>
       </section>
       <section className="company-method">
         <div><span>HOW WE WORK</span><h2>Clear communication.<br />Focused delivery.<br />Measurable value.</h2></div>
         <div className="company-method-list">
-          <article><strong>01</strong><div><h3>Understand the goal</h3><p>We begin with your users, operations and business outcome—not a preselected technology.</p></div></article>
-          <article><strong>02</strong><div><h3>Design the right system</h3><p>We define the experience, architecture and delivery plan before expensive development begins.</p></div></article>
-          <article><strong>03</strong><div><h3>Build with visibility</h3><p>You receive regular progress, working releases and clear decisions throughout the engagement.</p></div></article>
-          <article><strong>04</strong><div><h3>Improve after launch</h3><p>We test, document, monitor and evolve the solution as your needs and opportunities grow.</p></div></article>
+          {companyMethod.map(([no, title, text], index) => (
+            <motion.article key={no} {...reveal(index)}><strong>{no}</strong><div><h3>{title}</h3><p>{text}</p></div></motion.article>
+          ))}
         </div>
       </section>
       <section className="values">
-        {['Clarity in every step', 'Outcomes before output', 'Quality without complexity', 'Partnership beyond launch'].map((x, i) => <div key={x}><span>0{i + 1}</span><h3>{x}</h3></div>)}
+        {['Clarity in every step', 'Outcomes before output', 'Quality without complexity', 'Partnership beyond launch'].map((x, i) => <motion.div key={x} {...reveal(i)}><span>0{i + 1}</span><h3>{x}</h3></motion.div>)}
       </section>
     </PageShell>
   )
@@ -522,8 +597,11 @@ export function ContactPage() {
   return (
     <PageShell index="04" label="START A PROJECT" title={<>Bring us the<br /><em>hard problem.</em></>} intro="Tell us what you are building, fixing, or reimagining. We usually reply within one business day.">
       <section className="contact-panel">
-        <div><span>EMAIL US DIRECTLY</span><a href="mailto:info@upforge.us">info@upforge.us</a><p>Prefer a quick intro? Send a short note with your goals, timing, and where you need the most help.</p></div>
-        <form onSubmit={openGmailWithProject}>
+        <Tilt className="contact-email-card" rotationFactor={6}>
+          <Spotlight size={320} />
+          <span>EMAIL US DIRECTLY</span><a href="mailto:info@upforge.us">info@upforge.us</a><p>Prefer a quick intro? Send a short note with your goals, timing, and where you need the most help.</p>
+        </Tilt>
+        <motion.form onSubmit={openGmailWithProject} {...reveal(1)}>
           <div className="form-heading"><span>PROJECT INQUIRY</span><h2>Tell us what you want to build.</h2><p>Complete the brief below. We will prepare everything in Gmail so you can review it before sending.</p></div>
           <label>Your name<input name="name" placeholder="Jane Smith" required /></label>
           <label>Work email<input name="email" type="email" placeholder="jane@company.com" required /></label>
@@ -533,8 +611,11 @@ export function ContactPage() {
           <label>Estimated budget<select name="budget" defaultValue=""><option value="">Select budget</option><option>Under $1,000</option><option>$1,000 – $5,000</option><option>$5,000 – $15,000</option><option>$15,000+</option></select></label>
           <label>Preferred timeline<select name="timeline" defaultValue=""><option value="">Select timeline</option><option>As soon as possible</option><option>Within 1 month</option><option>1–3 months</option><option>3+ months</option></select></label>
           <label className="full-field">Tell us about the project<textarea name="message" placeholder="A little context goes a long way..." rows={5} required /></label>
-          <button type="submit">Continue to Gmail <ArrowRight /></button>
-        </form>
+          <div className="form-submit-wrap biz-glow-wrap">
+            <GlowEffect />
+            <button type="submit">Continue to Gmail <ArrowRight /></button>
+          </div>
+        </motion.form>
       </section>
     </PageShell>
   )

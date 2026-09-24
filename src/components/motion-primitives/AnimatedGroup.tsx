@@ -16,7 +16,7 @@ export function AnimatedGroup({ children, className, itemClassName, containerRef
 
   return (
     <motion.div
-      ref={ref}
+      ref={ref as RefObject<HTMLDivElement>}
       className={className}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
