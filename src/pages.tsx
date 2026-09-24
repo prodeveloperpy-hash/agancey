@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Asterisk, BrainCircuit, CloudCog, Code2, Database, Layers3, Palette, PenTool, Smartphone, Sparkles, Workflow } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpRight, Asterisk, BrainCircuit, CloudCog, Code2, Database, Layers3, Palette, PenTool, Smartphone, Sparkles, Workflow } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { motion } from 'motion/react'
@@ -22,6 +22,7 @@ import workHero from './assets/work-hero.webp'
 import aboutHero from './assets/about-hero.webp'
 import highlevelMark from './assets/highlevel-mark.png'
 import SiteNav from './SiteNav'
+import { projects, serviceImages } from './data/content'
 import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
 import { BorderTrail } from './components/motion-primitives/BorderTrail'
 import { GlowEffect } from './components/motion-primitives/GlowEffect'
@@ -177,9 +178,10 @@ export function ServicesPage() {
             <Spotlight size={300} />
             <span className="service-card-accent" aria-hidden="true" />
             <div className="service-card-visual" aria-hidden="true">
+              {serviceImages[slug] && <img className="service-card-photo" src={serviceImages[slug].src} alt="" loading="lazy" />}
               <div className="service-card-primary-icon"><Icon /></div>
               <div className="service-card-logos">
-                {(serviceTools[slug] ?? []).slice(0, 6).map(brand => (
+                {(serviceTools[slug] ?? []).slice(0, 4).map(brand => (
                   <span className="service-card-brand" key={brand.name} title={brand.name} style={{ '--brand-color':brand.color } as CSSProperties}>
                     <BrandMark tool={brand} />
                     <small>{brand.name}</small>
@@ -438,17 +440,26 @@ export function ServiceDetailPage() {
   if (!service) return <PageShell index="" label="SERVICE" title={<>Service not found.</>} intro="Return to our services catalogue to choose another capability."><section className="missing-service"><Link to="/services">View all services <ArrowRight /></Link></section></PageShell>
   const { title, text, Icon, tags } = service
   const tools = serviceTools[slug ?? ''] ?? serviceTools['solution-architecture']
+  const image = serviceImages[slug ?? '']
   return (
     <PageShell
       index=""
       label="UPFORGE SERVICE"
+      heroImage={image?.src}
       title={<>{title}<br /><em>built around you.</em></>}
       intro={text}
       heroDecor={<ServiceHeroLogos tools={tools} />}
     >
       <ServiceShowcase slug={slug ?? ''} title={title} text={text} tags={tags} />
       <section className="service-detail">
-        <motion.div className="service-detail-intro" {...reveal()}><Icon /><span>WHAT'S INCLUDED</span><h2>A complete service,<br />not a partial handoff.</h2><p>We combine strategy, execution, testing and documentation so your team receives a solution that is clear, maintainable and ready to use.</p></motion.div>
+        <motion.div className="service-detail-intro" {...reveal()}>
+          {image && (
+            <Tilt className="service-detail-photo" rotationFactor={5}>
+              <img src={image.src} alt={image.alt} loading="lazy" />
+              <span className="service-detail-photo-badge"><Icon /></span>
+            </Tilt>
+          )}
+          <Icon /><span>WHAT'S INCLUDED</span><h2>A complete service,<br />not a partial handoff.</h2><p>We combine strategy, execution, testing and documentation so your team receives a solution that is clear, maintainable and ready to use.</p></motion.div>
         <div className="included-list">{tags.map((tag,index) => {
           const brand = tools[index % tools.length]
           return (
@@ -472,23 +483,29 @@ export function ServiceDetailPage() {
   )
 }
 
-const projects = [
-  ['FINTECH / PRODUCT', 'Meridian', 'A wealth platform that makes complex decisions feel simple.', '01'],
-  ['HEALTHTECH / MOBILE', 'Pulse', 'A human-first care experience connecting patients and providers.', '02'],
-  ['LOGISTICS / DATA', 'Northline', 'Real-time operations intelligence across a national fleet.', '03'],
-  ['SAAS / AUTOMATION', 'Orbit', 'A growth engine that qualifies, nurtures and converts around the clock.', '04'],
-]
-
 export function WorkPage() {
   return (
     <PageShell index="02" label="SELECTED WORK" heroImage={workHero} title={<>Products made to<br /><em>move the needle.</em></>} intro="A selection of digital systems built around hard problems, real users, and measurable outcomes.">
-      <section className="work-list">
-        {projects.map(([tag, name, text, no], index) => (
-          <motion.article key={name} {...reveal(index)}>
-            <Spotlight size={420} />
-            <span>{no}</span><div><small>{tag}</small><h2>{name}</h2><p>{text}</p></div><ArrowRight />
-          </motion.article>
-        ))}
+      <section className="project-grid">
+        {projects.map(({ name, category, overview, url, screenshot, tags, year }, index) => {
+          const host = url ? url.replace(/^https?:\/\//, '').replace(/\/$/, '') : ''
+          return (
+            <motion.article className="project-card" key={name} {...reveal(index % 2)}>
+              <Spotlight size={420} />
+              <Tilt className="project-shot" rotationFactor={4}>
+                <div className="project-shot-bar" aria-hidden="true"><i /><i /><i /><span>{host || name.toLowerCase()}</span></div>
+                <img src={screenshot} alt={`${name} project screenshot`} loading="lazy" />
+              </Tilt>
+              <div className="project-body">
+                <div className="project-meta"><small>{category}</small>{year && <small>{year}</small>}</div>
+                <h2>{name}</h2>
+                <p>{overview}</p>
+                {tags && tags.length > 0 && <ul>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>}
+                {url && <a className="project-link" href={url} target="_blank" rel="noreferrer">Visit website <ArrowUpRight /></a>}
+              </div>
+            </motion.article>
+          )
+        })}
       </section>
     </PageShell>
   )

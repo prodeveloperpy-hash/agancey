@@ -12,6 +12,7 @@ import { TbBrandOpenai } from 'react-icons/tb'
 import { SiDjango, SiFigma, SiFlask, SiFlutter, SiGoogle, SiGoogleads, SiGooglecloud, SiGoogletagmanager, SiLooker, SiNotion, SiPandas, SiPostgresql, SiPostman, SiPython, SiReact, SiScrapy, SiSelenium, SiShopify, SiStripe, SiTensorflow, SiWordpress, SiZapier } from 'react-icons/si'
 import './styles.css'
 import SiteNav from './SiteNav'
+import { serviceImages } from './data/content'
 import { AnimatedGroup } from './components/motion-primitives/AnimatedGroup'
 import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
 import { BorderTrail } from './components/motion-primitives/BorderTrail'
@@ -305,7 +306,10 @@ export default function Home() {
               <Link className={`service-card service-card-${i % 5}`} to={`/services/${s.slug}`} key={s.title}>
                 <Spotlight size={280} />
                 <span className="service-card-number">(&nbsp; {String(i + 1).padStart(3, '0')} &nbsp;)</span>
-                <span className="service-card-icon"><Icon /></span>
+                <span className="service-card-icon">
+                  {serviceImages[s.slug] && <img className="service-card-thumb" src={serviceImages[s.slug].src} alt="" loading="lazy" />}
+                  <Icon />
+                </span>
                 <span className="service-card-copy">
                   <span>{s.tag}</span>
                   <h3>{s.title}</h3>
