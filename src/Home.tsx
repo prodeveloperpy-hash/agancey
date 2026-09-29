@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react'
-import type { CSSProperties } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { CSSProperties, KeyboardEvent } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'motion/react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import {
   ArrowRight, ArrowUpRight, Bot, BrainCircuit, ChevronLeft, ChevronRight, CircleCheck,
   CloudCog, Code2, Compass, Database, Rocket, Search, Layers3, LayoutDashboard, MonitorSmartphone, Palette, PenTool,
@@ -96,6 +96,101 @@ const featureCards = [
   { title:'SEO & Growth', text:'Search, ads and tracking', Icon:TrendingUp, slug:'seo-services' },
   { title:'Data & Dashboards', text:'Decisions in one view', Icon:LayoutDashboard, slug:'analytics-dashboards' },
 ]
+
+const SHOWCASE_INTERVAL = 7000
+const hostOf = (url:string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+
+/** Tabbed project showcase: a numbered list on the left drives a device stage on the right. */
+function ProjectShowcase() {
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const reduceMotion = useReducedMotion()
+  const project = projects[active]
+
+  useEffect(() => {
+    if (paused || reduceMotion) return
+    const timer = window.setTimeout(() => setActive(current => (current + 1) % projects.length), SHOWCASE_INTERVAL)
+    return () => window.clearTimeout(timer)
+  }, [active, paused, reduceMotion])
+
+  const onKeyDown = (e:KeyboardEvent) => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
+    e.preventDefault()
+    const next = (active + (e.key === 'ArrowDown' ? 1 : -1) + projects.length) % projects.length
+    setActive(next)
+    document.getElementById(`showcase-tab-${next}`)?.focus()
+  }
+
+  return (
+    <div className="showcase reveal" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
+      <div className="showcase-list" role="tablist" aria-label="Projects" aria-orientation="vertical" onKeyDown={onKeyDown}>
+        {projects.map((item, index) => {
+          const selected = index === active
+          return (
+            <div className={`showcase-item${selected ? ' is-active' : ''}`} key={item.slug}>
+              <button
+                type="button"
+                role="tab"
+                id={`showcase-tab-${index}`}
+                aria-selected={selected}
+                aria-controls="showcase-stage"
+                tabIndex={selected ? 0 : -1}
+                onClick={() => setActive(index)}
+              >
+                <span className="showcase-no">{String(index + 1).padStart(2, '0')}</span>
+                <span className="showcase-title"><strong>{item.name}</strong><small>{item.category}</small></span>
+                <ArrowUpRight className="showcase-chevron" />
+              </button>
+              {selected && (
+                <div className="showcase-detail">
+                  <p>{item.overview}</p>
+                  <dl>
+                    <div><dt>Frontend</dt><dd>{item.stack.frontend.slice(0, 3).join(' · ')}</dd></div>
+                    <div><dt>Backend</dt><dd>{item.stack.backend.slice(1, 3).join(' · ')}</dd></div>
+                  </dl>
+                  <Link className="showcase-cta" to={`/work/${item.slug}`}>View case study <ArrowRight /></Link>
+                </div>
+              )}
+              <span className="showcase-progress" aria-hidden="true">
+                {selected && <i key={`${active}-${paused}`} style={{ animationDuration:`${SHOWCASE_INTERVAL}ms`, animationPlayState:paused || reduceMotion ? 'paused' : 'running' }} />}
+              </span>
+            </div>
+          )
+        })}
+      </div>
+
+      <Link className="showcase-stage" id="showcase-stage" role="tabpanel" aria-labelledby={`showcase-tab-${active}`} to={`/work/${project.slug}`}>
+        <span className="showcase-glow" aria-hidden="true" />
+        <AnimatePresence mode="wait">
+          <motion.div
+            className="showcase-devices"
+            key={project.slug}
+            initial={reduceMotion ? false : { opacity:0, y:24, scale:.98 }}
+            animate={{ opacity:1, y:0, scale:1 }}
+            exit={reduceMotion ? undefined : { opacity:0, y:-16, scale:.98 }}
+            transition={{ duration:.55, ease:[0.16, 1, 0.3, 1] }}
+          >
+            <div className="showcase-browser">
+              <div className="project-shot-bar" aria-hidden="true"><i /><i /><i /><span>{hostOf(project.url)}</span></div>
+              <img src={project.screenshot} alt={`${project.name} website on desktop`} />
+            </div>
+            {project.mobileShot && (
+              <div className="showcase-phone">
+                <span className="showcase-phone-notch" aria-hidden="true" />
+                <img src={project.mobileShot} alt={`${project.name} website on mobile`} />
+              </div>
+            )}
+            <div className="showcase-badge">
+              <span><i />Live in production</span>
+              <strong>{project.stack.frontend[0]} + {project.stack.backend[1]}</strong>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+        <span className="showcase-open">Open case study <ArrowUpRight /></span>
+      </Link>
+    </div>
+  )
+}
 
 function CursorGlow() {
   useEffect(() => {
@@ -254,24 +349,7 @@ export default function Home() {
           </div>
           <Link className="services-contact-link" to="/work">View all work <ArrowRight /></Link>
         </div>
-        <AnimatedGroup className="home-work-grid" itemClassName="home-work-item">
-          {projects.map(({ slug, name, category, overview, url, screenshot, tags }) => (
-            <Link className="home-work-card" to={`/work/${slug}`} key={name} aria-label={`${name} case study`}>
-              <Spotlight size={320} />
-              <div className="home-work-shot">
-                <div className="project-shot-bar" aria-hidden="true"><i /><i /><i /><span>{url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</span></div>
-                <img src={screenshot} alt={`${name} website homepage`} loading="lazy" />
-              </div>
-              <div className="home-work-info">
-                <small>{category}</small>
-                <h3>{name}</h3>
-                <p>{overview}</p>
-                {tags && <ul>{tags.slice(0,3).map(tag => <li key={tag}>{tag}</li>)}</ul>}
-              </div>
-              <span className="home-work-arrow" aria-hidden="true"><ArrowUpRight /></span>
-            </Link>
-          ))}
-        </AnimatedGroup>
+        <ProjectShowcase />
       </section>
 
       <section className="impact">
