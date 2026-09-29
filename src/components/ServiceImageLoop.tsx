@@ -125,6 +125,40 @@ export const serviceTools: Record<string, BrandTool[]> = {
   ],
 }
 
+const allTools = new Map(Object.values(serviceTools).flat().map(brand => [brand.name.toLowerCase(), brand] as const))
+
+// Terms that name a technology without using the tool's own label.
+const tagAliases: Record<string, string> = {
+  ga4:'Analytics', 'power bi':'Microsoft BI', 'ios':'Apple', 'meta graph':'Facebook', 'push notifications':'Firebase',
+  rag:'LangChain', llm:'OpenAI', ai:'OpenAI', chatbots:'OpenAI', 'data pipelines':'Airflow', 'scheduled':'Airflow',
+  'automated testing':'Selenium', 'browser':'Selenium', 'webhooks':'Postman', 'api documentation':'Swagger', 'rest':'REST APIs',
+  'cloud':'Google Cloud', 'dashboards':'Looker', 'forecasting':'scikit-learn', 'exploratory':'Jupyter', 'data cleaning':'Pandas',
+}
+
+const escapeRegex = (value:string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+const mentions = (text:string, term:string) => new RegExp(`(^|[^a-z0-9])${escapeRegex(term)}($|[^a-z0-9])`).test(text)
+
+function matchTool(tag:string, candidates:BrandTool[]) {
+  const text = tag.toLowerCase()
+  return candidates
+    .filter(brand => mentions(text, brand.name.toLowerCase()))
+    .sort((a,b) => b.name.length - a.name.length)[0]
+}
+
+/** Picks the logo that actually matches each tag, falling back to unused service tools. */
+export function brandsForTags(tags:readonly string[], tools:BrandTool[]) {
+  const picked = tags.map(tag => {
+    const text = tag.toLowerCase()
+    const alias = Object.keys(tagAliases).sort((a,b) => b.length - a.length).find(term => mentions(text, term))
+    return matchTool(tag, tools)
+      ?? matchTool(tag, [...allTools.values()])
+      ?? (alias ? allTools.get(tagAliases[alias].toLowerCase()) : undefined)
+  })
+  const unused = tools.filter(brand => !picked.includes(brand))
+  let next = 0
+  return picked.map((brand,index) => brand ?? unused[next++] ?? tools[index % tools.length])
+}
+
 export function BrandMark({ tool }: { tool:BrandTool }) {
   const Icon = tool.Icon
   return tool.image ? <img src={tool.image} alt="" /> : Icon ? <Icon /> : null

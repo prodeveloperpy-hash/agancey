@@ -107,10 +107,11 @@ em { font-family:'Playfair Display'; font-weight:500; }
   color:#0f172a;
   font-family:"Sora","Manrope",Arial,sans-serif;
   font-size:clamp(54px,6vw,88px);
-  line-height:.9;
+  line-height:1.1;
   letter-spacing:-.07em;
 }
 .services-carousel-head h2 span { color:var(--blue); }
+.services-carousel-head h2 .motion-text-word { overflow:visible; }
 .services-contact-link {
   display:inline-flex;
   align-items:center;
@@ -167,11 +168,6 @@ em { font-family:'Playfair Display'; font-weight:500; }
 .service-card:hover {
   transform:translateY(-5px);
   box-shadow:0 22px 45px rgba(33,48,73,.14);
-}
-.service-card-number {
-  font:700 10px "DM Mono",monospace;
-  letter-spacing:.08em;
-  opacity:.55;
 }
 .service-card-icon {
   flex:1;

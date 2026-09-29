@@ -20,7 +20,7 @@ import servicesHero from './assets/services-hero.webp'
 import workHero from './assets/work-hero.webp'
 import aboutHero from './assets/about-hero.webp'
 import SiteNav from './SiteNav'
-import { ServiceImageLoop, BrandMark, serviceTools, type BrandTool } from './components/ServiceImageLoop'
+import { ServiceImageLoop, BrandMark, brandsForTags, serviceTools, type BrandTool } from './components/ServiceImageLoop'
 import { projects, serviceImages } from './data/content'
 import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
 import { BorderTrail } from './components/motion-primitives/BorderTrail'
@@ -82,7 +82,7 @@ function PageShell({ index, label, title, intro, heroImage, heroDecor, heroClass
       <section className="page-cta">
         <Spotlight size={520} />
         <span>READY WHEN YOU ARE</span>
-        <h2>Let's make it<br /><em>remarkable.</em></h2>
+        <h2>Let's make it<br /><em>remarkable</em></h2>
         <div className="biz-tagline biz-tagline-left"><span />Modern<i />Fast<i />Secure<i />Scalable</div>
         <Magnetic className="page-cta-magnetic">
           <div className="biz-glow-wrap">
@@ -162,7 +162,7 @@ function ServicesOrbit() {
 
 export function ServicesPage() {
   return (
-    <PageShell index="01" label="CAPABILITIES" heroImage={servicesHero} heroDecor={<ServicesOrbit />} heroClassName="services-page-hero" title={<>Expertise that turns<br /><em>ideas into impact.</em></>} intro="Strategy, engineering, data, and automation—one senior team from first conversation to long-term scale.">
+    <PageShell index="01" label="CAPABILITIES" heroImage={servicesHero} heroDecor={<ServicesOrbit />} heroClassName="services-page-hero" title={<>Expertise that turns<br /><em>ideas into impact</em></>} intro="Strategy, engineering, data, and automation—one senior team from first conversation to long-term scale.">
       <section className="biz-logo-strip" aria-label="Technologies we work with">
         <span>Technologies we work with</span>
         <InfiniteSlider gap={44} speed={36} speedOnHover={12}>
@@ -243,7 +243,8 @@ function ServiceShowcase({ slug, title, text, tags }: { slug:string; title:strin
       Icon:Code2,
       mark:'',
     }))
-  const capabilities = capabilityCopy.map((capability,index) => ({ ...capability, brand:tools[index % tools.length] }))
+  const capabilityBrands = brandsForTags(capabilityCopy.map(capability => capability.title), tools)
+  const capabilities = capabilityCopy.map((capability,index) => ({ ...capability, brand:capabilityBrands[index] }))
   const leftTools = tools.slice(0,4)
   const rightTools = tools.slice(4,8)
 
@@ -252,7 +253,7 @@ function ServiceShowcase({ slug, title, text, tags }: { slug:string; title:strin
       <section className="automation-capabilities">
         <motion.div className="automation-heading" {...reveal()}>
           <span>UPFORGE EXPERTISE</span>
-          <h2>Unlock new possibilities with<br /><em>{title.toLowerCase()}.</em></h2>
+          <h2>Unlock new possibilities with<br /><em>{title.toLowerCase()}</em></h2>
           <p>{text} Every engagement combines clear planning, experienced execution and dependable support.</p>
         </motion.div>
         <div className="automation-card-grid">
@@ -286,7 +287,7 @@ function ServiceShowcase({ slug, title, text, tags }: { slug:string; title:strin
         </div>
         <motion.div className="automation-ecosystem-copy" {...reveal()}>
           <span>CONNECTED TOOLKIT</span>
-          <h2>Our expertise in {title.toLowerCase()} tools.</h2>
+          <h2>Our expertise in {title.toLowerCase()} tools</h2>
           <p>We work with proven platforms and modern technologies selected around your users, existing systems and long-term operating needs.</p>
           <Link to="/contact">Schedule a discovery call <ArrowRight /></Link>
         </motion.div>
@@ -314,7 +315,7 @@ const deliverySteps = [
 export function ServiceDetailPage() {
   const { slug } = useParams()
   const service = serviceDetails.find(item => item.slug === slug)
-  if (!service) return <PageShell index="" label="SERVICE" title={<>Service not found.</>} intro="Return to our services catalogue to choose another capability."><section className="missing-service"><Link to="/services">View all services <ArrowRight /></Link></section></PageShell>
+  if (!service) return <PageShell index="" label="SERVICE" title={<>Service not found</>} intro="Return to our services catalogue to choose another capability."><section className="missing-service"><Link to="/services">View all services <ArrowRight /></Link></section></PageShell>
   const { title, text, Icon, tags } = service
   const tools = serviceTools[slug ?? ''] ?? serviceTools['solution-architecture']
   const image = serviceImages[slug ?? '']
@@ -323,7 +324,7 @@ export function ServiceDetailPage() {
       index=""
       label="UPFORGE SERVICE"
       heroImage={image?.src}
-      title={<>{title}<br /><em>built around you.</em></>}
+      title={<>{title}<br /><em>built around you</em></>}
       intro={text}
       heroDecor={<ServiceHeroLogos tools={tools} />}
     >
@@ -333,9 +334,9 @@ export function ServiceDetailPage() {
           {image && (
             <div className="service-detail-gallery"><ServiceImageLoop slug={slug ?? ''} title={title} /></div>
           )}
-          <Icon /><span>WHAT'S INCLUDED</span><h2>A complete service,<br />not a partial handoff.</h2><p>We combine strategy, execution, testing and documentation so your team receives a solution that is clear, maintainable and ready to use.</p></motion.div>
-        <div className="included-list">{tags.map((tag,index) => {
-          const brand = tools[index % tools.length]
+          <Icon /><span>WHAT'S INCLUDED</span><h2>A complete service,<br />not a partial handoff</h2><p>We combine strategy, execution, testing and documentation so your team receives a solution that is clear, maintainable and ready to use.</p></motion.div>
+        <div className="included-list">{brandsForTags(tags, tools).map((brand,index) => {
+          const tag = tags[index]
           return (
             <motion.article key={tag} {...reveal(index)}>
               <span className="included-brand-logo" style={{ '--brand-color':brand.color } as CSSProperties}><BrandMark tool={brand} /></span>
@@ -359,7 +360,7 @@ export function ServiceDetailPage() {
 
 export function WorkPage() {
   return (
-    <PageShell index="02" label="SELECTED WORK" heroImage={workHero} title={<>Products made to<br /><em>move the needle.</em></>} intro="A selection of digital systems built around hard problems, real users, and measurable outcomes.">
+    <PageShell index="02" label="SELECTED WORK" heroImage={workHero} title={<>Products made to<br /><em>move the needle</em></>} intro="A selection of digital systems built around hard problems, real users, and measurable outcomes.">
       <section className="project-grid">
         {projects.map(({ name, category, overview, url, screenshot, tags, year }, index) => {
           const host = url ? url.replace(/^https?:\/\//, '').replace(/\/$/, '') : ''
@@ -400,9 +401,9 @@ const companyMethod = [
 
 export function AboutPage() {
   return (
-    <PageShell index="03" label="ABOUT UPFORGE" heroImage={aboutHero} title={<>Technology made<br /><em>clear and useful.</em></>} intro="UpForge is a digital engineering company that designs, builds and improves software, automation and data systems for modern businesses.">
+    <PageShell index="03" label="ABOUT UPFORGE" heroImage={aboutHero} title={<>Technology made<br /><em>clear and useful</em></>} intro="UpForge is a digital engineering company that designs, builds and improves software, automation and data systems for modern businesses.">
       <section className="about-story">
-        <motion.div {...reveal()}><span>WHO WE ARE</span><h2>A practical technology partner for ambitious companies.</h2></motion.div>
+        <motion.div {...reveal()}><span>WHO WE ARE</span><h2>A practical technology partner for ambitious companies</h2></motion.div>
         <motion.div className="story-copy" {...reveal(1)}><p>We combine product strategy, thoughtful design and dependable engineering in one focused team. Our job is to understand the business problem first, then build the simplest strong solution around it.</p><p>From customer-facing products to internal operations, UpForge helps startups and established organizations replace complexity with systems that are easier to use, manage and scale.</p></motion.div>
       </section>
       <section className="biz-page-stats">
@@ -421,7 +422,7 @@ export function AboutPage() {
       <section className="company-overview">
         <motion.div className="company-overview-head" {...reveal()}>
           <span>WHAT WE DO</span>
-          <h2>One team from idea to reliable delivery.</h2>
+          <h2>One team from idea to reliable delivery</h2>
           <p>We plan, design, engineer and support complete digital solutions—without passing your project between disconnected suppliers.</p>
         </motion.div>
         <div className="company-pillars">
@@ -435,7 +436,7 @@ export function AboutPage() {
         </div>
       </section>
       <section className="company-method">
-        <div><span>HOW WE WORK</span><h2>Clear communication.<br />Focused delivery.<br />Measurable value.</h2></div>
+        <div><span>HOW WE WORK</span><h2>Clear communication<br />Focused delivery<br />Measurable value</h2></div>
         <div className="company-method-list">
           {companyMethod.map(([no, title, text], index) => (
             <motion.article key={no} {...reveal(index)}><strong>{no}</strong><div><h3>{title}</h3><p>{text}</p></div></motion.article>
@@ -486,14 +487,14 @@ export function ContactPage() {
   }
 
   return (
-    <PageShell index="04" label="START A PROJECT" title={<>Bring us the<br /><em>hard problem.</em></>} intro="Tell us what you are building, fixing, or reimagining. We usually reply within one business day.">
+    <PageShell index="04" label="START A PROJECT" title={<>Bring us the<br /><em>hard problem</em></>} intro="Tell us what you are building, fixing, or reimagining. We usually reply within one business day.">
       <section className="contact-panel">
         <Tilt className="contact-email-card" rotationFactor={6}>
           <Spotlight size={320} />
           <span>EMAIL US DIRECTLY</span><a href="mailto:info@upforge.us">info@upforge.us</a><p>Prefer a quick intro? Send a short note with your goals, timing, and where you need the most help.</p>
         </Tilt>
         <motion.form onSubmit={openGmailWithProject} {...reveal(1)}>
-          <div className="form-heading"><span>PROJECT INQUIRY</span><h2>Tell us what you want to build.</h2><p>Complete the brief below. We will prepare everything in Gmail so you can review it before sending.</p></div>
+          <div className="form-heading"><span>PROJECT INQUIRY</span><h2>Tell us what you want to build</h2><p>Complete the brief below. We will prepare everything in Gmail so you can review it before sending.</p></div>
           <label>Your name<input name="name" placeholder="Jane Smith" required /></label>
           <label>Work email<input name="email" type="email" placeholder="jane@company.com" required /></label>
           <label>Phone / WhatsApp<input name="phone" type="tel" placeholder="+92 300 0000000" /></label>

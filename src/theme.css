@@ -79,6 +79,8 @@ html[data-theme="dark"] .site-nav { background:rgba(5,9,20,.62); border-color:va
 html[data-theme="dark"] .brand span,
 html[data-theme="dark"] .footer-brand span { color:#f3f6ff!important; }
 .brand b,.inner-nav .brand b,.footer-brand b { color:var(--bz-blue)!important; }
+.footer-brand .brand-name { color:#f3f6ff!important; }
+.footer-brand .brand-name b { color:#8fc1ff!important; }
 .inner-nav>div>a:not(.nav-cta) { color:var(--bz-muted); font-size:14px; font-weight:500; }
 .inner-nav>div>a:not(.nav-cta):hover,.inner-nav>div>a:not(.nav-cta).active { color:var(--bz-text); }
 .inner-nav>div>a:not(.nav-cta).active::after { background:var(--bz-blue); box-shadow:0 0 10px var(--bz-blue); }
@@ -529,3 +531,41 @@ html[data-theme="dark"] .biz-office-copy .biz-subtitle { color:#d7e5fa; }
 .biz-home .home-service-link { display:inline-flex; align-items:center; gap:8px; align-self:flex-start; margin-top:auto; padding-top:20px; color:var(--bz-text); font-size:12px; font-weight:700; text-decoration:none; }
 .biz-home .home-service-link svg { width:16px; height:16px; }
 .biz-home .home-service-link:hover { color:var(--bz-blue-2); }
+
+/* ---------- How we work: connected process timeline ---------- */
+.process .section-head>p { align-self:end; margin:0; color:var(--bz-muted); font-size:15px; line-height:1.7; }
+.flow { position:relative; }
+.flow-rail { position:absolute; top:58px; left:12.5%; right:12.5%; height:2px; border-radius:2px; background:var(--bz-border); overflow:hidden; pointer-events:none; }
+.flow-rail span { position:absolute; inset:0; width:40%; background:linear-gradient(90deg,transparent,var(--bz-blue),var(--bz-blue-3),transparent); animation:flow-rail 3.6s linear infinite; }
+@keyframes flow-rail { from { transform:translateX(-100%); } to { transform:translateX(250%); } }
+.flow-grid { position:relative; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; }
+.flow-item { min-width:0; height:100%; }
+.flow-card { position:relative; isolation:isolate; display:flex; flex-direction:column; height:100%; padding:28px 26px 24px; overflow:hidden; border:1px solid var(--bz-border); border-radius:22px; background:var(--bz-surface); backdrop-filter:blur(14px); box-shadow:0 10px 30px rgba(20,50,120,.06); transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease; }
+.flow-card:hover { transform:translateY(-6px); border-color:rgba(31,107,255,.4); box-shadow:var(--bz-shadow); }
+.flow-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:34px; }
+.flow-icon { position:relative; display:grid; place-items:center; width:60px; height:60px; border-radius:18px; color:#fff; background:linear-gradient(145deg,var(--bz-blue-2),var(--bz-blue)); box-shadow:0 0 0 7px var(--bz-bg),0 12px 28px var(--bz-glow); }
+.flow-icon svg { width:26px; height:26px; }
+.flow-no { font-family:"Sora",sans-serif; font-size:54px; font-weight:800; line-height:1; letter-spacing:-.06em; color:transparent; -webkit-text-stroke:1.5px color-mix(in srgb,var(--bz-blue) 38%,transparent); transition:color .35s ease; }
+.flow-card:hover .flow-no { color:color-mix(in srgb,var(--bz-blue) 14%,transparent); }
+.flow-card h3 { margin:0 0 10px; color:var(--bz-text); font-size:26px; letter-spacing:-.04em; }
+.flow-card>p { margin:0 0 20px; color:var(--bz-muted); font-size:14px; line-height:1.65; }
+.flow-card ul { display:grid; gap:9px; margin:0 0 24px; padding:0; list-style:none; }
+.flow-card li { display:flex; align-items:center; gap:9px; color:var(--bz-text); font-size:13px; font-weight:600; }
+.flow-card li svg { flex:0 0 auto; width:16px; height:16px; color:var(--bz-blue); }
+.flow-outcome { display:flex; flex-direction:column; gap:4px; margin-top:auto; padding:14px 16px; border-radius:14px; background:color-mix(in srgb,var(--bz-blue) 8%,transparent); border:1px dashed color-mix(in srgb,var(--bz-blue) 30%,transparent); }
+.flow-outcome small { font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.16em; color:var(--bz-blue-2); }
+.flow-outcome strong { color:var(--bz-text); font-size:15px; letter-spacing:-.02em; }
+@media(max-width:1100px) {
+  .flow-rail { display:none; }
+  .flow-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:620px) {
+  .flow-grid { grid-template-columns:1fr; gap:16px; }
+  .flow-card { padding:24px 20px 20px; }
+  .flow-card-top { margin-bottom:24px; }
+  .flow-no { font-size:44px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .flow-rail span { animation:none; }
+  .flow-card,.flow-card:hover { transform:none; transition:none; }
+}

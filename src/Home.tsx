@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import {
   ArrowRight, Bot, BrainCircuit, ChevronLeft, ChevronRight, CircleCheck,
-  CloudCog, Code2, Database, Layers3, LayoutDashboard, MonitorSmartphone, Palette, PenTool,
+  CloudCog, Code2, Compass, Database, Rocket, Search, Layers3, LayoutDashboard, MonitorSmartphone, Palette, PenTool,
   ShieldCheck, Smartphone, Sparkles, TrendingUp, Workflow
 } from 'lucide-react'
 import { FaAws, FaFacebookF, FaLinkedin, FaLinkedinIn, FaYoutube } from 'react-icons/fa6'
@@ -55,11 +55,11 @@ const services = [
 ]
 
 const process = [
-  ['01', 'Discover', 'We get close to your business, users, and the problem worth solving.'],
-  ['02', 'Architect', 'We map the smartest route from ambitious idea to resilient product.'],
-  ['03', 'Create', 'Design and engineering move together in focused, transparent sprints.'],
-  ['04', 'Evolve', 'We launch, measure, optimize, and stay beside you as you grow.'],
-]
+  { no:'01', title:'Discover', text:'We get close to your business, users, and the problem worth solving.', Icon:Search, outcome:'Clear project brief', points:['Stakeholder workshops','User & market research','Success metrics'] },
+  { no:'02', title:'Architect', text:'We map the smartest route from ambitious idea to resilient product.', Icon:Compass, outcome:'Technical roadmap', points:['System architecture','UX flows & wireframes','Scope & milestones'] },
+  { no:'03', title:'Create', text:'Design and engineering move together in focused, transparent sprints.', Icon:Code2, outcome:'Working product', points:['Design & development sprints','Weekly demos','QA & testing'] },
+  { no:'04', title:'Evolve', text:'We launch, measure, optimize, and stay beside you as you grow.', Icon:Rocket, outcome:'Measurable growth', points:['Launch & monitoring','Analytics & iteration','Ongoing support'] },
+] as const
 
 const liveSystemLogos = [
   { name:'Architecture', Icon:FaAws, color:'#ff9900' },
@@ -207,7 +207,7 @@ export default function Home() {
       <section className="intro reveal" id="about">
         <div className="eyebrow"><span>01</span> WHAT WE BELIEVE</div>
         <InView className="intro-copy">
-          <h2><TextEffect preset="slide">Not another vendor.</TextEffect><br /><em><TextEffect preset="blur" delay={0.14}>Your unfair advantage.</TextEffect></em></h2>
+          <h2><TextEffect preset="slide">Not another vendor</TextEffect><br /><em><TextEffect preset="blur" delay={0.14}>Your unfair advantage</TextEffect></em></h2>
           <div>
             <p>We are a team of builders, thinkers and problem-solvers obsessed with one thing: making technology genuinely useful for your business.</p>
             <div className="proof"><CircleCheck /> SENIOR TALENT, ZERO HANDOFFS</div>
@@ -230,7 +230,6 @@ export default function Home() {
             return (
               <article className={`service-card service-card-${i % 5}`} key={s.title}>
                 <Spotlight size={280} />
-                <span className="service-card-number">(&nbsp; {String(i + 1).padStart(3, '0')} &nbsp;)</span>
                 <div className="home-service-gallery"><ServiceImageLoop slug={s.slug} title={s.title} /></div>
                 <span className="service-card-copy">
                   <span>{s.tag}</span>
@@ -249,7 +248,7 @@ export default function Home() {
       <section className="impact">
         <InView className="impact-card" direction="left">
           <div className="impact-top"><Sparkles /> THE UPFORGE EFFECT</div>
-          <h2><TextEffect preset="slide">Complexity, made</TextEffect><br /><em><TextEffect delay={0.12}>beautifully simple.</TextEffect></em></h2>
+          <h2><TextEffect preset="slide">Complexity, made</TextEffect><br /><em><TextEffect delay={0.12}>beautifully simple</TextEffect></em></h2>
           <div className="metrics">
             <div><strong>42+</strong><span>PRODUCTS SHIPPED</span></div>
             <div><strong>96%</strong><span>CLIENT RETENTION</span></div>
@@ -275,27 +274,36 @@ export default function Home() {
       <section className="process" id="process">
         <div className="section-head reveal">
           <div className="eyebrow"><span>03</span> HOW WE WORK</div>
-          <h2><TextEffect preset="slide">Sharp process.</TextEffect><br /><em><TextEffect preset="scale" delay={0.12}>Zero drama.</TextEffect></em></h2>
+          <h2><TextEffect preset="slide">Sharp process</TextEffect><br /><em><TextEffect preset="scale" delay={0.12}>Zero drama</TextEffect></em></h2>
+          <p>Four focused stages, one accountable team. You always know what is happening, what comes next and what it delivers.</p>
         </div>
-        <AnimatedGroup className="process-grid" itemClassName="process-motion-item">
-          {process.map(([no, title, text]) => (
-            <article key={title}>
-              <div className="step">{no}</div>
-              <div className="step-dot" />
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
-        </AnimatedGroup>
+        <div className="flow">
+          <div className="flow-rail" aria-hidden="true"><span /></div>
+          <AnimatedGroup className="flow-grid" itemClassName="flow-item">
+            {process.map(({ no, title, text, Icon, outcome, points }) => (
+              <article className="flow-card" key={title}>
+                <Spotlight size={240} />
+                <div className="flow-card-top">
+                  <span className="flow-icon"><Icon /></span>
+                  <span className="flow-no">{no}</span>
+                </div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <ul>{points.map(point => <li key={point}><CircleCheck />{point}</li>)}</ul>
+                <div className="flow-outcome"><small>OUTCOME</small><strong>{outcome}</strong></div>
+              </article>
+            ))}
+          </AnimatedGroup>
+        </div>
       </section>
 
       <section className="contact" id="contact">
         <div className="contact-noise" />
         <span className="eyebrow-light">HAVE SOMETHING AMBITIOUS IN MIND?</span>
-        <h2><TextEffect preset="slide">LET'S BUILD</TextEffect><br /><em><TextEffect preset="blur" delay={0.14}>WHAT'S NEXT.</TextEffect></em></h2>
+        <h2><TextEffect preset="slide">LET'S BUILD</TextEffect><br /><em><TextEffect preset="blur" delay={0.14}>WHAT'S NEXT</TextEffect></em></h2>
         <a href="mailto:info@upforge.us">info@upforge.us <ArrowRight /></a>
         <div className="footer-row">
-          <div className="brand footer-brand"><img src="/upforge-logo.png" alt="" /><span className="brand-name"><b>Up</b>Forge</span></div>
+          <div className="brand footer-brand"><img src="/upforge-logo-dark.png" alt="" /><span className="brand-name"><b>Up</b>Forge</span></div>
           <p>ENGINEERING DIGITAL MOMENTUM<br />FROM IDEA TO IMPACT.</p>
           <div className="footer-links">
             <Link to="/services">SERVICES</Link><Link to="/about">ABOUT</Link><Link to="/contact">CONTACT</Link>
