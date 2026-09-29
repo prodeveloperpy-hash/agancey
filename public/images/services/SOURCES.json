@@ -1,0 +1,152 @@
+{
+  "solution-architecture": {
+    "src": "/images/services/solution-architecture.png",
+    "alt": "Three-tier solution architecture showing presentation, application logic and data layers",
+    "source": "https://docs.aws.amazon.com/whitepapers/latest/serverless-multi-tier-architectures-api-gateway-lambda/introduction.html",
+    "original": "https://docs.aws.amazon.com/images/whitepapers/latest/serverless-multi-tier-architectures-api-gateway-lambda/images/image2.png"
+  },
+  "full-stack-development": {
+    "src": "/images/services/full-stack-development.png",
+    "alt": "Next.js full-stack web development framework",
+    "source": "https://nextjs.org/",
+    "original": "https://h8dxkfmaphn8o0p3.public.blob.vercel-storage.com/nextjs/twitter-card.png"
+  },
+  "no-code-automation": {
+    "src": "/images/services/no-code-automation.png",
+    "alt": "n8n workflow automation platform",
+    "source": "https://n8n.io/",
+    "original": "https://n8niostorageaccount.blob.core.windows.net/n8nio-strapi-blobs-stage/assets/og_image_website_3_afd66761a9.png"
+  },
+  "wordpress-development": {
+    "src": "/images/services/wordpress-development.png",
+    "alt": "WordPress website building interface",
+    "source": "https://wordpress.org/",
+    "original": "https://wordpress.org/files/2025/12/wporg-69-build.png"
+  },
+  "graphic-design": {
+    "src": "/images/services/graphic-design.jpg",
+    "alt": "Figma graphic design tools",
+    "source": "https://www.figma.com/graphic-design-tool/",
+    "original": "https://cdn.sanity.io/images/599r6htc/regionalized/135d2170e6a27e5d4249b3e4029bc9cd1e512457-2400x1260.jpg?w=1200&q=70&fit=max&auto=format"
+  },
+  "seo-services": {
+    "src": "/images/services/seo-services.png",
+    "alt": "Ahrefs search engine optimization platform",
+    "source": "https://ahrefs.com/",
+    "original": "https://static.ahrefs.com/assets/img/og/ahrefs.png?v=2"
+  },
+  "ui-ux-design": {
+    "src": "/images/services/ui-ux-design.png",
+    "alt": "Figma user interface design tools",
+    "source": "https://www.figma.com/ui-design-tool/",
+    "original": "https://cdn.sanity.io/images/599r6htc/regionalized/608b4ab3d16df489b862f90de1b59c9defb8cbb0-1200x630.png?w=1200&q=70&fit=max&auto=format"
+  },
+  "mobile-development": {
+    "src": "/images/services/mobile-development.webp",
+    "alt": "Flutter application development across devices",
+    "source": "https://flutter.dev/",
+    "original": "https://flutter.dev/assets/development.d5be397a45277986ff1f5a29e4db094c.webp"
+  },
+  "data-ai-engineering": {
+    "src": "/images/services/data-ai-engineering.png",
+    "alt": "Databricks data and AI platform",
+    "source": "https://www.databricks.com/",
+    "original": "https://www.databricks.com/sites/default/files/2023-11/databricks-og-universal.png"
+  },
+  "ai-tools-products": {
+    "src": "/images/services/ai-tools-products.png",
+    "alt": "LangChain AI application development platform",
+    "source": "https://www.langchain.com/",
+    "original": "https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/6a907b277587adb77be09e34_Website%20preview%20.png"
+  },
+  "saas-applications": {
+    "src": "/images/services/saas-applications.png",
+    "alt": "Supabase application backend platform",
+    "source": "https://supabase.com/",
+    "original": "https://supabase.com/images/og/supabase-og.png"
+  },
+  "analytics-dashboards": {
+    "src": "/images/services/analytics-dashboards.webp",
+    "alt": "Metabase business intelligence and analytics dashboards",
+    "source": "https://www.metabase.com/",
+    "original": "https://cdn.metabase.com/images/opengraph/home-og.webp"
+  },
+  "data-analysis": {
+    "src": "/images/services/data-analysis.svg",
+    "alt": "Pandas data analysis charts comparing time series and distributions",
+    "source": "https://pandas.pydata.org/",
+    "original": "https://pandas.pydata.org/docs/_images/04_plot_overview.svg"
+  },
+  "paid-advertising": {
+    "src": "/images/services/paid-advertising.svg",
+    "alt": "Google Ads campaign platform logo",
+    "source": "https://ads.google.com/home/",
+    "original": "https://www.gstatic.com/images/branding/productlogos/ads/v5/192px.svg"
+  },
+  "pixel-tracking": {
+    "src": "/images/services/pixel-tracking.jpg",
+    "alt": "Google Tag Manager tag management interface",
+    "source": "https://marketingplatform.google.com/about/tag-manager/",
+    "original": "https://lh3.googleusercontent.com/WWofZ3a9TWziKyCr2YXEq5mno1UkiTOETycJj5xuDuJJ1dNGFRPBI7WJt2sJtQtDjxH4V099YVijECveySffaLQAUhyx4E3HauKwxA=s1500"
+  },
+  "python-development": {
+    "src": "/images/services/python-development.png",
+    "alt": "Python programming language logo",
+    "source": "https://www.python.org/",
+    "original": "https://www.python.org/static/img/python-logo.png"
+  },
+  "web-scraping": {
+    "src": "/images/services/web-scraping.png",
+    "alt": "Scrapy web crawling and data extraction framework",
+    "source": "https://scrapy.org/",
+    "original": "https://scrapy.org/og_image/og_image.png"
+  },
+  "django-development": {
+    "src": "/images/services/django-development.png",
+    "alt": "Django Python web framework logo",
+    "source": "https://www.djangoproject.com/",
+    "original": "https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png"
+  },
+  "ai-chatbots": {
+    "src": "/images/services/ai-chatbots.jpg",
+    "alt": "Botpress conversational AI platform",
+    "source": "https://botpress.com/",
+    "original": "https://cdn.prod.website-files.com/635c4eeb78332f7971255095/6a1ded7960de29af20457f6d_f7714877d559cb98adc053a44d48870d_bp_opengraph.jpg"
+  },
+  "flask-development": {
+    "src": "/images/services/flask-development.svg",
+    "alt": "Flask Python web framework logo",
+    "source": "https://flask.palletsprojects.com/en/stable/",
+    "original": "https://flask.palletsprojects.com/en/stable/_images/flask-name.svg"
+  },
+  "selenium-automation": {
+    "src": "/images/services/selenium-automation.png",
+    "alt": "Selenium browser automation framework",
+    "source": "https://www.selenium.dev/",
+    "original": "https://www.selenium.dev/images/selenium_4_logo.png"
+  },
+  "google-api-integration": {
+    "src": "/images/services/google-api-integration.png",
+    "alt": "Google Workspace developer integration illustration",
+    "source": "https://developers.google.com/workspace",
+    "original": "https://developers.google.com/static/workspace/images/banner-connect.png"
+  },
+  "api-integration": {
+    "src": "/images/services/api-integration.jpg",
+    "alt": "Postman API development platform",
+    "source": "https://www.postman.com/",
+    "original": "https://voyager.postman.com/social-preview/postman-v12-social-preview-homepage.jpg"
+  },
+  "data-management": {
+    "src": "/images/services/data-management.png",
+    "alt": "PostgreSQL database platform logo",
+    "source": "https://www.postgresql.org/",
+    "original": "https://www.postgresql.org/media/img/about/press/elephant.png"
+  },
+  "social-media-api-integration": {
+    "src": "/images/services/social-media-api-integration.png",
+    "alt": "YouTube Data API integration illustration",
+    "source": "https://developers.google.com/youtube/v3",
+    "original": "https://developers.google.com/static/youtube/images/youtube_home_page_data_api.png"
+  }
+}

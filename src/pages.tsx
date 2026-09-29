@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight, Asterisk, BrainCircuit, CloudCog, Code2, Database, Layers3, Palette, PenTool, Smartphone, Sparkles, Workflow } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
-import { motion } from 'motion/react'
+import { useEffect, useRef, useState } from 'react'
+import { motion, useInView } from 'motion/react'
 import type { CSSProperties, FormEvent, ReactNode } from 'react'
 import type { IconType } from 'react-icons'
 import { FaAws, FaFacebook, FaFacebookF, FaLinkedin, FaLinkedinIn, FaMicrosoft, FaYoutube } from 'react-icons/fa6'
@@ -173,21 +173,12 @@ export function ServicesPage() {
         </InfiniteSlider>
       </section>
       <section className="detail-grid">
-        {serviceDetails.map(({ slug, title, text, Icon, tags }, index) => (
+        {serviceDetails.map(({ slug, title, text, tags }, index) => (
           <motion.article className="service-catalog-card" key={title} tabIndex={0} {...reveal(index % 3)}>
             <Spotlight size={300} />
             <span className="service-card-accent" aria-hidden="true" />
-            <div className="service-card-visual" aria-hidden="true">
-              {serviceImages[slug] && <img className="service-card-photo" src={serviceImages[slug].src} alt="" loading="lazy" />}
-              <div className="service-card-primary-icon"><Icon /></div>
-              <div className="service-card-logos">
-                {(serviceTools[slug] ?? []).slice(0, 4).map(brand => (
-                  <span className="service-card-brand" key={brand.name} title={brand.name} style={{ '--brand-color':brand.color } as CSSProperties}>
-                    <BrandMark tool={brand} />
-                    <small>{brand.name}</small>
-                  </span>
-                ))}
-              </div>
+            <div className="service-card-visual">
+              <ServiceImageLoop slug={slug} title={title} />
             </div>
             <div className="service-card-content">
               <h2>{title}</h2><p>{text}</p>
@@ -221,8 +212,8 @@ const serviceTools: Record<string, BrandTool[]> = {
     tool('GitHub',SiGithub,'#181717'), tool('PostgreSQL',SiPostgresql,'#4169e1'), tool('MongoDB',SiMongodb,'#47a248'), tool('Redis',SiRedis,'#dc382d'),
   ],
   'full-stack-development': [
-    tool('React',SiReact,'#61dafb'), tool('Next.js',SiNextdotjs,'#111111'), tool('Node.js',SiNodedotjs,'#5fa04e'), tool('TypeScript',SiTypescript,'#3178c6'),
-    tool('Python',SiPython,'#3776ab'), tool('PostgreSQL',SiPostgresql,'#4169e1'), tool('MongoDB',SiMongodb,'#47a248'), tool('GraphQL',SiGraphql,'#e10098'),
+    tool('React',SiReact,'#087ea4'), tool('Next.js',SiNextdotjs,'#111111'), tool('Node.js',SiNodedotjs,'#5fa04e'), tool('Python',SiPython,'#3776ab'),
+    tool('REST APIs',SiSwagger,'#268400'), tool('GraphQL',SiGraphql,'#e10098'), tool('PostgreSQL',SiPostgresql,'#4169e1'), tool('Cloud deployment',FaAws,'#d97706'),
   ],
   'no-code-automation': [
     highlevelTool, tool('Make',SiMake,'#6d00cc'), tool('Zapier',SiZapier,'#ff4f00'), tool('n8n',SiN8N,'#ea4b71'),
@@ -325,6 +316,35 @@ const stripTools = Array.from(
 function BrandMark({ tool }: { tool:BrandTool }) {
   const Icon = tool.Icon
   return tool.image ? <img src={tool.image} alt="" /> : Icon ? <Icon /> : null
+}
+
+function ServiceImageLoop({ slug, title }: { slug:string; title:string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const visible = useInView(ref, { margin:'100px' })
+  const [paused, setPaused] = useState(false)
+  const brands = serviceTools[slug] ?? []
+  return (
+    <div ref={ref} className="service-image-loop" role="region" aria-label={`${title} technology images`}>
+      <div className="service-image-window" tabIndex={0} aria-label="Technology images; scroll to explore">
+        <div className="service-image-track" style={{ '--loop-duration':`${brands.length * 4}s`, animationPlayState:paused || !visible ? 'paused' : 'running' } as CSSProperties}>
+          {[0, 1].map(copy => (
+            <div className="service-image-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>
+              {brands.map(brand => (
+                <figure className="service-image-slide" key={brand.name} style={{ '--brand-color':brand.color } as CSSProperties}>
+                  <span className="service-image-mark" aria-hidden="true"><BrandMark tool={brand} /></span>
+                  <figcaption>{brand.name}</figcaption>
+                </figure>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="service-image-controls">
+        <span>{brands.length} technologies</span>
+        <button type="button" aria-label={`${paused ? 'Play' : 'Pause'} ${title} images`} aria-pressed={paused} onClick={() => setPaused(value => !value)}>{paused ? 'Play' : 'Pause'}</button>
+      </div>
+    </div>
+  )
 }
 
 function BrandNode({ tool, className }: { tool:BrandTool; className:string }) {
@@ -454,10 +474,7 @@ export function ServiceDetailPage() {
       <section className="service-detail">
         <motion.div className="service-detail-intro" {...reveal()}>
           {image && (
-            <Tilt className="service-detail-photo" rotationFactor={5}>
-              <img src={image.src} alt={image.alt} loading="lazy" />
-              <span className="service-detail-photo-badge"><Icon /></span>
-            </Tilt>
+            <div className="service-detail-gallery"><ServiceImageLoop slug={slug ?? ''} title={title} /></div>
           )}
           <Icon /><span>WHAT'S INCLUDED</span><h2>A complete service,<br />not a partial handoff.</h2><p>We combine strategy, execution, testing and documentation so your team receives a solution that is clear, maintainable and ready to use.</p></motion.div>
         <div className="included-list">{tags.map((tag,index) => {
