@@ -102,3 +102,32 @@ export const projects: Project[] = [
     tags:['Brand website', 'Packages & gallery', 'Enquiry forms', 'WhatsApp chat'],
   },
 ]
+
+/** Supplied photos for service detail heroes. */
+export const serviceHeroImages: Record<string, ServiceImage> = {
+  "solution-architecture": { src:"/images/services/heroes/solution-architecture.jpg", alt:"Team planning a technology architecture with connected AI and cloud systems" },
+  "social-media-api-integration": { src:"/images/services/heroes/social-media-api-integration.jpg", alt:"Social media platform logos for connected integrations" },
+  "data-management": { src:"/images/services/heroes/data-management.jpg", alt:"Data management illustration with secure connected devices" },
+  "api-integration": { src:"/images/services/heroes/api-integration.png", alt:"API connecting web applications, servers and databases" },
+  "google-api-integration": { src:"/images/services/heroes/google-api-integration.jpg", alt:"API hub connecting digital services" },
+  "selenium-automation": { src:"/images/services/heroes/selenium-automation.jpg", alt:"Selenium automation concept with connected hexagons" },
+  "flask-development": { src:"/images/services/heroes/flask-development.jpg", alt:"Illustrated Flask and Python application development workshop" },
+  "ai-chatbots": { src:"/images/services/heroes/ai-chatbots.jpg", alt:"AI chatbot assistant offering help" },
+  "django-development": { src:"/images/services/heroes/django-development.jpg", alt:"Illustrated Django application development workflow" },
+  "web-scraping": { src:"/images/services/heroes/web-scraping.png", alt:"Web scraping and data extraction illustration" },
+  "python-development": { src:"/images/services/heroes/python-development.jpg", alt:"Python programming concept with code and a digital python" },
+  "pixel-tracking": { src:"/images/services/heroes/pixel-tracking.png", alt:"Website purchase event sent to a conversion tracking dashboard" },
+  "paid-advertising": { src:"/images/services/heroes/paid-advertising.png", alt:"Google Ads and LinkedIn logos" },
+  "data-analysis": { src:"/images/services/heroes/data-analysis.jpg", alt:"Data analysis charts over a city skyline" },
+  "analytics-dashboards": { src:"/images/services/heroes/analytics-dashboards.jpg", alt:"Monitor showing analytics charts and dashboards" },
+  "saas-applications": { src:"/images/services/heroes/saas-applications.jpg", alt:"SaaS application development and cloud services illustration" },
+  "ai-tools-products": { src:"/images/services/heroes/ai-tools-products.jpg", alt:"AI tools connected on a digital circuit" },
+  "data-ai-engineering": { src:"/images/services/heroes/data-ai-engineering.jpg", alt:"Engineer and robot working with data systems" },
+  "mobile-development": { src:"/images/services/heroes/mobile-development.jpg", alt:"Mobile applications and communication icons on a tablet" },
+  "ui-ux-design": { src:"/images/services/heroes/ui-ux-design.webp", alt:"User interface and user experience design illustration" },
+  "seo-services": { src:"/images/services/heroes/seo-services.jpg", alt:"SEO planning with keywords, backlinks and site architecture" },
+  "graphic-design": { src:"/images/services/heroes/graphic-design.webp", alt:"Graphic design composition of brand logos forming a tree" },
+  "wordpress-development": { src:"/images/services/heroes/wordpress-development.jpg", alt:"WordPress logo surrounded by a network of websites" },
+  "no-code-automation": { src:"/images/services/heroes/no-code-automation.jpg", alt:"No-code automation tools and connected workflows" },
+  "full-stack-development": { src:"/images/services/heroes/full-stack-development.png", alt:"Full-stack development illustration with programming technologies" },
+}

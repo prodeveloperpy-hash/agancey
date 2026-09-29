@@ -21,7 +21,7 @@ import workHero from './assets/work-hero.webp'
 import aboutHero from './assets/about-hero.webp'
 import SiteNav from './SiteNav'
 import { ServiceImageLoop, BrandMark, brandsForTags, serviceTools, type BrandTool } from './components/ServiceImageLoop'
-import { projects, serviceImages } from './data/content'
+import { projects, serviceImages, serviceHeroImages } from './data/content'
 import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
 import { BorderTrail } from './components/motion-primitives/BorderTrail'
 import { GlowEffect } from './components/motion-primitives/GlowEffect'
@@ -315,7 +315,7 @@ export function ServiceDetailPage() {
   if (!service) return <PageShell index="" label="SERVICE" title={<>Service not found</>} intro="Return to our services catalogue to choose another capability."><section className="missing-service"><Link to="/services">View all services <ArrowRight /></Link></section></PageShell>
   const { title, text, Icon, tags } = service
   const tools = serviceTools[slug ?? ''] ?? serviceTools['solution-architecture']
-  const image = serviceImages[slug ?? '']
+  const image = serviceHeroImages[slug ?? '']
   return (
     <PageShell
       index=""
