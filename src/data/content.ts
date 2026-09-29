@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Editable site content — replace the dummy values below with real data.
  *
  * Images can be:
@@ -9,8 +9,6 @@
  * Nothing else in the code needs to change when you edit this file.
  */
 
-/** Placeholder helper for the dummy Unsplash photos. Not needed for your own images. */
-const unsplash = (id: string, width = 1200) => `https://images.unsplash.com/${id}?w=${width}&q=80&auto=format&fit=crop`
 
 export type ServiceImage = {
   /** Image URL or /public path */
@@ -69,59 +67,38 @@ export type Project = {
 }
 
 /** Shown on the Work page in this order. Add or remove entries freely. */
+/** Shown on the Work page in this order. Add or remove entries freely. */
 export const projects: Project[] = [
   {
-    name:'Meridian',
-    category:'FINTECH / PRODUCT',
-    overview:'A wealth platform that makes complex financial decisions feel simple, with real-time portfolio views and guided planning.',
-    url:'https://example.com',
-    screenshot:unsplash('photo-1551288049-bebda4e38f71', 1400),
-    tags:['React', 'Node.js', 'PostgreSQL'],
-    year:'2026',
+    name:'Tooli',
+    category:'MARKETPLACE / PRICE COMPARISON',
+    overview:'A UK plant and tool hire comparison platform. Contractors search by equipment category, location and hire dates to compare local and national suppliers, check availability and book delivery, while suppliers can list their own equipment.',
+    url:'https://www.tooli.uk/',
+    screenshot:'/images/work/tooli.jpg',
+    tags:['Marketplace', 'Search & filtering', 'Supplier listings', 'Location pages'],
   },
   {
-    name:'Pulse',
-    category:'HEALTHTECH / MOBILE',
-    overview:'A human-first care experience connecting patients and providers through booking, messaging and reminders.',
-    url:'https://example.com',
-    screenshot:unsplash('photo-1551650975-87deedd944c3', 1400),
-    tags:['Flutter', 'Firebase'],
-    year:'2025',
+    name:'WaveHire',
+    category:'BROADCAST / EQUIPMENT RENTAL',
+    overview:'A London rental site for professional wireless broadcast gear: wireless video, camera control and IP data systems for TV, live sports and film crews. Visitors browse the equipment catalogue, build an enquiry basket and read production insights.',
+    url:'https://wavehire.tv/',
+    screenshot:'/images/work/wavehire.jpg',
+    tags:['Equipment catalogue', 'Enquiry basket', 'Blog & insights', 'Light / dark mode'],
   },
   {
-    name:'Northline',
-    category:'LOGISTICS / DATA',
-    overview:'Real-time operations intelligence across a national fleet, combining live tracking with performance dashboards.',
-    url:'https://example.com',
-    screenshot:unsplash('photo-1460925895917-afdab827c52f', 1400),
-    tags:['BigQuery', 'Looker Studio', 'Python'],
-    year:'2025',
+    name:'Wavetek TV',
+    category:'BROADCAST / E-COMMERCE',
+    overview:'An e-commerce storefront for Wavetek\'s live-production video, control and connectivity products. It pairs a product catalogue and cart with time-limited offers, countdown sales, product video and support resources.',
+    url:'https://wavetek-frontend-7homzqrazq-ew.a.run.app/',
+    screenshot:'/images/work/wavetek.jpg',
+    tags:['E-commerce', 'Product catalogue', 'Promotions & countdowns', 'Google Cloud Run'],
   },
   {
-    name:'Orbit',
-    category:'SAAS / AUTOMATION',
-    overview:'A growth engine that qualifies, nurtures and converts leads around the clock using connected CRM automations.',
-    url:'https://example.com',
-    screenshot:unsplash('photo-1559028012-481c04fa702d', 1400),
-    tags:['GoHighLevel', 'n8n', 'OpenAI'],
-    year:'2026',
-  },
-  {
-    name:'Brightside Studio',
-    category:'BRAND / WORDPRESS',
-    overview:'A fast, editable marketing website and brand refresh for a creative studio, built for easy content updates.',
-    url:'https://example.com',
-    screenshot:unsplash('photo-1498050108023-c5249f4df085', 1400),
-    tags:['WordPress', 'Figma'],
-    year:'2024',
-  },
-  {
-    name:'Signal',
-    category:'MARKETING / ANALYTICS',
-    overview:'Unified paid-media reporting with accurate conversion tracking across Google, Meta and LinkedIn campaigns.',
-    url:'https://example.com',
-    screenshot:unsplash('photo-1504868584819-f8e8b4b6d7e3', 1400),
-    tags:['GA4', 'Tag Manager', 'Google Ads'],
-    year:'2026',
+    name:'WinkBooth',
+    category:'EVENTS / BOOKING SITE',
+    overview:'A luxury photo booth hire brand for weddings, birthdays, corporate events and brand activations across the UK. The site showcases packages and a gallery, with availability checks, custom requests and WhatsApp enquiries.',
+    url:'https://winkbooth.co.uk/',
+    screenshot:'/images/work/winkbooth.jpg',
+    tags:['Brand website', 'Packages & gallery', 'Enquiry forms', 'WhatsApp chat'],
   },
 ]
