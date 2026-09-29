@@ -570,3 +570,22 @@ html[data-theme="dark"] .biz-office-copy .biz-subtitle { color:#d7e5fa; }
   .flow-rail span { animation:none; }
   .flow-card,.flow-card:hover { transform:none; transition:none; }
 }
+
+/* Service artwork stays visible beside the introduction, including on mobile. */
+.biz-page-hero.service-detail-hero { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); align-items:center; gap:5vw; }
+.biz-page-hero.service-detail-hero .biz-page-copy { grid-column:1; grid-row:1; max-width:100%; }
+.service-hero-artwork { grid-column:2; grid-row:1; position:relative; z-index:1; width:100%; margin:0; padding:18px; border:1px solid var(--bz-border); border-radius:24px; background:#f1f5f9; box-shadow:0 24px 70px #02061725; }
+.service-hero-artwork img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:contain; border-radius:12px; }
+.service-hero-artwork figcaption { padding:16px 4px 2px; color:#334155; font-size:13px; font-weight:600; }
+.framework-card-image { position:relative; margin:0 0 24px; overflow:hidden; border-radius:12px; background:#f1f5f9; }
+.framework-card-image>img,.framework-card-mark { display:flex; align-items:center; justify-content:center; width:100%; height:170px; padding:16px; object-fit:contain; }
+.framework-card-mark { color:var(--brand-color); background:radial-gradient(ellipse at center,#fff,#e8eef7); }
+.framework-card-mark svg,.framework-card-mark img { width:96px; height:96px; object-fit:contain; }
+.framework-card-image figcaption { padding:10px 14px; color:#334155; border-top:1px solid #dbe3ee; background:#fff; font-size:12px; font-weight:700; }
+.automation-card-grid article:has(.framework-card-image) { justify-content:flex-start; }
+@media(max-width:900px) {
+  .biz-page-hero.service-detail-hero { grid-template-columns:minmax(0,1fr); gap:32px; }
+  .biz-page-hero.service-detail-hero .biz-page-copy { grid-column:1; grid-row:1; }
+  .service-hero-artwork { grid-column:1; grid-row:2; max-width:640px; justify-self:center; }
+  .service-hero-artwork img { max-height:340px; }
+}

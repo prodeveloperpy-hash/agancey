@@ -213,23 +213,27 @@ function BrandNode({ tool, className }: { tool:BrandTool; className:string }) {
   )
 }
 
-function ServiceHeroLogos({ tools }: { tools:BrandTool[] }) {
+const frameworkImageServices: Record<string, string> = {
+  'Next.js':'full-stack-development', 'n8n':'no-code-automation',
+  'WordPress':'wordpress-development', 'Figma':'ui-ux-design',
+  'Flutter':'mobile-development', 'LangChain':'ai-tools-products',
+  'Supabase':'saas-applications', 'Pandas':'data-analysis',
+  'Google Ads':'paid-advertising', 'Tag Manager':'pixel-tracking',
+  'Python':'python-development', 'Scrapy':'web-scraping',
+  'Django':'django-development', 'Flask':'flask-development',
+  'Selenium':'selenium-automation', 'Postman':'api-integration',
+  'PostgreSQL':'data-management',
+}
+
+function FrameworkVisual({ brand }: { brand:BrandTool }) {
+  const image = serviceImages[frameworkImageServices[brand.name]]
   return (
-    <div className="service-hero-logos" aria-hidden="true">
-      <div className="service-hero-orbit orbit-outer" />
-      <div className="service-hero-orbit orbit-inner" />
-      <div className="service-hero-core"><Sparkles /></div>
-      {tools.map((brand,index) => (
-        <span
-          key={brand.name}
-          className={`service-hero-logo hero-logo-${index + 1}`}
-          style={{ '--brand-color':brand.color, '--logo-delay':`${index * -.65}s` } as CSSProperties}
-        >
-          <BrandMark tool={brand} />
-          <small>{brand.name}</small>
-        </span>
-      ))}
-    </div>
+    <figure className="framework-card-image" style={{ '--brand-color':brand.color } as CSSProperties}>
+      {image
+        ? <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+        : <span className="framework-card-mark" role="img" aria-label={`${brand.name} logo`}><BrandMark tool={brand} /></span>}
+      <figcaption>{brand.name}</figcaption>
+    </figure>
   )
 }
 
@@ -261,14 +265,7 @@ function ServiceShowcase({ slug, title, text, tags }: { slug:string; title:strin
             return (
             <motion.article key={title} {...reveal(index)}>
               <Spotlight size={260} />
-              <div
-                className="automation-card-logo"
-                title={brand.name}
-                aria-label={`${brand.name} logo`}
-                style={{ '--brand-color':brand.color } as CSSProperties}
-              >
-                <BrandMark tool={brand} />
-              </div>
+              <FrameworkVisual brand={brand} />
               <div><h3>{title}</h3><p>{text}</p></div>
             </motion.article>
             )
@@ -323,10 +320,13 @@ export function ServiceDetailPage() {
     <PageShell
       index=""
       label="UPFORGE SERVICE"
-      heroImage={image?.src}
+      heroClassName="service-detail-hero"
       title={<>{title}<br /><em>built around you</em></>}
       intro={text}
-      heroDecor={<ServiceHeroLogos tools={tools} />}
+      heroDecor={image && <figure className="service-hero-artwork">
+        <img src={image.src} alt={image.alt} fetchPriority="high" decoding="async" />
+        <figcaption>{title}</figcaption>
+      </figure>}
     >
       <ServiceShowcase slug={slug ?? ''} title={title} text={text} tags={tags} />
       <section className="service-detail">
