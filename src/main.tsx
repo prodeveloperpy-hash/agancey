@@ -3,18 +3,21 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { FaEnvelope, FaWhatsapp } from 'react-icons/fa6'
 import Home from './Home'
-import { AboutPage, ContactPage, ServiceDetailPage, ServicesPage, WorkPage } from './pages'
+import { ScrollToTop } from './components/ScrollToTop'
+import { AboutPage, ContactPage, ProjectDetailPage, ServiceDetailPage, ServicesPage, WorkPage } from './pages'
 import './styles.css'
 import './theme.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/:slug" element={<ServiceDetailPage />} />
         <Route path="/work" element={<WorkPage />} />
+        <Route path="/work/:slug" element={<ProjectDetailPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>

@@ -1,7 +1,7 @@
-import { ArrowLeft, ArrowRight, ArrowUpRight, Asterisk, BrainCircuit, CloudCog, Code2, Database, Layers3, Palette, PenTool, Smartphone, Sparkles, Workflow } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpRight, Asterisk, BrainCircuit, CheckCircle2, ChevronLeft, ChevronRight, Cloud, CloudCog, Code2, Database, ExternalLink, Layers3, LayoutTemplate, Maximize2, Monitor, Palette, PenTool, RefreshCw, Server, Smartphone, Sparkles, Workflow, X } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
 import { motion } from 'motion/react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { CSSProperties, FormEvent, ReactNode } from 'react'
 import { FaAws, FaFacebook, FaFacebookF, FaLinkedin, FaLinkedinIn, FaMicrosoft, FaYoutube } from 'react-icons/fa6'
 import { TbBrandOpenai } from 'react-icons/tb'
@@ -53,12 +53,6 @@ const reveal = (index = 0) => ({
 })
 
 function PageShell({ index, label, title, intro, heroImage, heroDecor, heroClassName = '', children }: PageShellProps) {
-  useEffect(() => {
-    if (!window.location.hash) return
-    const timer = window.setTimeout(() => document.querySelector(window.location.hash)?.scrollIntoView({ behavior: 'auto', block: 'start' }), 80)
-    return () => window.clearTimeout(timer)
-  }, [])
-
   return (
     <main className="inner-page biz-page">
       <SiteNav />
@@ -362,25 +356,207 @@ export function WorkPage() {
   return (
     <PageShell index="02" label="SELECTED WORK" heroImage={workHero} title={<>Products made to<br /><em>move the needle</em></>} intro="A selection of digital systems built around hard problems, real users, and measurable outcomes.">
       <section className="project-grid">
-        {projects.map(({ name, category, overview, url, screenshot, tags, year }, index) => {
+        {projects.map(({ slug, name, category, overview, url, screenshot, tags, year }, index) => {
           const host = url ? url.replace(/^https?:\/\//, '').replace(/\/$/, '') : ''
           return (
             <motion.article className="project-card" key={name} {...reveal(index % 2)}>
               <Spotlight size={420} />
-              <Tilt className="project-shot" rotationFactor={4}>
-                <div className="project-shot-bar" aria-hidden="true"><i /><i /><i /><span>{host || name.toLowerCase()}</span></div>
-                <img src={screenshot} alt={`${name} project screenshot`} loading="lazy" />
-              </Tilt>
+              <Link to={`/work/${slug}`} aria-label={`${name} case study`}>
+                <Tilt className="project-shot" rotationFactor={4}>
+                  <div className="project-shot-bar" aria-hidden="true"><i /><i /><i /><span>{host || name.toLowerCase()}</span></div>
+                  <img src={screenshot} alt={`${name} project screenshot`} loading="lazy" />
+                </Tilt>
+              </Link>
               <div className="project-body">
                 <div className="project-meta"><small>{category}</small>{year && <small>{year}</small>}</div>
-                <h2>{name}</h2>
+                <h2><Link to={`/work/${slug}`}>{name}</Link></h2>
                 <p>{overview}</p>
                 {tags && tags.length > 0 && <ul>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>}
-                {url && <a className="project-link" href={url} target="_blank" rel="noreferrer">Visit website <ArrowUpRight /></a>}
+                <div className="project-actions">
+                  <Link className="project-link project-card-link" to={`/work/${slug}`}>View case study <ArrowRight /></Link>
+                  {url && <a className="project-link project-link-muted" href={url} target="_blank" rel="noreferrer">Visit website <ArrowUpRight /></a>}
+                </div>
               </div>
             </motion.article>
           )
         })}
+      </section>
+    </PageShell>
+  )
+}
+
+const PREVIEW_WIDTHS = { desktop:1440, mobile:390 } as const
+
+/** Live, interactive preview of a project scaled down to fit its frame. */
+function LivePreview({ url, name }: { url:string; name:string }) {
+  const [device, setDevice] = useState<keyof typeof PREVIEW_WIDTHS>('desktop')
+  const [loaded, setLoaded] = useState(false)
+  const [reloadKey, setReloadKey] = useState(0)
+  const [size, setSize] = useState({ width:0, height:0 })
+  const viewportRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = viewportRef.current
+    if (!el) return
+    const observer = new ResizeObserver(([entry]) => setSize({ width:entry.contentRect.width, height:entry.contentRect.height }))
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [device])
+
+  const frameWidth = PREVIEW_WIDTHS[device]
+  const scale = size.width ? Math.min(1, size.width / frameWidth) : 1
+  const host = url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+  const switchDevice = (next:keyof typeof PREVIEW_WIDTHS) => { if (next !== device) { setLoaded(false); setDevice(next) } }
+
+  return (
+    <div className={`live-preview is-${device}`}>
+      <div className="live-preview-head">
+        <span className="live-preview-status"><i />LIVE PREVIEW</span>
+        <div className="live-preview-toggle" role="group" aria-label="Preview device">
+          <button type="button" aria-pressed={device === 'desktop'} onClick={() => switchDevice('desktop')}><Monitor /> Desktop</button>
+          <button type="button" aria-pressed={device === 'mobile'} onClick={() => switchDevice('mobile')}><Smartphone /> Mobile</button>
+        </div>
+      </div>
+      <div className="live-preview-frame">
+        <div className="project-shot-bar">
+          <i /><i /><i /><span>{host}</span>
+          <button type="button" onClick={() => { setLoaded(false); setReloadKey(key => key + 1) }} aria-label="Reload preview"><RefreshCw /></button>
+          <a href={url} target="_blank" rel="noreferrer" aria-label={`Open ${name} in a new tab`}><ExternalLink /></a>
+        </div>
+        <div className="live-preview-viewport" ref={viewportRef}>
+          {!loaded && <div className="live-preview-loading"><span />Loading {host}…</div>}
+          {size.width > 0 && (
+            <iframe
+              key={`${device}-${reloadKey}`}
+              src={url}
+              title={`${name} live website preview`}
+              loading="lazy"
+              onLoad={() => setLoaded(true)}
+              style={{ width:frameWidth, height:size.height / scale, transform:`scale(${scale})` }}
+            />
+          )}
+        </div>
+      </div>
+      <p className="live-preview-note">This is the real site running inside the page. Scroll and click to explore it.</p>
+    </div>
+  )
+}
+
+function ProjectGallery({ images }: { images:{ src:string; alt:string }[] }) {
+  const [open, setOpen] = useState<number | null>(null)
+  const step = useCallback((dir:number) => setOpen(current => current === null ? null : (current + dir + images.length) % images.length), [images.length])
+
+  useEffect(() => {
+    if (open === null) return
+    const onKey = (e:KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(null)
+      if (e.key === 'ArrowRight') step(1)
+      if (e.key === 'ArrowLeft') step(-1)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open, step])
+
+  return (
+    <>
+      <div className="project-gallery-grid">
+        {images.map((image, index) => (
+          <motion.button type="button" className="project-gallery-item" key={image.src} onClick={() => setOpen(index)} {...reveal(index)}>
+            <img src={image.src} alt={image.alt} loading="lazy" />
+            <span><Maximize2 /> {image.alt}</span>
+          </motion.button>
+        ))}
+      </div>
+      {open !== null && (
+        <div className="project-lightbox" role="dialog" aria-modal="true" aria-label={images[open].alt} onClick={() => setOpen(null)}>
+          <button type="button" className="lightbox-close" onClick={() => setOpen(null)} aria-label="Close"><X /></button>
+          <button type="button" className="lightbox-nav lightbox-prev" onClick={e => { e.stopPropagation(); step(-1) }} aria-label="Previous screenshot"><ChevronLeft /></button>
+          <figure onClick={e => e.stopPropagation()}>
+            <img src={images[open].src} alt={images[open].alt} />
+            <figcaption>{images[open].alt}<small>{open + 1} / {images.length}</small></figcaption>
+          </figure>
+          <button type="button" className="lightbox-nav lightbox-next" onClick={e => { e.stopPropagation(); step(1) }} aria-label="Next screenshot"><ChevronRight /></button>
+        </div>
+      )}
+    </>
+  )
+}
+
+const stackLayers = [
+  { key:'frontend', label:'Frontend', note:'What visitors see and use', Icon:LayoutTemplate },
+  { key:'backend', label:'Backend', note:'APIs, business logic and admin', Icon:Server },
+  { key:'database', label:'Database', note:'How the data is stored', Icon:Database },
+  { key:'hosting', label:'Hosting & tools', note:'Where it runs and is measured', Icon:Cloud },
+] as const
+
+export function ProjectDetailPage() {
+  const { slug } = useParams()
+  const index = projects.findIndex(project => project.slug === slug)
+  if (index === -1) return <PageShell index="" label="PROJECT" title={<>Project not found.</>} intro="Return to our work to browse other projects."><section className="missing-service"><Link to="/work">View all work <ArrowRight /></Link></section></PageShell>
+  const project = projects[index]
+  const next = projects[(index + 1) % projects.length]
+  const gallery = [{ src:project.screenshot, alt:`${project.name} homepage` }, ...project.gallery, ...(project.mobileShot ? [{ src:project.mobileShot, alt:`${project.name} on mobile` }] : [])]
+
+  return (
+    <PageShell index="" label={project.category} heroImage={project.screenshot} title={<>{project.name}<br /><em>case study</em></>} intro={project.overview}>
+      <section className="case-overview">
+        <motion.div className="case-summary" {...reveal()}>
+          <Link className="case-back" to="/work"><ArrowLeft /> All projects</Link>
+          <span className="case-eyebrow">WHAT WE BUILT</span>
+          <h2>Built for real users,<br /><em>running in production.</em></h2>
+          <ul className="case-highlights">{project.highlights.map(item => <li key={item}><CheckCircle2 />{item}</li>)}</ul>
+          <dl className="case-facts">
+            <div><dt>Category</dt><dd>{project.category.toLowerCase().replace(/\b\w/g, c => c.toUpperCase())}</dd></div>
+            <div><dt>Frontend</dt><dd>{project.stack.frontend.slice(0,2).join(' + ')}</dd></div>
+            <div><dt>Backend</dt><dd>{project.stack.backend.slice(1,3).join(' + ')}</dd></div>
+            <div><dt>Hosting</dt><dd>{project.stack.hosting[0]}</dd></div>
+          </dl>
+          <a className="biz-btn biz-btn-primary" href={project.url} target="_blank" rel="noreferrer">Visit live website <ArrowUpRight /></a>
+        </motion.div>
+        <motion.div className="case-preview" {...reveal(1)}>
+          <LivePreview url={project.url} name={project.name} />
+        </motion.div>
+      </section>
+
+      <section className="case-section">
+        <div className="case-section-head"><span className="case-eyebrow">SCREENSHOTS</span><h2>Inside the product</h2></div>
+        <ProjectGallery images={gallery} />
+      </section>
+
+      <section className="case-section case-stack">
+        <div className="case-section-head"><span className="case-eyebrow">TECHNOLOGY</span><h2>Frontend, backend &amp; database</h2></div>
+        <motion.div className="case-architecture" aria-label="System architecture" {...reveal()}>
+          <div><Monitor /><strong>Browser</strong><small>Desktop &amp; mobile</small></div>
+          <i aria-hidden="true" />
+          <div><LayoutTemplate /><strong>{project.stack.frontend[0]} app</strong><small>{project.stack.frontend[1]} build</small></div>
+          <i aria-hidden="true" />
+          <div><Server /><strong>REST API</strong><small>{project.stack.backend[1]}</small></div>
+          <i aria-hidden="true" />
+          <div><Database /><strong>Database</strong><small>{project.stack.database[1] ?? project.stack.database[0]}</small></div>
+        </motion.div>
+        <div className="case-stack-grid">
+          {stackLayers.map(({ key, label, note, Icon }, i) => (
+            <motion.article key={key} {...reveal(i)}>
+              <Spotlight size={220} />
+              <span className="case-stack-icon"><Icon /></span>
+              <h3>{label}</h3>
+              <p>{note}</p>
+              <ul>{project.stack[key].map(item => <li key={item}>{item}</li>)}</ul>
+            </motion.article>
+          ))}
+        </div>
+        <motion.div className="case-models" {...reveal()}>
+          <div><Database /><h3>Data model</h3><p>The main records the backend stores and exposes through its API.</p></div>
+          <ul>{project.dataModels.map(model => <li key={model}>{model}</li>)}</ul>
+        </motion.div>
+      </section>
+
+      <section className="case-next">
+        <Link to={`/work/${next.slug}`}>
+          <span>NEXT PROJECT</span>
+          <strong>{next.name} <ArrowRight /></strong>
+          <img src={next.screenshot} alt="" loading="lazy" />
+        </Link>
       </section>
     </PageShell>
   )

@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import {
-  ArrowRight, Bot, BrainCircuit, ChevronLeft, ChevronRight, CircleCheck,
+  ArrowRight, ArrowUpRight, Bot, BrainCircuit, ChevronLeft, ChevronRight, CircleCheck,
   CloudCog, Code2, Compass, Database, Rocket, Search, Layers3, LayoutDashboard, MonitorSmartphone, Palette, PenTool,
   ShieldCheck, Smartphone, Sparkles, TrendingUp, Workflow
 } from 'lucide-react'
@@ -14,6 +14,7 @@ import './styles.css'
 import SiteNav from './SiteNav'
 import officeHero from './assets/upforge-office-hero.png'
 import { ServiceImageLoop } from './components/ServiceImageLoop'
+import { projects } from './data/content'
 import { AnimatedGroup } from './components/motion-primitives/AnimatedGroup'
 import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
 import { BorderTrail } from './components/motion-primitives/BorderTrail'
@@ -245,6 +246,34 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="home-work" id="work">
+        <div className="services-carousel-head reveal">
+          <div>
+            <div className="eyebrow"><span>03</span> SELECTED WORK</div>
+            <h2><TextEffect>Recent projects</TextEffect></h2>
+          </div>
+          <Link className="services-contact-link" to="/work">View all work <ArrowRight /></Link>
+        </div>
+        <AnimatedGroup className="home-work-grid" itemClassName="home-work-item">
+          {projects.map(({ slug, name, category, overview, url, screenshot, tags }) => (
+            <Link className="home-work-card" to={`/work/${slug}`} key={name} aria-label={`${name} case study`}>
+              <Spotlight size={320} />
+              <div className="home-work-shot">
+                <div className="project-shot-bar" aria-hidden="true"><i /><i /><i /><span>{url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</span></div>
+                <img src={screenshot} alt={`${name} website homepage`} loading="lazy" />
+              </div>
+              <div className="home-work-info">
+                <small>{category}</small>
+                <h3>{name}</h3>
+                <p>{overview}</p>
+                {tags && <ul>{tags.slice(0,3).map(tag => <li key={tag}>{tag}</li>)}</ul>}
+              </div>
+              <span className="home-work-arrow" aria-hidden="true"><ArrowUpRight /></span>
+            </Link>
+          ))}
+        </AnimatedGroup>
+      </section>
+
       <section className="impact">
         <InView className="impact-card" direction="left">
           <div className="impact-top"><Sparkles /> THE UPFORGE EFFECT</div>
@@ -273,7 +302,7 @@ export default function Home() {
 
       <section className="process" id="process">
         <div className="section-head reveal">
-          <div className="eyebrow"><span>03</span> HOW WE WORK</div>
+          <div className="eyebrow"><span>04</span> HOW WE WORK</div>
           <h2><TextEffect preset="slide">Sharp process</TextEffect><br /><em><TextEffect preset="scale" delay={0.12}>Zero drama</TextEffect></em></h2>
           <p>Four focused stages, one accountable team. You always know what is happening, what comes next and what it delivers.</p>
         </div>

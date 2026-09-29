@@ -64,42 +64,146 @@ export type Project = {
   tags?: string[]
   /** Year delivered (optional) */
   year?: string
+  /** URL segment for the detail page: /work/<slug> */
+  slug: string
+  /** Extra screenshots for the detail page gallery */
+  gallery: ServiceImage[]
+  /** Phone-sized screenshot shown beside the live preview */
+  mobileShot?: string
+  /** Main features delivered */
+  highlights: string[]
+  /** Technology used in each layer of the build */
+  stack: {
+    frontend: string[]
+    backend: string[]
+    database: string[]
+    hosting: string[]
+  }
+  /** Main records the backend stores (shown as the data model) */
+  dataModels: string[]
 }
 
-/** Shown on the Work page in this order. Add or remove entries freely. */
+// Shared by all four builds: React SPAs talking to a Django REST API, each on Google Cloud Run.
+const djangoBackend = ['Python', 'Django', 'Django REST Framework', 'Django Admin', 'Token-based API authentication']
+const djangoDatabase = ['Relational SQL database', 'Django ORM & migrations']
+
 /** Shown on the Work page in this order. Add or remove entries freely. */
 export const projects: Project[] = [
   {
+    slug:'tooli',
     name:'Tooli',
     category:'MARKETPLACE / PRICE COMPARISON',
     overview:'A UK plant and tool hire comparison platform. Contractors search by equipment category, location and hire dates to compare local and national suppliers, check availability and book delivery, while suppliers can list their own equipment.',
     url:'https://www.tooli.uk/',
     screenshot:'/images/work/tooli.jpg',
+    mobileShot:'/images/work/tooli-mobile.jpg',
+    gallery:[
+      { src:'/images/work/tooli-2.jpg', alt:'Tooli location carousel comparing tool hire by UK city' },
+      { src:'/images/work/tooli-3.jpg', alt:'Tooli equipment categories and value propositions' },
+      { src:'/images/work/tooli-4.jpg', alt:'Tooli excavator hire guide with the price comparison search' },
+    ],
     tags:['Marketplace', 'Search & filtering', 'Supplier listings', 'Location pages'],
+    highlights:[
+      'Price comparison search by equipment category, location and hire dates',
+      'Supplier accounts and organisations that list and price their own equipment',
+      'Availability calendars, hire intervals and per-location pricing',
+      'SEO landing pages for 16 UK cities and 20+ equipment types',
+      'Role-based access for customers, suppliers and administrators',
+    ],
+    stack:{
+      frontend:['React', 'Vite', 'React Router', 'Tailwind CSS', 'Radix UI', 'Recharts', 'Lucide icons'],
+      backend:djangoBackend,
+      database:djangoDatabase,
+      hosting:['Google Cloud Run', 'Google Tag Manager'],
+    },
+    dataModels:['Equipment', 'Equipment prices', 'Equipment availability', 'Equipment images', 'Equipment locations', 'Categories', 'Hire intervals', 'Locations', 'Organisations', 'Users & roles'],
   },
   {
+    slug:'wavehire',
     name:'WaveHire',
     category:'BROADCAST / EQUIPMENT RENTAL',
     overview:'A London rental site for professional wireless broadcast gear: wireless video, camera control and IP data systems for TV, live sports and film crews. Visitors browse the equipment catalogue, build an enquiry basket and read production insights.',
     url:'https://wavehire.tv/',
     screenshot:'/images/work/wavehire.jpg',
+    mobileShot:'/images/work/wavehire-mobile.jpg',
+    gallery:[
+      { src:'/images/work/wavehire-2.jpg', alt:'WaveHire FLEX and VITA product ranges with daily hire rates' },
+      { src:'/images/work/wavehire-3.jpg', alt:'WaveHire wireless broadcast benefits section' },
+      { src:'/images/work/wavehire-4.jpg', alt:'WaveHire equipment catalogue with search and category filters' },
+    ],
     tags:['Equipment catalogue', 'Enquiry basket', 'Blog & insights', 'Light / dark mode'],
+    highlights:[
+      'Equipment catalogue with search, category filters and live availability',
+      'Enquiry basket that turns selected kit into a tracked hire request',
+      'Product pages with daily rates, specifications, kit contents and video',
+      'Enquiry status workflow with full history for the rental desk',
+      'Insights blog, partner showcase and light / dark theme',
+    ],
+    stack:{
+      frontend:['React', 'Vite', 'React Router', 'Lucide icons'],
+      backend:djangoBackend,
+      database:djangoDatabase,
+      hosting:['Google Cloud Run (europe-west1)', 'Google Analytics 4', 'Google Tag Manager'],
+    },
+    dataModels:['Products', 'Product prices', 'Product specifications', 'Product images', 'Product videos', 'Kit items', 'Categories', 'Hire intervals', 'Enquiries', 'Enquiry items', 'Enquiry status history', 'Partners', 'Users & roles'],
   },
   {
+    slug:'wavetek',
     name:'Wavetek TV',
     category:'BROADCAST / E-COMMERCE',
     overview:'An e-commerce storefront for Wavetek\'s live-production video, control and connectivity products. It pairs a product catalogue and cart with time-limited offers, countdown sales, product video and support resources.',
     url:'https://wavetek-frontend-7homzqrazq-ew.a.run.app/',
     screenshot:'/images/work/wavetek.jpg',
-    tags:['E-commerce', 'Product catalogue', 'Promotions & countdowns', 'Google Cloud Run'],
+    mobileShot:'/images/work/wavetek-mobile.jpg',
+    gallery:[
+      { src:'/images/work/wavetek-4.jpg', alt:'Wavetek product catalogue with search, category and sort filters' },
+      { src:'/images/work/wavetek-2.jpg', alt:'Wavetek shop direct benefits with free shipping and returns' },
+      { src:'/images/work/wavetek-3.jpg', alt:'Wavetek trusted partners and site footer' },
+    ],
+    tags:['E-commerce', 'Product catalogue', 'Promotions & countdowns', 'Stripe payments'],
+    highlights:[
+      'Product catalogue with categories, series, comparison and search',
+      'Cart, Stripe checkout, payment results and order tracking links',
+      'Time-limited offers with countdown timers and promotional pop-ups',
+      'Admin panel for products, orders, quotes, demos, partners and content',
+      'Shipments, enquiries and daily sales statistics for the team',
+    ],
+    stack:{
+      frontend:['React', 'Vite', 'Redux Toolkit', 'React Router', 'Tailwind CSS', 'Recharts'],
+      backend:[...djangoBackend, 'Stripe payments'],
+      database:[...djangoDatabase, 'Google Cloud Storage (media)'],
+      hosting:['Google Cloud Run (europe-west1)'],
+    },
+    dataModels:['Products', 'Categories', 'Subcategories', 'Product offers', 'Product media', 'Product documents', 'Orders', 'Order items', 'Payments', 'Shipments', 'Enquiries', 'Partners', 'Daily stats', 'Accounts & roles'],
   },
   {
+    slug:'winkbooth',
     name:'WinkBooth',
     category:'EVENTS / BOOKING SITE',
     overview:'A luxury photo booth hire brand for weddings, birthdays, corporate events and brand activations across the UK. The site showcases packages and a gallery, with availability checks, custom requests and WhatsApp enquiries.',
     url:'https://winkbooth.co.uk/',
     screenshot:'/images/work/winkbooth.jpg',
+    mobileShot:'/images/work/winkbooth-mobile.jpg',
+    gallery:[
+      { src:'/images/work/winkbooth-2.jpg', alt:'WinkBooth 360 booth introduction and collection heading' },
+      { src:'/images/work/winkbooth-3.jpg', alt:'WinkBooth signature photo booths and 360 booth experience' },
+      { src:'/images/work/winkbooth-4.jpg', alt:'WinkBooth packages page with featured booth packages' },
+    ],
     tags:['Brand website', 'Packages & gallery', 'Enquiry forms', 'WhatsApp chat'],
+    highlights:[
+      'Package catalogue with pricing, add-on items and image galleries',
+      'Enquiry and custom request forms that feed a quoting workflow',
+      'Quotes and custom offers built from package items in the admin',
+      'Editable page content, pricing cards and testimonials',
+      'GSAP-driven animation and WhatsApp chat for fast enquiries',
+    ],
+    stack:{
+      frontend:['React', 'Vite', 'React Router', 'Tailwind CSS', 'GSAP'],
+      backend:djangoBackend,
+      database:djangoDatabase,
+      hosting:['Google Cloud Run (europe-west1)'],
+    },
+    dataModels:['Packages', 'Package prices', 'Package images', 'Package items', 'Pricing cards', 'Testimonials', 'Page content', 'Enquiries', 'Custom offers', 'Quotes', 'Quote items', 'Users & roles'],
   },
 ]
 
