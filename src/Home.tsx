@@ -3,16 +3,17 @@ import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import {
-  ArrowRight, Bot, BrainCircuit, ChartColumn, ChevronLeft, ChevronRight, CircleCheck,
-  CloudCog, Code2, Database, Globe, Layers3, LayoutDashboard, MessageCircle, MonitorSmartphone, Palette, PenTool,
-  Play, ShieldCheck, Smartphone, Sparkles, TrendingUp, Workflow, Zap
+  ArrowRight, Bot, BrainCircuit, ChevronLeft, ChevronRight, CircleCheck,
+  CloudCog, Code2, Database, Layers3, LayoutDashboard, MonitorSmartphone, Palette, PenTool,
+  ShieldCheck, Smartphone, Sparkles, TrendingUp, Workflow
 } from 'lucide-react'
 import { FaAws, FaFacebookF, FaLinkedin, FaLinkedinIn, FaYoutube } from 'react-icons/fa6'
 import { TbBrandOpenai } from 'react-icons/tb'
-import { SiDjango, SiFigma, SiFlask, SiFlutter, SiGoogle, SiGoogleads, SiGooglecloud, SiGoogletagmanager, SiLooker, SiNotion, SiPandas, SiPostgresql, SiPostman, SiPython, SiReact, SiScrapy, SiSelenium, SiShopify, SiStripe, SiTensorflow, SiWordpress, SiZapier } from 'react-icons/si'
+import { SiDjango, SiFigma, SiFlask, SiFlutter, SiGoogle, SiGoogleads, SiGooglecloud, SiGoogletagmanager, SiLooker, SiPandas, SiPostgresql, SiPostman, SiPython, SiReact, SiScrapy, SiSelenium, SiStripe, SiTensorflow, SiWordpress, SiZapier } from 'react-icons/si'
 import './styles.css'
 import SiteNav from './SiteNav'
-import { serviceImages } from './data/content'
+import officeHero from './assets/upforge-office-hero.png'
+import { ServiceImageLoop } from './components/ServiceImageLoop'
 import { AnimatedGroup } from './components/motion-primitives/AnimatedGroup'
 import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
 import { BorderTrail } from './components/motion-primitives/BorderTrail'
@@ -24,7 +25,6 @@ import { Spotlight } from './components/motion-primitives/Spotlight'
 import { TextEffect } from './components/motion-primitives/TextEffect'
 import { TextLoop } from './components/motion-primitives/TextLoop'
 import { TextShimmer } from './components/motion-primitives/TextShimmer'
-import { Tilt } from './components/motion-primitives/Tilt'
 
 const services = [
   { title: 'Solution Architecture', text: 'Future-ready technical foundations that scale cleanly with your business.', icon: Layers3, tag: 'TECH STRATEGY', slug: 'solution-architecture' },
@@ -96,77 +96,6 @@ const featureCards = [
   { title:'Data & Dashboards', text:'Decisions in one view', Icon:LayoutDashboard, slug:'analytics-dashboards' },
 ]
 
-const stackLogos = [
-  { name:'React', Icon:SiReact },
-  { name:'Python', Icon:SiPython },
-  { name:'AWS', Icon:FaAws },
-  { name:'Stripe', Icon:SiStripe },
-  { name:'Shopify', Icon:SiShopify },
-  { name:'Notion', Icon:SiNotion },
-  { name:'Zapier', Icon:SiZapier },
-  { name:'WordPress', Icon:SiWordpress },
-]
-
-const chartBars = [26, 38, 32, 52, 46, 68, 84]
-
-function LaptopMockup() {
-  return (
-    <Tilt className="biz-laptop" rotationFactor={5}>
-      <div className="biz-laptop-lid">
-        <div className="biz-screen">
-          <div className="biz-screen-nav">
-            <span className="biz-screen-brand"><b>Up</b>Forge</span>
-            <span className="biz-screen-links"><i className="is-active">Home</i><i>About</i><i>Services</i><i>Projects</i><i>Blog</i></span>
-            <span className="biz-screen-pill">Contact Us</span>
-          </div>
-          <div className="biz-screen-body">
-            <div className="biz-screen-copy">
-              <h3>Grow Your<br />Business Online</h3>
-              <p>We deliver innovative digital solutions</p>
-              <div className="biz-screen-actions">
-                <span className="biz-screen-btn">Get Started</span>
-                <span className="biz-screen-play"><i><Play /></i> Watch Video</span>
-              </div>
-            </div>
-            <div className="biz-chart-card">
-              <strong>+<AnimatedNumber value={68} />% <small>Growth</small></strong>
-              <div className="biz-chart">
-                <svg viewBox="0 0 200 90" preserveAspectRatio="none" aria-hidden="true">
-                  <motion.polyline
-                    points="4,78 34,64 62,70 92,46 120,52 150,30 196,8"
-                    initial={{ pathLength:0 }}
-                    whileInView={{ pathLength:1 }}
-                    viewport={{ once:true }}
-                    transition={{ duration:1.6, ease:'easeInOut', delay:.4 }}
-                  />
-                </svg>
-                {chartBars.map((height, index) => (
-                  <motion.span
-                    key={index}
-                    style={{ height:`${height}%` }}
-                    initial={{ scaleY:0 }}
-                    whileInView={{ scaleY:1 }}
-                    viewport={{ once:true }}
-                    transition={{ duration:.8, delay:.2 + index * .08, ease:[0.16, 1, 0.3, 1] }}
-                  />
-                ))}
-              </div>
-              <div className="biz-chart-icons"><i><ChartColumn /></i><i><MessageCircle /></i><i><Zap /></i><i><Globe /></i></div>
-            </div>
-          </div>
-          <div className="biz-screen-trust">
-            <span>Built with<br />modern stacks</span>
-            <InfiniteSlider className="biz-screen-logos" gap={28} speed={28} speedOnHover={10}>
-              {stackLogos.map(({ name, Icon }) => <span key={name}><Icon /> {name}</span>)}
-            </InfiniteSlider>
-          </div>
-        </div>
-      </div>
-      <div className="biz-laptop-base"><span /></div>
-    </Tilt>
-  )
-}
-
 function CursorGlow() {
   useEffect(() => {
     const glow = document.querySelector<HTMLElement>('.cursor-glow')
@@ -206,9 +135,9 @@ export default function Home() {
       <SiteNav />
 
       <section className="biz-hero" id="home">
-        <Spotlight className="biz-hero-spotlight" size={560} />
-        <div className="biz-hero-bg" aria-hidden="true"><span className="biz-beam biz-beam-one" /><span className="biz-beam biz-beam-two" /><span className="biz-dots" /></div>
-
+        <div className="biz-office-hero">
+          <img className="biz-office-image" src={officeHero} alt="UpForge office with a modern workstation and blue brand signage" fetchPriority="high" width={1672} height={941} />
+          <div className="biz-office-copy">
         <div className="biz-kicker"><span className="biz-kicker-line" /><TextShimmer duration={2.8}>Professional</TextShimmer><span className="biz-kicker-line" /></div>
         <h1 className="biz-title">
           <motion.span
@@ -238,11 +167,8 @@ export default function Home() {
           </Magnetic>
           <button className="biz-btn biz-btn-ghost" type="button" onClick={() => scrollTo('services')}>Explore services</button>
         </div>
-
-        <InView className="biz-device" delay={0.1}>
-          <span className="biz-device-glow" aria-hidden="true" />
-          <LaptopMockup />
-        </InView>
+          </div>
+        </div>
 
         <AnimatedGroup className="biz-features" itemClassName="biz-feature-motion">
           {featureCards.map(({ title, text, Icon, slug, featured }) => (
@@ -301,22 +227,18 @@ export default function Home() {
           <button className="services-carousel-control services-carousel-prev" type="button" onClick={() => moveServices(-1)} aria-label="Previous services"><ChevronLeft /></button>
           <AnimatedGroup className="services-carousel-track" itemClassName="service-card-motion" containerRef={servicesTrackRef}>
           {services.map((s, i) => {
-            const Icon = s.icon
             return (
-              <Link className={`service-card service-card-${i % 5}`} to={`/services/${s.slug}`} key={s.title}>
+              <article className={`service-card service-card-${i % 5}`} key={s.title}>
                 <Spotlight size={280} />
                 <span className="service-card-number">(&nbsp; {String(i + 1).padStart(3, '0')} &nbsp;)</span>
-                <span className="service-card-icon">
-                  {serviceImages[s.slug] && <img className="service-card-thumb" src={serviceImages[s.slug].src} alt="" loading="lazy" />}
-                  <Icon />
-                </span>
+                <div className="home-service-gallery"><ServiceImageLoop slug={s.slug} title={s.title} /></div>
                 <span className="service-card-copy">
                   <span>{s.tag}</span>
-                  <h3>{s.title}</h3>
+                  <h3><Link to={`/services/${s.slug}`}>{s.title}</Link></h3>
                   <p>{s.text}</p>
                 </span>
-                <ArrowRight className="service-card-arrow" />
-              </Link>
+                <Link className="home-service-link" to={`/services/${s.slug}`} aria-label={`View ${s.title}`}>View service <ArrowRight /></Link>
+              </article>
             )
           })}
           </AnimatedGroup>
