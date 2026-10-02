@@ -21,7 +21,7 @@ import workHero from './assets/work-hero.webp'
 import aboutHero from './assets/about-hero.webp'
 import SiteNav from './SiteNav'
 import { ServiceImageLoop, BrandMark, brandsForTags, serviceTools, type BrandTool } from './components/ServiceImageLoop'
-import { projects, serviceImages, serviceHeroImages } from './data/content'
+import { projects, workProjects, serviceImages, serviceHeroImages } from './data/content'
 import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
 import { BorderTrail } from './components/motion-primitives/BorderTrail'
 import { GlowEffect } from './components/motion-primitives/GlowEffect'
@@ -356,12 +356,14 @@ export function WorkPage() {
   return (
     <PageShell index="02" label="SELECTED WORK" heroImage={workHero} title={<>Products made to<br /><em>move the needle</em></>} intro="A selection of digital systems built around hard problems, real users, and measurable outcomes.">
       <section className="project-grid">
-        {projects.map(({ slug, name, category, overview, url, screenshot, tags, year }, index) => {
+        {workProjects.map(({ slug, name, category, overview, url, screenshot, tags, year }, index) => {
           const host = url ? url.replace(/^https?:\/\//, '').replace(/\/$/, '') : ''
+          const destination = slug ? `/work/${slug}` : url
+          const externalProps = slug ? {} : { target:'_blank', rel:'noreferrer' }
           return (
             <motion.article className="project-card" key={name} {...reveal(index % 2)}>
               <Spotlight size={420} />
-              <Link to={`/work/${slug}`} aria-label={`${name} case study`}>
+              <Link to={destination} {...externalProps} aria-label={slug ? `${name} case study` : `Visit ${name} website`}>
                 <Tilt className="project-shot" rotationFactor={4}>
                   <div className="project-shot-bar" aria-hidden="true"><i /><i /><i /><span>{host || name.toLowerCase()}</span></div>
                   <img src={screenshot} alt={`${name} project screenshot`} loading="lazy" />
@@ -369,11 +371,11 @@ export function WorkPage() {
               </Link>
               <div className="project-body">
                 <div className="project-meta"><small>{category}</small>{year && <small>{year}</small>}</div>
-                <h2><Link to={`/work/${slug}`}>{name}</Link></h2>
+                <h2><Link to={destination} {...externalProps}>{name}</Link></h2>
                 <p>{overview}</p>
                 {tags && tags.length > 0 && <ul>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>}
                 <div className="project-actions">
-                  <Link className="project-link project-card-link" to={`/work/${slug}`}>View case study <ArrowRight /></Link>
+                  {slug && <Link className="project-link project-card-link" to={`/work/${slug}`}>View case study <ArrowRight /></Link>}
                   {url && <a className="project-link project-link-muted" href={url} target="_blank" rel="noreferrer">Visit website <ArrowUpRight /></a>}
                 </div>
               </div>

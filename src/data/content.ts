@@ -207,6 +207,29 @@ export const projects: Project[] = [
   },
 ]
 
+/** Additional live websites displayed on the Work page. */
+type WorkProject = Pick<Project, 'name' | 'category' | 'overview' | 'url' | 'screenshot' | 'tags' | 'year'> & { slug?: string }
+
+export const workProjects: WorkProject[] = [
+  ...projects,
+  {
+    name:'BisViews',
+    category:'BUSINESS / REVIEW PLATFORM',
+    overview:'A business discovery and review platform where visitors search for companies, browse categories and share their experiences, with dedicated registration for businesses.',
+    url:'https://bisviews.com/',
+    screenshot:'/images/work/bisviews.png',
+    tags:['Business search', 'Categories', 'Customer reviews', 'Business registration'],
+  },
+  {
+    name:'CVS2020',
+    category:'RETAIL / E-COMMERCE',
+    overview:'An online store for commercial catering equipment and professional cleaning supplies, with product categories covering ice cream machines, slush machines and pressure washers.',
+    url:'https://cvs2020.com/',
+    screenshot:'/images/work/cvs2020.png',
+    tags:['E-commerce', 'Product catalogue', 'WordPress', 'WooCommerce'],
+  },
+]
+
 /** Supplied photos for service detail heroes. */
 export const serviceHeroImages: Record<string, ServiceImage> = {
   "solution-architecture": { src:"/images/services/heroes/solution-architecture.jpg", alt:"Team planning a technology architecture with connected AI and cloud systems" },
