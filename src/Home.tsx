@@ -13,6 +13,7 @@ import { SiDjango, SiFigma, SiFlask, SiFlutter, SiGoogle, SiGoogleads, SiGooglec
 import './styles.css'
 import SiteNav from './SiteNav'
 import officeHero from './assets/upforge-office-hero.png'
+import googleSearchShot from './assets/upforge-google-search.svg'
 import { ServiceImageLoop } from './components/ServiceImageLoop'
 import { projects } from './data/content'
 import { AnimatedGroup } from './components/motion-primitives/AnimatedGroup'
@@ -232,7 +233,12 @@ export default function Home() {
 
       <section className="biz-hero" id="home">
         <div className="biz-office-hero">
-          <img className="biz-office-image" src={officeHero} alt="UpForge office with a modern workstation and blue brand signage" fetchPriority="high" width={1672} height={941} />
+          <div className="biz-office-media">
+            <div className="biz-office-stage">
+              <img className="biz-office-image" src={officeHero} alt="UpForge office with a modern workstation and blue brand signage" fetchPriority="high" width={1672} height={941} />
+              <div className="biz-office-screen"><img src={googleSearchShot} alt="Google-style search results for Upforge on the office monitor" /></div>
+            </div>
+          </div>
           <div className="biz-office-copy">
         <div className="biz-kicker"><span className="biz-kicker-line" /><TextShimmer duration={2.8}>Professional</TextShimmer><span className="biz-kicker-line" /></div>
         <h1 className="biz-title">

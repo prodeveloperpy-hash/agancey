@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590">
+  <rect width="1000" height="590" fill="#fff"/>
+  <!-- Perspective follows the monitor's upper and lower edges. -->
+  <g transform="matrix(1,-.068,0,.83,0,68)" font-family="Arial, Helvetica, sans-serif">
+    <rect width="1000" height="32" fill="#edf0f4"/>
+    <g fill="#89919d"><circle cx="26" cy="16" r="4"/><circle cx="41" cy="16" r="4"/><circle cx="56" cy="16" r="4"/></g>
+    <rect x="92" y="6" width="786" height="21" rx="10" fill="#fff"/>
+    <text x="116" y="21" font-size="12" fill="#5f6368">google.com/search?q=upforge</text>
+    <text x="29" y="94" font-size="38" letter-spacing="-2" font-weight="500"><tspan fill="#4285f4">G</tspan><tspan fill="#ea4335">o</tspan><tspan fill="#fbbc05">o</tspan><tspan fill="#4285f4">g</tspan><tspan fill="#34a853">l</tspan><tspan fill="#ea4335">e</tspan></text>
+    <rect x="177" y="53" width="657" height="57" rx="28" fill="#f1f3f4"/>
+    <text x="204" y="89" font-size="23" fill="#202124">upforge</text>
+    <g stroke="#4285f4" stroke-width="3" fill="none"><circle cx="799" cy="79" r="9"/><path d="m806 86 7 7"/></g>
+    <circle cx="942" cy="80" r="17" fill="#174ea6"/><text x="934" y="87" font-size="20" fill="#fff">U</text>
+    <g font-size="17" fill="#5f6368"><text x="182" y="149" fill="#1a73e8">All</text><text x="232" y="149">Images</text><text x="319" y="149">Videos</text><text x="403" y="149">News</text><text x="480" y="149">Maps</text><text x="559" y="149">More</text><text x="782" y="149">Tools</text></g>
+    <path d="M0 165H1000" stroke="#ebedef"/><path d="M179 164H207" stroke="#1a73e8" stroke-width="3"/>
+    <circle cx="195" cy="208" r="17" fill="#e8f0fe"/><text x="186" y="215" font-size="21" font-weight="bold" fill="#174ea6">U</text>
+    <text x="224" y="204" font-size="18" fill="#202124">UpForge</text>
+    <text x="224" y="224" font-size="13" fill="#4d5156">https://upforge.us</text>
+    <text x="178" y="261" font-size="27" fill="#1a0dab">UpForge — Software, AI &amp; Automation</text>
+    <g font-size="18" fill="#4d5156"><text x="178" y="290">Modern digital products for startups and companies.</text><text x="178" y="316">Web development, AI engineering, automation and digital growth.</text></g>
+    <g font-size="23" fill="#1a0dab"><text x="197" y="367">Our Services</text><text x="529" y="367">Recent Projects</text><text x="197" y="451">About UpForge</text><text x="529" y="451">Contact Us</text></g>
+    <g font-size="16" fill="#4d5156"><text x="197" y="395">From architecture to automation</text><text x="529" y="395">Explore our latest work</text><text x="197" y="479">Meet the team behind the work</text><text x="529" y="479">Let's build what's next</text></g>
+    <path d="M178 513H833" stroke="#ebedef"/>
+    <text x="178" y="553" font-size="25" fill="#202124">People also search for</text>
+    <g font-size="17" fill="#3c4043"><text x="197" y="588">Upforge software development</text><text x="529" y="588">Upforge AI &amp; automation</text></g>
+  </g>
+</svg>
