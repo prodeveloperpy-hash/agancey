@@ -12,8 +12,7 @@ import { TbBrandOpenai } from 'react-icons/tb'
 import { SiDjango, SiFigma, SiFlask, SiFlutter, SiGoogle, SiGoogleads, SiGooglecloud, SiGoogletagmanager, SiLooker, SiPandas, SiPostgresql, SiPostman, SiPython, SiReact, SiScrapy, SiSelenium, SiStripe, SiTensorflow, SiWordpress, SiZapier } from 'react-icons/si'
 import './styles.css'
 import SiteNav from './SiteNav'
-import officeHero from './assets/upforge-office-hero.png'
-import googleSearchShot from './assets/upforge-google-search.svg'
+import officeHero from './assets/upforge-home-hero.png'
 import { ServiceImageLoop } from './components/ServiceImageLoop'
 import { projects } from './data/content'
 import { AnimatedGroup } from './components/motion-primitives/AnimatedGroup'
@@ -236,7 +235,6 @@ export default function Home() {
           <div className="biz-office-media">
             <div className="biz-office-stage">
               <img className="biz-office-image" src={officeHero} alt="UpForge office with a modern workstation and blue brand signage" fetchPriority="high" width={1672} height={941} />
-              <div className="biz-office-screen"><img src={googleSearchShot} alt="Google-style search results for Upforge on the office monitor" /></div>
             </div>
           </div>
           <div className="biz-office-copy">
