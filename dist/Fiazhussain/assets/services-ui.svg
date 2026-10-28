@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+  <title id="title">Services offered by Fiaz Hussain</title>
+  <desc id="desc">Full-stack development, solution architecture and cloud, AI and automation, data engineering and analytics, mobile application development, and ecommerce and CMS services.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset="0.55" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#082f49"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000814" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="760" rx="30" fill="url(#background)"/>
+  <circle cx="1300" cy="20" r="180" fill="#06b6d4" opacity="0.06"/>
+  <circle cx="80" cy="750" r="180" fill="#2563eb" opacity="0.08"/>
+
+  <text x="60" y="68" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34" font-weight="800">Services &amp; Capabilities</text>
+  <text x="60" y="103" fill="#94a3b8" font-family="Arial, sans-serif" font-size="17">From product strategy and architecture to development, automation, data, and deployment.</text>
+  <rect x="60" y="126" width="1280" height="2" fill="#1e293b"/>
+
+  <!-- Card 1 -->
+  <g transform="translate(60 164)" filter="url(#shadow)">
+    <rect width="400" height="245" rx="22" fill="#0f172a" stroke="#1d4ed8" stroke-width="2"/>
+    <rect x="24" y="24" width="58" height="58" rx="16" fill="url(#blue)"/>
+    <path d="M58 41L45 53l13 12M68 41l13 12-13 12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="100" y="49" fill="#60a5fa" font-family="Arial, sans-serif" font-size="13" font-weight="700">01 • BUILD</text>
+    <text x="100" y="76" fill="#f8fafc" font-family="Arial, sans-serif" font-size="22" font-weight="800">Full-Stack Development</text>
+    <text x="24" y="119" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">Responsive web products, SaaS platforms,</text>
+    <text x="24" y="145" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">REST APIs, microservices, and integrations.</text>
+    <g fill="#172554" stroke="#2563eb"><rect x="24" y="176" width="75" height="34" rx="17"/><rect x="107" y="176" width="91" height="34" rx="17"/><rect x="206" y="176" width="87" height="34" rx="17"/><rect x="301" y="176" width="75" height="34" rx="17"/></g>
+    <g fill="#bfdbfe" font-family="Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle"><text x="61" y="198">React</text><text x="152" y="198">TypeScript</text><text x="249" y="198">Python</text><text x="338" y="198">Node.js</text></g>
+  </g>
+
+  <!-- Card 2 -->
+  <g transform="translate(500 164)" filter="url(#shadow)">
+    <rect width="400" height="245" rx="22" fill="#0f172a" stroke="#0e7490" stroke-width="2"/>
+    <rect x="24" y="24" width="58" height="58" rx="16" fill="url(#blue)"/>
+    <path d="M39 57h29M45 48h29M51 39h29M39 66h29" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+    <text x="100" y="49" fill="#22d3ee" font-family="Arial, sans-serif" font-size="13" font-weight="700">02 • ARCHITECT</text>
+    <text x="100" y="76" fill="#f8fafc" font-family="Arial, sans-serif" font-size="22" font-weight="800">Architecture &amp; Cloud</text>
+    <text x="24" y="119" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">Secure system design, database architecture,</text>
+    <text x="24" y="145" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">authentication, CI/CD, and scalable hosting.</text>
+    <g fill="#083344" stroke="#0891b2"><rect x="24" y="176" width="68" height="34" rx="17"/><rect x="100" y="176" width="65" height="34" rx="17"/><rect x="173" y="176" width="74" height="34" rx="17"/><rect x="255" y="176" width="121" height="34" rx="17"/></g>
+    <g fill="#a5f3fc" font-family="Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle"><text x="58" y="198">AWS</text><text x="132" y="198">GCP</text><text x="210" y="198">Docker</text><text x="315" y="198">DigitalOcean</text></g>
+  </g>
+
+  <!-- Card 3 -->
+  <g transform="translate(940 164)" filter="url(#shadow)">
+    <rect width="400" height="245" rx="22" fill="#0f172a" stroke="#7c3aed" stroke-width="2"/>
+    <rect x="24" y="24" width="58" height="58" rx="16" fill="url(#purple)"/>
+    <circle cx="53" cy="53" r="13" fill="none" stroke="#fff" stroke-width="3"/><path d="M53 33v7M53 66v7M33 53h7M66 53h7" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    <text x="100" y="49" fill="#a78bfa" font-family="Arial, sans-serif" font-size="13" font-weight="700">03 • AUTOMATE</text>
+    <text x="100" y="76" fill="#f8fafc" font-family="Arial, sans-serif" font-size="22" font-weight="800">AI &amp; Automation</text>
+    <text x="24" y="119" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">AI agents, RAG, chatbots, lead workflows,</text>
+    <text x="24" y="145" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">CRM automation, and cross-system sync.</text>
+    <g fill="#2e1065" stroke="#7c3aed"><rect x="24" y="176" width="79" height="34" rx="17"/><rect x="111" y="176" width="65" height="34" rx="17"/><rect x="184" y="176" width="58" height="34" rx="17"/><rect x="250" y="176" width="126" height="34" rx="17"/></g>
+    <g fill="#ddd6fe" font-family="Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle"><text x="63" y="198">OpenAI</text><text x="143" y="198">Claude</text><text x="213" y="198">n8n</text><text x="313" y="198">GHL / Zapier</text></g>
+  </g>
+
+  <!-- Card 4 -->
+  <g transform="translate(60 449)" filter="url(#shadow)">
+    <rect width="400" height="245" rx="22" fill="#0f172a" stroke="#0284c7" stroke-width="2"/>
+    <rect x="24" y="24" width="58" height="58" rx="16" fill="url(#blue)"/>
+    <path d="M40 68V55M53 68V43M66 68V50" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <text x="100" y="49" fill="#38bdf8" font-family="Arial, sans-serif" font-size="13" font-weight="700">04 • UNDERSTAND</text>
+    <text x="100" y="76" fill="#f8fafc" font-family="Arial, sans-serif" font-size="22" font-weight="800">Data Engineering &amp; AI</text>
+    <text x="24" y="119" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">ETL/ELT, analytics, warehousing, search,</text>
+    <text x="24" y="145" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">dashboards, ranking, and data science.</text>
+    <g fill="#0c4a6e" stroke="#0284c7"><rect x="24" y="176" width="82" height="34" rx="17"/><rect x="114" y="176" width="91" height="34" rx="17"/><rect x="213" y="176" width="107" height="34" rx="17"/><rect x="328" y="176" width="48" height="34" rx="17"/></g>
+    <g fill="#bae6fd" font-family="Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle"><text x="65" y="198">BigQuery</text><text x="159" y="198">Elastic</text><text x="266" y="198">Power BI</text><text x="352" y="198">SQL</text></g>
+  </g>
+
+  <!-- Card 5 -->
+  <g transform="translate(500 449)" filter="url(#shadow)">
+    <rect width="400" height="245" rx="22" fill="#0f172a" stroke="#06b6d4" stroke-width="2"/>
+    <rect x="24" y="24" width="58" height="58" rx="16" fill="url(#blue)"/>
+    <rect x="42" y="34" width="23" height="39" rx="4" fill="none" stroke="#fff" stroke-width="3"/><circle cx="53.5" cy="66" r="2" fill="#fff"/>
+    <text x="100" y="49" fill="#67e8f9" font-family="Arial, sans-serif" font-size="13" font-weight="700">05 • MOBILIZE</text>
+    <text x="100" y="76" fill="#f8fafc" font-family="Arial, sans-serif" font-size="22" font-weight="800">Mobile Applications</text>
+    <text x="24" y="119" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">Cross-platform apps, APIs, authentication,</text>
+    <text x="24" y="145" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">notifications, payments, maps, and releases.</text>
+    <g fill="#083344" stroke="#06b6d4"><rect x="24" y="176" width="72" height="34" rx="17"/><rect x="104" y="176" width="105" height="34" rx="17"/><rect x="217" y="176" width="69" height="34" rx="17"/><rect x="294" y="176" width="82" height="34" rx="17"/></g>
+    <g fill="#cffafe" font-family="Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle"><text x="60" y="198">Flutter</text><text x="156" y="198">React Native</text><text x="251" y="198">Kotlin</text><text x="335" y="198">Firebase</text></g>
+  </g>
+
+  <!-- Card 6 -->
+  <g transform="translate(940 449)" filter="url(#shadow)">
+    <rect width="400" height="245" rx="22" fill="#0f172a" stroke="#2563eb" stroke-width="2"/>
+    <rect x="24" y="24" width="58" height="58" rx="16" fill="url(#blue)"/>
+    <path d="M38 45h31l-3 24H42zM46 45l3-8h10l3 8" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+    <text x="100" y="49" fill="#60a5fa" font-family="Arial, sans-serif" font-size="13" font-weight="700">06 • SELL</text>
+    <text x="100" y="76" fill="#f8fafc" font-family="Arial, sans-serif" font-size="22" font-weight="800">E-Commerce &amp; CMS</text>
+    <text x="24" y="119" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">Stores, catalogues, payments, custom themes,</text>
+    <text x="24" y="145" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="16">performance, SEO, and ongoing maintenance.</text>
+    <g fill="#172554" stroke="#2563eb"><rect x="24" y="176" width="86" height="34" rx="17"/><rect x="118" y="176" width="98" height="34" rx="17"/><rect x="224" y="176" width="112" height="34" rx="17"/><rect x="344" y="176" width="32" height="34" rx="16"/></g>
+    <g fill="#bfdbfe" font-family="Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle"><text x="67" y="198">Shopify</text><text x="167" y="198">WordPress</text><text x="280" y="198">WooCommerce</text><text x="360" y="198">+</text></g>
+  </g>
+</svg>

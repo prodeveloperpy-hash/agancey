@@ -20,6 +20,7 @@ import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
 import { BorderTrail } from './components/motion-primitives/BorderTrail'
 import { GlowEffect } from './components/motion-primitives/GlowEffect'
 import { InfiniteSlider } from './components/motion-primitives/InfiniteSlider'
+import { BizTagline } from './components/BizTagline'
 import { InView } from './components/motion-primitives/InView'
 import { Magnetic } from './components/motion-primitives/Magnetic'
 import { Spotlight } from './components/motion-primitives/Spotlight'
@@ -145,8 +146,8 @@ function ProjectShowcase() {
                 <div className="showcase-detail">
                   <p>{item.overview}</p>
                   <dl>
-                    <div><dt>Frontend</dt><dd>{item.stack.frontend.slice(0, 3).join(' · ')}</dd></div>
-                    <div><dt>Backend</dt><dd>{item.stack.backend.slice(1, 3).join(' · ')}</dd></div>
+                    <div><dt>Frontend</dt><dd>{item.stack.frontend.slice(0, 3).join(', ')}</dd></div>
+                    <div><dt>Backend</dt><dd>{item.stack.backend.slice(1, 3).join(', ')}</dd></div>
                   </dl>
                   <Link className="showcase-cta" to={`/work/${item.slug}`}>View case study <ArrowRight /></Link>
                 </div>
@@ -295,7 +296,7 @@ export default function Home() {
           </Magnetic>
         </InView>
 
-        <div className="biz-tagline"><span />Modern<i />Fast<i />Secure<i />Scalable<span /></div>
+        <BizTagline />
 
         <InfiniteSlider className="biz-ticker" gap={42} speed={50} speedOnHover={18}>
           {['Solution Architecture', 'Full-Stack Development', 'AI Engineering', 'SaaS Applications', 'No-Code Automation', 'Analytics Dashboards', 'Mobile Apps', 'SEO Services', 'Google & LinkedIn Ads', 'WordPress', 'UI/UX Design'].map((item) => (

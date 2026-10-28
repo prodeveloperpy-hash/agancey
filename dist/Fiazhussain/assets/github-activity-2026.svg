@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Fiaz Hussain GitHub Activity 2026</title>
+  <desc id="desc">525 contributions in 2026, 10 public repositories, and 10 repositories updated in 2026.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset="0.55" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#082f49"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="1200" height="430" rx="26" fill="url(#bg)"/>
+  <circle cx="1090" cy="45" r="120" fill="#06b6d4" opacity="0.08" filter="url(#glow)"/>
+  <circle cx="75" cy="390" r="130" fill="#2563eb" opacity="0.10" filter="url(#glow)"/>
+  <rect x="46" y="42" width="8" height="58" rx="4" fill="url(#accent)"/>
+  <text x="78" y="74" fill="#f8fafc" font-family="Arial, sans-serif" font-size="30" font-weight="700">GitHub Activity</text>
+  <text x="78" y="103" fill="#67e8f9" font-family="Arial, sans-serif" font-size="18" font-weight="600">2026 PUBLIC CONTRIBUTION OVERVIEW</text>
+  <line x1="48" y1="132" x2="1152" y2="132" stroke="#334155"/>
+
+  <g transform="translate(48 166)">
+    <rect width="336" height="204" rx="20" fill="#0f172a" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="168" y="78" text-anchor="middle" fill="#38bdf8" font-family="Arial, sans-serif" font-size="58" font-weight="800">525</text>
+    <text x="168" y="120" text-anchor="middle" fill="#f8fafc" font-family="Arial, sans-serif" font-size="21" font-weight="700">Contributions in 2026</text>
+    <text x="168" y="153" text-anchor="middle" fill="#94a3b8" font-family="Arial, sans-serif" font-size="15">Verified from the public GitHub calendar</text>
+  </g>
+
+  <g transform="translate(432 166)">
+    <rect width="336" height="204" rx="20" fill="#0f172a" stroke="#0e7490" stroke-width="2"/>
+    <text x="168" y="78" text-anchor="middle" fill="#22d3ee" font-family="Arial, sans-serif" font-size="58" font-weight="800">10</text>
+    <text x="168" y="120" text-anchor="middle" fill="#f8fafc" font-family="Arial, sans-serif" font-size="21" font-weight="700">Public Repositories</text>
+    <text x="168" y="153" text-anchor="middle" fill="#94a3b8" font-family="Arial, sans-serif" font-size="15">Projects, products, and experiments</text>
+  </g>
+
+  <g transform="translate(816 166)">
+    <rect width="336" height="204" rx="20" fill="#0f172a" stroke="#0891b2" stroke-width="2"/>
+    <text x="168" y="78" text-anchor="middle" fill="#67e8f9" font-family="Arial, sans-serif" font-size="58" font-weight="800">10</text>
+    <text x="168" y="120" text-anchor="middle" fill="#f8fafc" font-family="Arial, sans-serif" font-size="21" font-weight="700">Repositories Updated</text>
+    <text x="168" y="153" text-anchor="middle" fill="#94a3b8" font-family="Arial, sans-serif" font-size="15">Active public work during 2026</text>
+  </g>
+
+  <text x="600" y="408" text-anchor="middle" fill="#64748b" font-family="Arial, sans-serif" font-size="14">Public GitHub data • Updated September 2026</text>
+</svg>

@@ -10,6 +10,18 @@ button { color:inherit; }
 nav { position:absolute; top:0; z-index:20; width:100%; height:90px; padding:0 4vw; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
 .brand { border:0; padding:0; background:none; display:inline-flex; align-items:center; gap:8px; font-weight:900; font-size:23px; line-height:1; letter-spacing:-1.5px; cursor:pointer; }
 .brand img { display:block; width:48px; height:48px; object-fit:contain; }
+.brand-wordmark {
+  display:block;
+  height:34px;
+  width:auto;
+}
+.brand-wordmark .upforge-wordmark-forge { fill:#171a20; }
+.upforge-wordmark-forge-on-primary { fill:#e0f2fe!important; }
+html[data-theme="dark"] .brand-wordmark .upforge-wordmark-forge { fill:#f1f5f9; }
+.brand-wordmark-footer { height:30px; }
+.brand-wordmark-orbit { height:52px; width:auto; }
+.system-visual .core .brand-wordmark { height:56px; }
+.services-orbit-core .brand-wordmark { height:46px; max-width:100px; }
 .brand-name { display:inline-block; }
 .footer-brand img { width:58px; height:58px; }
 .brand b { color:#123f86; font-weight:900; }
@@ -998,7 +1010,6 @@ html[data-theme="dark"] {
   --muted:#9cafc6;
   --line:rgba(147,197,253,.16);
 }
-html[data-theme="dark"] img[src="/upforge-logo.png"] { content:url("/upforge-logo-dark.png"); }
 body,.inner-page,nav,.inner-nav,.hero,.intro,.services,.process,.page-hero,
 .detail-grid article,.company-overview,.company-method,.values,
 .service-list article,.work-list article,.theme-toggle {
@@ -1712,8 +1723,9 @@ a.social-link.linkedin:hover { color:#0a66c2!important; }
 .email-float,
 .whatsapp-float {
   position:fixed;
-  z-index:100;
-  right:24px;
+  z-index:9999;
+  left:auto;
+  right:max(24px, env(safe-area-inset-right, 0px));
   width:64px;
   height:64px;
   display:flex;
@@ -1727,9 +1739,9 @@ a.social-link.linkedin:hover { color:#0a66c2!important; }
   text-decoration:none;
   transition:transform .25s ease,box-shadow .25s ease,background .25s ease;
 }
-.whatsapp-float { bottom:24px; }
+.whatsapp-float { bottom:max(24px, env(safe-area-inset-bottom, 0px)); }
 .email-float {
-  bottom:100px;
+  bottom:max(100px, calc(env(safe-area-inset-bottom, 0px) + 76px));
   color:white;
   border-color:white;
   background:#2563eb;
@@ -1775,9 +1787,9 @@ a.social-link.linkedin:hover { color:#0a66c2!important; }
   100% { transform:scale(1.18); opacity:0; }
 }
 @media(max-width:560px) {
-  .email-float,.whatsapp-float { right:16px; width:57px; height:57px; }
-  .whatsapp-float { bottom:16px; }
-  .email-float { bottom:85px; }
+  .email-float,.whatsapp-float { right:max(16px, env(safe-area-inset-right, 0px)); width:57px; height:57px; }
+  .whatsapp-float { bottom:max(16px, env(safe-area-inset-bottom, 0px)); }
+  .email-float { bottom:max(85px, calc(env(safe-area-inset-bottom, 0px) + 69px)); }
   .email-float>svg,.whatsapp-float>svg { width:28px; height:28px; }
   .email-float>span,
   .whatsapp-float>span { display:none; }

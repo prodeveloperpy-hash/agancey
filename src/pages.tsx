@@ -20,6 +20,8 @@ import servicesHero from './assets/services-hero.webp'
 import workHero from './assets/work-hero.webp'
 import aboutHero from './assets/about-hero.webp'
 import SiteNav from './SiteNav'
+import { BizTagline } from './components/BizTagline'
+import UpforgeWordmark from './components/UpforgeWordmark'
 import { ServiceImageLoop, BrandMark, brandsForTags, serviceTools, type BrandTool } from './components/ServiceImageLoop'
 import { projects, workProjects, serviceImages, serviceHeroImages } from './data/content'
 import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
@@ -77,7 +79,7 @@ function PageShell({ index, label, title, intro, heroImage, heroDecor, heroClass
         <Spotlight size={520} />
         <span>READY WHEN YOU ARE</span>
         <h2>Let's make it<br /><em>remarkable</em></h2>
-        <div className="biz-tagline biz-tagline-left"><span />Modern<i />Fast<i />Secure<i />Scalable</div>
+        <BizTagline align="left" />
         <Magnetic className="page-cta-magnetic">
           <div className="biz-glow-wrap">
             <GlowEffect colors={['#ffffff', '#8fbaff', '#1f6bff', '#ffffff']} />
@@ -93,7 +95,7 @@ function PageShell({ index, label, title, intro, heroImage, heroDecor, heroClass
           <span className="social-link youtube disabled" aria-label="UpForge YouTube channel coming soon" title="YouTube channel coming soon"><FaYoutube /></span>
         </div>
         <a className="footer-whatsapp-number" href="https://wa.me/923041769292" target="_blank" rel="noreferrer">WhatsApp: +92 304 1769292</a>
-        <span>© 2026 UPFORGE — TECHNOLOGY AGENCY & SOFTWARE HOUSE</span>
+        <span>© 2026 UPFORGE, TECHNOLOGY AGENCY & SOFTWARE HOUSE</span>
       </footer>
     </main>
   )
@@ -149,14 +151,14 @@ function ServicesOrbit() {
         ))}
       </div>
       <div className="services-orbit-inner" />
-      <div className="services-orbit-core"><img src="/upforge-logo.png" alt="UpForge" /></div>
+      <div className="services-orbit-core"><UpforgeWordmark className="brand-wordmark brand-wordmark-orbit" variant="onPrimary" title="Upforge" /></div>
     </div>
   )
 }
 
 export function ServicesPage() {
   return (
-    <PageShell index="01" label="CAPABILITIES" heroImage={servicesHero} heroDecor={<ServicesOrbit />} heroClassName="services-page-hero" title={<>Expertise that turns<br /><em>ideas into impact</em></>} intro="Strategy, engineering, data, and automation—one senior team from first conversation to long-term scale.">
+    <PageShell index="01" label="CAPABILITIES" heroImage={servicesHero} heroDecor={<ServicesOrbit />} heroClassName="services-page-hero" title={<>Expertise that turns<br /><em>ideas into impact</em></>} intro="Strategy, engineering, data, and automation: one senior team from first conversation to long-term scale">
       <section className="biz-logo-strip" aria-label="Technologies we work with">
         <span>Technologies we work with</span>
         <InfiniteSlider gap={44} speed={36} speedOnHover={12}>
@@ -571,10 +573,10 @@ const companyPillars = [
 ]
 
 const companyMethod = [
-  ['01', 'Understand the goal', 'We begin with your users, operations and business outcome—not a preselected technology.'],
-  ['02', 'Design the right system', 'We define the experience, architecture and delivery plan before expensive development begins.'],
-  ['03', 'Build with visibility', 'You receive regular progress, working releases and clear decisions throughout the engagement.'],
-  ['04', 'Improve after launch', 'We test, document, monitor and evolve the solution as your needs and opportunities grow.'],
+  ['01', 'Understand the goal', 'We begin with your users, operations and business outcome, not a preselected technology'],
+  ['02', 'Design the right system', 'We define the experience, architecture and delivery plan before expensive development begins'],
+  ['03', 'Build with visibility', 'You receive regular progress, working releases and clear decisions throughout the engagement'],
+  ['04', 'Improve after launch', 'We test, document, monitor and evolve the solution as your needs and opportunities grow'],
 ] as const
 
 export function AboutPage() {
@@ -601,7 +603,7 @@ export function AboutPage() {
         <motion.div className="company-overview-head" {...reveal()}>
           <span>WHAT WE DO</span>
           <h2>One team from idea to reliable delivery</h2>
-          <p>We plan, design, engineer and support complete digital solutions—without passing your project between disconnected suppliers.</p>
+          <p>We plan, design, engineer and support complete digital solutions without passing your project between disconnected suppliers</p>
         </motion.div>
         <div className="company-pillars">
           {companyPillars.map(({ title, text, Icon }, index) => (
@@ -640,7 +642,7 @@ export function ContactPage() {
     const budget = String(data.get('budget') || 'Not selected')
     const timeline = String(data.get('timeline') || 'Not selected')
     const message = String(data.get('message') || 'No additional details provided')
-    const subject = `New UpForge project inquiry — ${service} — ${name}`
+    const subject = `New UpForge project inquiry, ${service}, ${name}`
     const body = [
       'Hello UpForge,',
       '',

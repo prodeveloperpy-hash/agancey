@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { ArrowRight, Menu, X } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import ThemeToggle from './ThemeToggle'
+import UpforgeWordmark from './components/UpforgeWordmark'
 import { AnimatedBackground } from './components/motion-primitives/AnimatedBackground'
 import { Magnetic } from './components/motion-primitives/Magnetic'
 import { ScrollProgress } from './components/motion-primitives/ScrollProgress'
@@ -40,9 +41,8 @@ export default function SiteNav() {
     <>
       <ScrollProgress />
       <nav className="site-nav" aria-label="Main navigation">
-        <Link className="brand" to="/" onClick={goHome} aria-label="UpForge home">
-          <img src="/upforge-logo.png" alt="" />
-          <span className="brand-name"><b>Up</b>Forge</span>
+        <Link className="brand" to="/" onClick={goHome} aria-label="Upforge home">
+          <UpforgeWordmark className="brand-wordmark" />
         </Link>
         <div className={`nav-links${menuOpen ? ' open' : ''}`} onMouseLeave={() => setHovered(null)}>
           {navItems.map(({ id, label, to }, index) => {
