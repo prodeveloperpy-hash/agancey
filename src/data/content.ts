@@ -213,6 +213,22 @@ type WorkProject = Pick<Project, 'name' | 'category' | 'overview' | 'url' | 'scr
 export const workProjects: WorkProject[] = [
   ...projects,
   {
+    name:'UpForge',
+    category:'AGENCY / SOFTWARE, AI, AUTOMATION',
+    overview:'Software, AI, automation, and full-stack delivery for modern businesses',
+    url:'https://upforge.us/',
+    screenshot:'/images/work/upforge.png',
+    tags:['Agency', 'Full-stack', 'AI', 'Automation'],
+  },
+  {
+    name:'Tooli-Art',
+    category:'E-COMMERCE / ART SUPPLIES',
+    overview:'Art supplies ecommerce with catalogue browsing and conversion-focused UX',
+    url:'https://tooli-art.com/',
+    screenshot:'/images/work/tooli-art.png',
+    tags:['E-commerce', 'Product catalogue', 'UX', 'Retail'],
+  },
+  {
     name:'BisViews',
     category:'BUSINESS / REVIEW PLATFORM',
     overview:'A business discovery and review platform where visitors search for companies, browse categories and share their experiences, with dedicated registration for businesses',
@@ -236,6 +252,38 @@ export const workProjects: WorkProject[] = [
     screenshot:'/images/work/tvpackages.jpg',
     tags:['IPTV', 'Streaming', 'Device setup', 'WhatsApp support', 'React'],
     year:'2026',
+  },
+  {
+    name:'RAZ Catering Supplies',
+    category:'RETAIL / CATERING SUPPLIES',
+    overview:'UK catering supplies ecommerce with product catalogue and ordering journeys',
+    url:'https://razcateringsupplies.co.uk/',
+    screenshot:'/images/work/raz-catering.jpg',
+    tags:['E-commerce', 'Catering supplies', 'WordPress', 'WooCommerce'],
+  },
+  {
+    name:'RemotePC',
+    category:'SAAS / REMOTE ACCESS',
+    overview:'Remote access product marketing site with plans, features, and signup flows',
+    url:'https://www.remotepc.com/',
+    screenshot:'/images/work/remotepc.jpg',
+    tags:['SaaS', 'Product marketing', 'Remote access', 'Lead generation'],
+  },
+  {
+    name:'Asma & Sidra',
+    category:'FASHION / E-COMMERCE',
+    overview:'Fashion retail storefront with collections and seasonal campaign landing pages',
+    url:'https://www.asmaandsidra.com/',
+    screenshot:'/images/work/asma-sidra.jpg',
+    tags:['Fashion', 'E-commerce', 'Collections', 'WordPress'],
+  },
+  {
+    name:'Cambrex',
+    category:'PHARMA / ENTERPRISE',
+    overview:'Global pharmaceutical manufacturing corporate site with compliance-led content',
+    url:'https://www.cambrex.com/',
+    screenshot:'/images/work/cambrex.jpg',
+    tags:['Enterprise', 'Pharma', 'Corporate CMS', 'Global'],
   },
 ]
 
