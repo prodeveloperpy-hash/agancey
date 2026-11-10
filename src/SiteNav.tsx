@@ -14,6 +14,7 @@ const navItems = [
   { id:'services', label:'Services', to:'/services' },
   { id:'work', label:'Work', to:'/work' },
   { id:'about', label:'About', to:'/about' },
+  { id:'blog', label:'Insights', to:'/blog' },
   { id:'contact', label:'Contact', to:'/contact' },
 ]
 

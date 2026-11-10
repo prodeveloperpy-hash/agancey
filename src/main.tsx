@@ -5,6 +5,8 @@ import { FaEnvelope, FaWhatsapp } from 'react-icons/fa6'
 import Home from './Home'
 import { ScrollToTop } from './components/ScrollToTop'
 import { AboutPage, ContactPage, ProjectDetailPage, ServiceDetailPage, ServicesPage, WorkPage } from './pages'
+import { BlogPage, BlogPostPage } from './pages/BlogPages'
+import Seo from './components/Seo'
 import FiazPortfolioPage from './portfolio/FiazPortfolioPage'
 import './styles.css'
 import './theme.css'
@@ -16,6 +18,7 @@ function SiteChrome() {
   return (
     <>
       <ScrollToTop />
+      <Seo />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<ServicesPage />} />
@@ -24,6 +27,8 @@ function SiteChrome() {
         <Route path="/work/:slug" element={<ProjectDetailPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/Fiazhussain" element={<FiazPortfolioPage />} />
         <Route path="/fiazhussain" element={<Navigate to="/Fiazhussain" replace />} />
       </Routes>

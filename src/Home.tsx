@@ -418,7 +418,7 @@ export default function Home() {
           <div className="brand footer-brand"><img src="/upforge-logo-dark.png" alt="" /><span className="brand-name"><b>Up</b>Forge</span></div>
           <p>ENGINEERING DIGITAL MOMENTUM<br />FROM IDEA TO IMPACT.</p>
           <div className="footer-links">
-            <Link to="/services">SERVICES</Link><Link to="/about">ABOUT</Link><Link to="/contact">CONTACT</Link>
+            <Link to="/services">SERVICES</Link><Link to="/blog">INSIGHTS</Link><Link to="/about">ABOUT</Link><Link to="/contact">CONTACT</Link>
             <a className="social-link linkedin" href="https://www.linkedin.com/company/up-forge/" target="_blank" rel="noreferrer" aria-label="UpForge on LinkedIn"><FaLinkedinIn /></a>
             <span className="social-link facebook disabled" aria-label="UpForge Facebook page coming soon" title="Facebook page coming soon"><FaFacebookF /></span>
             <span className="social-link youtube disabled" aria-label="UpForge YouTube channel coming soon" title="YouTube channel coming soon"><FaYoutube /></span>
