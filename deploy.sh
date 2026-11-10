@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eu
 
-DEPLOY_PATH="${HOME}/public_html}"
+DEPLOY_PATH="${HOME}/public_html"
 
 if [ ! -f dist/index.html ] || [ ! -f dist/assets/app.js ]; then
   echo "ERROR: dist/ is incomplete. On your PC run: npm run build — then commit dist/ and push before deploy." >&2
