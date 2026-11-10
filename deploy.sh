@@ -18,6 +18,14 @@ mkdir -p "${DEPLOY_PATH}/assets"
 rm -rf "${DEPLOY_PATH:?}"/*
 cp -a dist/. "${DEPLOY_PATH}/"
 
+# Bust StackCDN/browser cache after deploy (edge previously cached index.html as app.js).
+BUILD_TAG="$(git rev-parse --short HEAD 2>/dev/null || date +%Y%m%d%H%M%S)"
+sed -i.bak \
+  -e "s|\"/assets/app.js\"|\"/assets/app.js?v=${BUILD_TAG}\"|" \
+  -e "s|\"/assets/app.css\"|\"/assets/app.css?v=${BUILD_TAG}\"|" \
+  "${DEPLOY_PATH}/index.html"
+rm -f "${DEPLOY_PATH}/index.html.bak"
+
 if [ ! -f "${DEPLOY_PATH}/assets/app.js" ]; then
   echo "ERROR: app.js missing after copy. Check deploy path and permissions." >&2
   ls -la "${DEPLOY_PATH}" "${DEPLOY_PATH}/assets" 2>&1 || true
