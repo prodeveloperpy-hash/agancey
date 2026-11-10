@@ -1,9 +1,8 @@
 ---
+# cPanel has no npm on PATH — dist/ is built locally and committed before push.
 deployment:
   tasks:
-    - export DEPLOYPATH=$HOME/public_html/
-    - npm install
-    - npm run build
-    - /bin/mkdir -p $DEPLOYPATH
-    - /bin/rm -rf $DEPLOYPATH/*
-    - /bin/cp -R dist/. $DEPLOYPATH
+  - export DEPLOYPATH=$HOME/public_html/
+  - /bin/mkdir -p $DEPLOYPATH
+  - /bin/rm -rf $DEPLOYPATH/*
+  - /bin/cp -R dist/. $DEPLOYPATH
