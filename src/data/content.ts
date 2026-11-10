@@ -228,6 +228,15 @@ export const workProjects: WorkProject[] = [
     screenshot:'/images/work/cvs2020.png',
     tags:['E-commerce', 'Product catalogue', 'WordPress', 'WooCommerce'],
   },
+  {
+    name:'TV Packages',
+    category:'ENTERTAINMENT / IPTV & STREAMING',
+    overview:'UK-focused IPTV and streaming experience with live TV, sports and movies, multi-device setup guides, hardware offers and WhatsApp-led sales and support',
+    url:'https://tvpackages.uk/',
+    screenshot:'/images/work/tvpackages.jpg',
+    tags:['IPTV', 'Streaming', 'Device setup', 'WhatsApp support', 'React'],
+    year:'2026',
+  },
 ]
 
 /** Supplied photos for service detail heroes. */

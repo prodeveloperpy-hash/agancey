@@ -93,6 +93,7 @@ export const projects: PortfolioProject[] = [
   { name: 'Wavehire', tagline: 'Broadcast equipment hire platform', url: 'https://wavehire.tv/', image: asset('projects/wavehire.png'), stack: 'React · Django · Cloud Run' },
   { name: 'Wavetek TV', tagline: 'Live production technology on Cloud Run', url: 'https://wavetek-frontend-7homzqrazq-ew.a.run.app/', image: asset('projects/wavetek.png'), stack: 'React · GCP' },
   { name: 'BisViews', tagline: 'Business reviews, search & analytics', url: 'https://bisviews.com/', image: asset('projects/bisviews.png'), stack: 'Python · Elasticsearch · BigQuery' },
+  { name: 'TV Packages', tagline: 'UK IPTV, streaming setup & WhatsApp support', url: 'https://tvpackages.uk/', image: asset('projects/tvpackages.jpg'), stack: 'React · Vite · Conversion UX' },
 ]
 
 export const demos = [

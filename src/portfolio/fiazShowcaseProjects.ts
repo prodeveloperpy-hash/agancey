@@ -86,6 +86,15 @@ export const portfolioShowcaseProjects: PortfolioShowcaseProject[] = [
     stack: wpStack,
   },
   {
+    slug: 'tvpackages',
+    name: 'TV Packages',
+    category: 'ENTERTAINMENT / IPTV & STREAMING',
+    overview: 'IPTV and streaming site with live TV, sports and movies, device guides and WhatsApp support',
+    url: 'https://tvpackages.uk/',
+    screenshot: '/images/work/tvpackages.jpg',
+    stack: productStack,
+  },
+  {
     slug: 'raz-catering',
     name: 'RAZ Catering Supplies',
     category: 'RETAIL / CATERING SUPPLIES',
