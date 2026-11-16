@@ -23,6 +23,13 @@ export default function FiazProjectShowcase({ projects = portfolioShowcaseProjec
     return () => window.clearTimeout(timer)
   }, [active, paused, reduceMotion, projects.length])
 
+  useEffect(() => {
+    document.getElementById(`fiaz-showcase-tab-${active}`)?.scrollIntoView({
+      block: 'nearest',
+      behavior: reduceMotion ? 'instant' : 'smooth',
+    })
+  }, [active, reduceMotion])
+
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
     e.preventDefault()

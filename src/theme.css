@@ -622,8 +622,10 @@ html[data-theme="dark"] .biz-office-copy .biz-subtitle { color:#d7e5fa; }
 
 /* ---------- Home: project showcase ---------- */
 .home-work { padding:140px 6vw; color:var(--bz-text); background:var(--bz-bg); }
-.showcase { display:grid; grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); gap:48px; align-items:center; }
-.showcase-list { display:flex; flex-direction:column; border-top:1px solid var(--bz-border); }
+.showcase { display:grid; grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); gap:48px; align-items:start; }
+.showcase-list { display:flex; flex-direction:column; border-top:1px solid var(--bz-border); max-height:min(70vh,680px); overflow-y:auto; overscroll-behavior:contain; position:sticky; top:96px; scrollbar-width:thin; scrollbar-color:color-mix(in srgb,var(--bz-blue) 45%,transparent) transparent; }
+.showcase-list::-webkit-scrollbar { width:6px; }
+.showcase-list::-webkit-scrollbar-thumb { border-radius:999px; background:color-mix(in srgb,var(--bz-blue) 40%,transparent); }
 .showcase-item { position:relative; border-bottom:1px solid var(--bz-border); }
 .showcase-item>button { display:grid; grid-template-columns:44px minmax(0,1fr) 24px; align-items:center; gap:14px; width:100%; padding:22px 4px; border:0; color:var(--bz-muted); background:none; font:inherit; text-align:left; cursor:pointer; transition:color .3s; }
 .showcase-item>button:hover,.showcase-item.is-active>button { color:var(--bz-text); }

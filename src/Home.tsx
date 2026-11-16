@@ -14,7 +14,7 @@ import './styles.css'
 import SiteNav from './SiteNav'
 import officeHero from './assets/upforge-home-hero.png'
 import { ServiceImageLoop } from './components/ServiceImageLoop'
-import { projects } from './data/content'
+import { homeShowcaseProjects } from './data/content'
 import { AnimatedGroup } from './components/motion-primitives/AnimatedGroup'
 import { AnimatedNumber } from './components/motion-primitives/AnimatedNumber'
 import { BorderTrail } from './components/motion-primitives/BorderTrail'
@@ -98,37 +98,82 @@ const featureCards = [
   { title:'Data & Dashboards', text:'Decisions in one view', Icon:LayoutDashboard, slug:'analytics-dashboards' },
 ]
 
-const SHOWCASE_INTERVAL = 7000
+const SHOWCASE_INTERVAL = 5500
 const hostOf = (url:string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
 
 /** Tabbed project showcase: a numbered list on the left drives a device stage on the right. */
 function ProjectShowcase() {
+  const showcase = homeShowcaseProjects
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
   const reduceMotion = useReducedMotion()
-  const project = projects[active]
+  const project = showcase[active]
 
   useEffect(() => {
     if (paused || reduceMotion) return
-    const timer = window.setTimeout(() => setActive(current => (current + 1) % projects.length), SHOWCASE_INTERVAL)
+    const timer = window.setTimeout(
+      () => setActive((current) => (current + 1) % showcase.length),
+      SHOWCASE_INTERVAL,
+    )
     return () => window.clearTimeout(timer)
-  }, [active, paused, reduceMotion])
+  }, [active, paused, reduceMotion, showcase.length])
+
+  useEffect(() => {
+    document.getElementById(`showcase-tab-${active}`)?.scrollIntoView({
+      block: 'nearest',
+      behavior: reduceMotion ? 'instant' : 'smooth',
+    })
+  }, [active, reduceMotion])
 
   const onKeyDown = (e:KeyboardEvent) => {
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
     e.preventDefault()
-    const next = (active + (e.key === 'ArrowDown' ? 1 : -1) + projects.length) % projects.length
+    const next = (active + (e.key === 'ArrowDown' ? 1 : -1) + showcase.length) % showcase.length
     setActive(next)
     document.getElementById(`showcase-tab-${next}`)?.focus()
   }
 
+  const stageInner = (
+    <>
+      <span className="showcase-glow" aria-hidden="true" />
+      <AnimatePresence mode="wait">
+        <motion.div
+          className="showcase-devices"
+          key={project.key}
+          initial={reduceMotion ? false : { opacity:0, y:24, scale:.98 }}
+          animate={{ opacity:1, y:0, scale:1 }}
+          exit={reduceMotion ? undefined : { opacity:0, y:-16, scale:.98 }}
+          transition={{ duration:.55, ease:[0.16, 1, 0.3, 1] }}
+        >
+          <div className="showcase-browser">
+            <div className="project-shot-bar" aria-hidden="true"><i /><i /><i /><span>{hostOf(project.url)}</span></div>
+            <img src={project.screenshot} alt={`${project.name} website on desktop`} />
+          </div>
+          {project.mobileShot && (
+            <div className="showcase-phone">
+              <span className="showcase-phone-notch" aria-hidden="true" />
+              <img src={project.mobileShot} alt={`${project.name} website on mobile`} />
+            </div>
+          )}
+          <div className="showcase-badge">
+            <span><i />Live in production</span>
+            <strong>{project.stack.frontend[0]} + {project.stack.backend[0]}</strong>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+      <span className="showcase-open">
+        {project.slug ? 'Open case study' : 'Visit website'} <ArrowUpRight />
+      </span>
+    </>
+  )
+
   return (
     <div className="showcase reveal" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
       <div className="showcase-list" role="tablist" aria-label="Projects" aria-orientation="vertical" onKeyDown={onKeyDown}>
-        {projects.map((item, index) => {
+        {showcase.map((item, index) => {
           const selected = index === active
           return (
-            <div className={`showcase-item${selected ? ' is-active' : ''}`} key={item.slug}>
+            <div className={`showcase-item${selected ? ' is-active' : ''}`} key={item.key}>
               <button
                 type="button"
                 role="tab"
@@ -147,9 +192,13 @@ function ProjectShowcase() {
                   <p>{item.overview}</p>
                   <dl>
                     <div><dt>Frontend</dt><dd>{item.stack.frontend.slice(0, 3).join(', ')}</dd></div>
-                    <div><dt>Backend</dt><dd>{item.stack.backend.slice(1, 3).join(', ')}</dd></div>
+                    <div><dt>Backend</dt><dd>{item.stack.backend.slice(0, 3).join(', ')}</dd></div>
                   </dl>
-                  <Link className="showcase-cta" to={`/work/${item.slug}`}>View case study <ArrowRight /></Link>
+                  {item.slug ? (
+                    <Link className="showcase-cta" to={`/work/${item.slug}`}>View case study <ArrowRight /></Link>
+                  ) : (
+                    <a className="showcase-cta" href={item.url} target="_blank" rel="noreferrer">Visit website <ArrowRight /></a>
+                  )}
                 </div>
               )}
               <span className="showcase-progress" aria-hidden="true">
@@ -160,35 +209,15 @@ function ProjectShowcase() {
         })}
       </div>
 
-      <Link className="showcase-stage" id="showcase-stage" role="tabpanel" aria-labelledby={`showcase-tab-${active}`} to={`/work/${project.slug}`}>
-        <span className="showcase-glow" aria-hidden="true" />
-        <AnimatePresence mode="wait">
-          <motion.div
-            className="showcase-devices"
-            key={project.slug}
-            initial={reduceMotion ? false : { opacity:0, y:24, scale:.98 }}
-            animate={{ opacity:1, y:0, scale:1 }}
-            exit={reduceMotion ? undefined : { opacity:0, y:-16, scale:.98 }}
-            transition={{ duration:.55, ease:[0.16, 1, 0.3, 1] }}
-          >
-            <div className="showcase-browser">
-              <div className="project-shot-bar" aria-hidden="true"><i /><i /><i /><span>{hostOf(project.url)}</span></div>
-              <img src={project.screenshot} alt={`${project.name} website on desktop`} />
-            </div>
-            {project.mobileShot && (
-              <div className="showcase-phone">
-                <span className="showcase-phone-notch" aria-hidden="true" />
-                <img src={project.mobileShot} alt={`${project.name} website on mobile`} />
-              </div>
-            )}
-            <div className="showcase-badge">
-              <span><i />Live in production</span>
-              <strong>{project.stack.frontend[0]} + {project.stack.backend[1]}</strong>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-        <span className="showcase-open">Open case study <ArrowUpRight /></span>
-      </Link>
+      {project.slug ? (
+        <Link className="showcase-stage" id="showcase-stage" role="tabpanel" aria-labelledby={`showcase-tab-${active}`} to={`/work/${project.slug}`}>
+          {stageInner}
+        </Link>
+      ) : (
+        <a className="showcase-stage" id="showcase-stage" role="tabpanel" aria-labelledby={`showcase-tab-${active}`} href={project.url} target="_blank" rel="noreferrer">
+          {stageInner}
+        </a>
+      )}
     </div>
   )
 }

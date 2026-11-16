@@ -296,6 +296,46 @@ export const workProjects: WorkProject[] = [
   },
 ]
 
+const showcaseFallbackStack: Pick<Project['stack'], 'frontend' | 'backend'> = {
+  frontend: ['React', 'Responsive UI', 'Modern frontend'],
+  backend: ['Python', 'APIs', 'Cloud hosting'],
+}
+
+/** Home “Recent projects” tab list — mirrors the Work page grid. */
+export type HomeShowcaseProject = {
+  key: string
+  slug?: string
+  name: string
+  category: string
+  overview: string
+  url: string
+  screenshot: string
+  mobileShot?: string
+  stack: { frontend: string[]; backend: string[] }
+}
+
+export const homeShowcaseProjects: HomeShowcaseProject[] = workProjects.map((wp) => {
+  const detailed = wp.slug
+    ? projects.find((p) => p.slug === wp.slug)
+    : projects.find((p) => p.name === wp.name)
+  return {
+    key: wp.slug ?? wp.name,
+    slug: wp.slug ?? detailed?.slug,
+    name: wp.name,
+    category: wp.category,
+    overview: wp.overview,
+    url: wp.url,
+    screenshot: wp.screenshot,
+    mobileShot: detailed?.mobileShot,
+    stack: detailed
+      ? { frontend: detailed.stack.frontend, backend: detailed.stack.backend }
+      : {
+          frontend: wp.tags?.length ? wp.tags.slice(0, 3) : [...showcaseFallbackStack.frontend],
+          backend: [...showcaseFallbackStack.backend],
+        },
+  }
+})
+
 /** Supplied photos for service detail heroes. */
 export const serviceHeroImages: Record<string, ServiceImage> = {
   "solution-architecture": { src:"/images/services/heroes/solution-architecture.jpg", alt:"Team planning a technology architecture with connected AI and cloud systems" },
