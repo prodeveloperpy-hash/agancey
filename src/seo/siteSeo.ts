@@ -146,6 +146,22 @@ export function getSeoForPath(pathname: string): SeoConfig {
     }
   }
 
+  if (/^\/Asad$/i.test(path)) {
+    return {
+      title: 'Asad | Full-Stack Engineer · UpForge',
+      description: 'Asad — full-stack engineer portfolio: web apps, APIs, and UpForge client delivery',
+      path: '/Asad',
+    }
+  }
+
+  if (/^\/Arslan$/i.test(path)) {
+    return {
+      title: 'Arslan | Full-Stack Engineer · UpForge',
+      description: 'Arslan — full-stack engineer portfolio: web apps, APIs, and UpForge client delivery',
+      path: '/Arslan',
+    }
+  }
+
   return {
     title: 'UpForge | Technology Agency',
     description: 'Software, AI, automation, and digital growth by UpForge',

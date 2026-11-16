@@ -1,32 +1,34 @@
 import { useEffect, useState, type KeyboardEvent } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
-import { portfolioShowcaseProjects } from './fiazShowcaseProjects'
+import { portfolioShowcaseProjects, type PortfolioShowcaseProject } from './fiazShowcaseProjects'
 
 const SHOWCASE_INTERVAL = 7000
 const hostOf = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
 
-export default function FiazProjectShowcase() {
+type Props = { projects?: PortfolioShowcaseProject[] }
+
+export default function FiazProjectShowcase({ projects = portfolioShowcaseProjects }: Props) {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
   const reduceMotion = useReducedMotion()
-  const project = portfolioShowcaseProjects[active]
+  const project = projects[active]
 
   useEffect(() => {
     if (paused || reduceMotion) return
     const timer = window.setTimeout(
-      () => setActive((current) => (current + 1) % portfolioShowcaseProjects.length),
+      () => setActive((current) => (current + 1) % projects.length),
       SHOWCASE_INTERVAL,
     )
     return () => window.clearTimeout(timer)
-  }, [active, paused, reduceMotion])
+  }, [active, paused, reduceMotion, projects.length])
 
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
     e.preventDefault()
     const next =
-      (active + (e.key === 'ArrowDown' ? 1 : -1) + portfolioShowcaseProjects.length) %
-      portfolioShowcaseProjects.length
+      (active + (e.key === 'ArrowDown' ? 1 : -1) + projects.length) %
+      projects.length
     setActive(next)
     document.getElementById(`fiaz-showcase-tab-${next}`)?.focus()
   }
@@ -40,7 +42,7 @@ export default function FiazProjectShowcase() {
       onBlur={() => setPaused(false)}
     >
       <div className="fiaz-showcase-list" role="tablist" aria-label="Live projects" aria-orientation="vertical" onKeyDown={onKeyDown}>
-        {portfolioShowcaseProjects.map((item, index) => {
+        {projects.map((item, index) => {
           const selected = index === active
           return (
             <div className={`fiaz-showcase-item${selected ? ' is-active' : ''}`} key={`${item.slug}-${item.name}`}>

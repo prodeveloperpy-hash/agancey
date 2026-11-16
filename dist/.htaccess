@@ -4,7 +4,7 @@ Options -MultiViews
 RewriteEngine On
 
 # Portfolio route (static /Fiazhussain/ folder on disk would otherwise 403).
-RewriteRule ^Fiazhussain/?$ index.html [L]
+RewriteRule ^(Fiazhussain|Asad|Arslan)/?$ index.html [L]
 
 # Serve existing files and directories normally.
 RewriteCond %{REQUEST_FILENAME} -f [OR]

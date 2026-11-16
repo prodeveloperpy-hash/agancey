@@ -8,12 +8,14 @@ import { AboutPage, ContactPage, ProjectDetailPage, ServiceDetailPage, ServicesP
 import { BlogPage, BlogPostPage } from './pages/BlogPages'
 import Seo from './components/Seo'
 import FiazPortfolioPage from './portfolio/FiazPortfolioPage'
+import AsadPortfolioPage from './portfolio/AsadPortfolioPage'
+import ArslanPortfolioPage from './portfolio/ArslanPortfolioPage'
 import './styles.css'
 import './theme.css'
 
 function SiteChrome() {
   const { pathname } = useLocation()
-  const hideFloats = /^\/Fiazhussain\/?$/i.test(pathname)
+  const hideFloats = /^\/(Fiazhussain|Asad|Arslan)\/?$/i.test(pathname)
 
   return (
     <>
@@ -31,6 +33,10 @@ function SiteChrome() {
         <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/Fiazhussain" element={<FiazPortfolioPage />} />
         <Route path="/fiazhussain" element={<Navigate to="/Fiazhussain" replace />} />
+        <Route path="/Asad" element={<AsadPortfolioPage />} />
+        <Route path="/asad" element={<Navigate to="/Asad" replace />} />
+        <Route path="/Arslan" element={<ArslanPortfolioPage />} />
+        <Route path="/arslan" element={<Navigate to="/Arslan" replace />} />
       </Routes>
       {!hideFloats && (
         <>

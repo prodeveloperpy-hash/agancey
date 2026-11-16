@@ -86,6 +86,15 @@ export const portfolioShowcaseProjects: PortfolioShowcaseProject[] = [
     stack: wpStack,
   },
   {
+    slug: 'recruitexa',
+    name: 'RecruitExa',
+    category: 'RECRUITMENT / HR SERVICES',
+    overview: 'Recruitment, talent sourcing, reverse recruiting, CV services, and HR consulting with remote delivery',
+    url: 'https://recruitexa.com/',
+    screenshot: '/images/work/recruitexa.jpg',
+    stack: productStack,
+  },
+  {
     slug: 'tvpackages',
     name: 'TV Packages',
     category: 'ENTERTAINMENT / IPTV & STREAMING',

@@ -285,6 +285,15 @@ export const workProjects: WorkProject[] = [
     screenshot:'/images/work/cambrex.jpg',
     tags:['Enterprise', 'Pharma', 'Corporate CMS', 'Global'],
   },
+  {
+    name:'RecruitExa',
+    category:'RECRUITMENT / HR SERVICES',
+    overview:'Recruitment, talent sourcing, reverse recruiting, CV and career services, HR consulting, and white-label agency support for remote hiring',
+    url:'https://recruitexa.com/',
+    screenshot:'/images/work/recruitexa.jpg',
+    tags:['Recruitment', 'Talent sourcing', 'HR consulting', 'Remote delivery'],
+    year:'2026',
+  },
 ]
 
 /** Supplied photos for service detail heroes. */

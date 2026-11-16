@@ -25,7 +25,7 @@ const blogSlugs = [
   'django-rest-apis-for-saas-products',
 ]
 
-const staticPaths = ['/', '/services', '/work', '/about', '/contact', '/blog', '/Fiazhussain']
+const staticPaths = ['/', '/services', '/work', '/about', '/contact', '/blog', '/Fiazhussain', '/Asad', '/Arslan']
 
 const urls = [
   ...staticPaths,

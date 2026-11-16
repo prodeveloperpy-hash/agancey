@@ -7,22 +7,9 @@ import { TextLoop } from '../components/motion-primitives/TextLoop'
 import FiazAboutWorkflow from './FiazAboutWorkflow'
 import FiazProjectShowcase from './FiazProjectShowcase'
 import FiazTechIconStrip from './FiazTechIconStrip'
-import {
-  aboutFocus,
-  aboutIntro,
-  contact,
-  demos,
-  experience,
-  heroRoles,
-  heroQuickStats,
-  hireLinks,
-  navItems,
-  privateCapabilities,
-  profilePhoto,
-  profilePhotoHero,
-  asset,
-} from './fiazProfileData'
 import type { AboutFocusIcon } from './fiazProfileData'
+import type { TeamPortfolioProfile } from './teamProfiles'
+import { fiazProfile } from './teamProfiles'
 import './fiaz-portfolio.css'
 
 const aboutFocusIcons: Record<
@@ -54,20 +41,44 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const } },
 }
 
-export default function FiazPortfolioPage() {
+export function TeamPortfolioPage({ profile }: { profile: TeamPortfolioProfile }) {
+  const {
+    fullName,
+    documentTitle,
+    portraitAlt,
+    profilePhoto,
+    profilePhotoHero,
+    asset,
+    contact,
+    heroRoles,
+    heroLead,
+    heroQuickStats,
+    hireLinks,
+    aboutIntro,
+    aboutFocus,
+    navItems,
+    demos,
+    experience,
+    privateCapabilities,
+    education,
+    showcaseProjects,
+    companiesStrip,
+    footerTagline,
+  } = profile
+
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const html = document.documentElement
     const previousTitle = document.title
     html.classList.add('fiaz-portfolio-active')
-    document.title = 'Fiaz Hussain | Solution Architect & Full-Stack Developer'
+    document.title = documentTitle
 
     return () => {
       html.classList.remove('fiaz-portfolio-active')
       document.title = previousTitle
     }
-  }, [])
+  }, [documentTitle])
 
   const go = (id: string) => {
     scrollTo(id)
@@ -87,7 +98,7 @@ export default function FiazPortfolioPage() {
         <div className="fiaz-nav-inner">
           <button type="button" className="fiaz-logo" onClick={() => go('top')}>
             <img src={profilePhoto} alt="" className="fiaz-logo-photo" />
-            <span>Fiaz Hussain</span>
+            <span>{fullName}</span>
           </button>
           <nav className="fiaz-nav-links" aria-label="Portfolio sections">
             {navItems.map((item) => (
@@ -97,7 +108,7 @@ export default function FiazPortfolioPage() {
             ))}
           </nav>
           <div className="fiaz-nav-actions">
-            <a className="fiaz-nav-cta" href={contact.fiverr} target="_blank" rel="noreferrer">Hire me</a>
+            <a className="fiaz-nav-cta" href={contact.fiverr ?? contact.upforge} target="_blank" rel="noreferrer">Hire me</a>
             <button type="button" className="fiaz-nav-menu" aria-label="Toggle menu" onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -108,12 +119,16 @@ export default function FiazPortfolioPage() {
             {navItems.map((item) => (
               <button key={item.id} type="button" onClick={() => go(item.id)}>{item.label}</button>
             ))}
-            <a href={contact.fiverr} target="_blank" rel="noreferrer" className="fiaz-nav-mobile-icon" aria-label="Fiverr">
-              <SiFiverr size={22} />
-            </a>
-            <a href={contact.upwork} target="_blank" rel="noreferrer" className="fiaz-nav-mobile-icon" aria-label="Upwork">
-              <SiUpwork size={22} />
-            </a>
+            {contact.fiverr && (
+              <a href={contact.fiverr} target="_blank" rel="noreferrer" className="fiaz-nav-mobile-icon" aria-label="Fiverr">
+                <SiFiverr size={22} />
+              </a>
+            )}
+            {contact.upwork && (
+              <a href={contact.upwork} target="_blank" rel="noreferrer" className="fiaz-nav-mobile-icon" aria-label="Upwork">
+                <SiUpwork size={22} />
+              </a>
+            )}
           </div>
         )}
       </header>
@@ -126,7 +141,7 @@ export default function FiazPortfolioPage() {
               <Sparkles size={14} aria-hidden />
               <span>Available for client projects worldwide</span>
             </div>
-            <h1 className="fiaz-hero-name">Fiaz Hussain</h1>
+            <h1 className="fiaz-hero-name">{fullName}</h1>
             <p className="fiaz-hero-role-line">
               <TextLoop className="fiaz-role-loop">
                 {heroRoles.map((role) => (
@@ -134,9 +149,7 @@ export default function FiazPortfolioPage() {
                 ))}
               </TextLoop>
             </p>
-            <p className="fiaz-hero-lead">
-              6+ years delivering web and mobile products, AI systems, CRM integrations, and automation from architecture to production support
-            </p>
+            <p className="fiaz-hero-lead">{heroLead}</p>
             <div className="fiaz-hero-connect" aria-label="Contact and hire links">
               <a
                 className="fiaz-hero-tile fiaz-hero-tile-email"
@@ -193,7 +206,7 @@ export default function FiazPortfolioPage() {
             <div className="fiaz-hero-portrait fiaz-hero-portrait-circle">
               <div className="fiaz-portrait-spin-ring" aria-hidden="true" />
               <div className="fiaz-portrait-inner">
-                <img src={profilePhotoHero} alt="Fiaz Hussain, Solution Architect and Full-Stack Developer" />
+                <img src={profilePhotoHero} alt={portraitAlt} />
               </div>
             </div>
             <div className="fiaz-portrait-badge">
@@ -310,8 +323,8 @@ export default function FiazPortfolioPage() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}>
             <h2 className="fiaz-section-title">Projects</h2>
           </motion.div>
-          <FiazProjectShowcase />
-          <img className="fiaz-wide-visual fiaz-companies-strip" src={asset('companies-showcase.svg')} alt="Companies and products" loading="lazy" />
+          <FiazProjectShowcase projects={showcaseProjects} />
+          <img className="fiaz-wide-visual fiaz-companies-strip" src={companiesStrip} alt="Companies and products" loading="lazy" />
         </div>
       </section>
 
@@ -357,8 +370,9 @@ export default function FiazPortfolioPage() {
           </div>
           <div className="fiaz-edu">
             <h3>Education & certification</h3>
-            <p><strong>M.Sc. Computer Science</strong>, GCUL Pakistan (2021)</p>
-            <p><strong>Microsoft Data Scientist Certification</strong> (2022)</p>
+            {education.lines.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
           </div>
           <details className="fiaz-details">
             <summary>Private engineering capabilities (NDA-friendly)</summary>
@@ -412,28 +426,32 @@ export default function FiazPortfolioPage() {
                 <FaWhatsapp size={28} />
                 <span>WhatsApp</span>
               </a>
-              <a
-                className="fiaz-contact-tile fiaz-contact-tile-fiverr"
-                href={contact.fiverr}
-                target="_blank"
-                rel="noreferrer"
-                title="Fiverr"
-                aria-label="Fiverr"
-              >
-                <SiFiverr size={32} />
-                <span>Fiverr</span>
-              </a>
-              <a
-                className="fiaz-contact-tile fiaz-contact-tile-upwork"
-                href={contact.upwork}
-                target="_blank"
-                rel="noreferrer"
-                title="Upwork"
-                aria-label="Upwork"
-              >
-                <SiUpwork size={32} />
-                <span>Upwork</span>
-              </a>
+              {contact.fiverr && (
+                <a
+                  className="fiaz-contact-tile fiaz-contact-tile-fiverr"
+                  href={contact.fiverr}
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Fiverr"
+                  aria-label="Fiverr"
+                >
+                  <SiFiverr size={32} />
+                  <span>Fiverr</span>
+                </a>
+              )}
+              {contact.upwork && (
+                <a
+                  className="fiaz-contact-tile fiaz-contact-tile-upwork"
+                  href={contact.upwork}
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Upwork"
+                  aria-label="Upwork"
+                >
+                  <SiUpwork size={32} />
+                  <span>Upwork</span>
+                </a>
+              )}
               <a
                 className="fiaz-contact-tile fiaz-contact-tile-upforge"
                 href={contact.upforge}
@@ -445,32 +463,40 @@ export default function FiazPortfolioPage() {
                 <ExternalLink size={26} strokeWidth={1.75} />
                 <span>UpForge</span>
               </a>
-              <a
-                className="fiaz-contact-tile fiaz-contact-tile-github"
-                href={contact.github}
-                target="_blank"
-                rel="noreferrer"
-                title="GitHub"
-                aria-label="GitHub"
-              >
-                <Github size={26} strokeWidth={1.75} />
-                <span>GitHub</span>
-              </a>
+              {contact.github && (
+                <a
+                  className="fiaz-contact-tile fiaz-contact-tile-github"
+                  href={contact.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  title="GitHub"
+                  aria-label="GitHub"
+                >
+                  <Github size={26} strokeWidth={1.75} />
+                  <span>GitHub</span>
+                </a>
+              )}
             </div>
           </motion.div>
         </div>
         <footer className="fiaz-footer">
-          <p>© {new Date().getFullYear()} Fiaz Hussain, architecture, engineering, automation, data, and AI</p>
-          <a href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub profile">
-            <Github size={18} />
-          </a>
+          <p>© {new Date().getFullYear()} {fullName}, {footerTagline}</p>
+          {contact.github && (
+            <a href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub profile">
+              <Github size={18} />
+            </a>
+          )}
         </footer>
       </section>
     </div>
 
-    <a className="fiaz-float-wa" href={contact.whatsapp} target="_blank" rel="noreferrer" aria-label="WhatsApp Fiaz Hussain">
+    <a className="fiaz-float-wa" href={contact.whatsapp} target="_blank" rel="noreferrer" aria-label={`WhatsApp ${fullName}`}>
       <FaWhatsapp size={24} />
     </a>
   </>
   )
+}
+
+export default function FiazPortfolioPage() {
+  return <TeamPortfolioPage profile={fiazProfile} />
 }
