@@ -139,4 +139,9 @@ function teammateBase(
 const upforgeInbox = 'info@upforge.us'
 
 export const asadProfile = teammateBase('asad', 'Asad', '/Asad', upforgeInbox)
-export const arslanProfile = teammateBase('arslan', 'Arslan', '/Arslan', upforgeInbox)
+
+export const arslanProfile: TeamPortfolioProfile = {
+  ...teammateBase('arslan', 'Arslan', '/Arslan', upforgeInbox),
+  profilePhoto: '/Arslan/arslan-profile.jpg',
+  profilePhotoHero: '/Arslan/arslan-profile-hero.jpg',
+}
